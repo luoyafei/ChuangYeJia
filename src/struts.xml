@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"/>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<constant name="struts.custom.i18n.resources" value="app" />
+	
+	<package name="main" extends="struts-default" namespace="/">
+	
+		<!-- 默认action，在url中随意敲击，可以跳转到指定地方。 -->
+    	<!-- <default-action-ref name="myIndex" />
+    	<action name="myIndex">
+    		<result>/tags.jsp</result>
+    	</action>
+		
+		<action name="testi18n">
+			<result>/testI18nFile.jsp</result>
+		</action>
+		<action name="index">
+			<result>
+				/exception.jsp
+			</result>
+		</action> -->
+	</package>
+	
+    <package name="default" extends="struts-default" namespace="/">
+		
+		
+		 
+    <!-- 	<global-results>
+    		<result name="exception">/exception.jsp</result>
+    	</global-results> -->
+    	
+    	<!-- 这是用来测试重复提交token的Action
+    	<action name="tokenAction" class="com.struts.action.TokenAction">
+    		<result>/index.jsp</result>
+    		<interceptor-ref name="defaultStack"></interceptor-ref>
+    		<interceptor-ref name="token"></interceptor-ref>
+    		<result name="invalid.token" type="redirect">/testToken.jsp</result>
+    	</action>
+    	 -->
+    	
+    	
+    </package>
+</struts>
+
