@@ -19,8 +19,8 @@
 	} else {
 %>
 
-	<li><a onclick=''>登陆</a></li>
-	<li><a href='pages/user/register.php'>注册</a></li>
+	<li><a href='/ChuangYeJia/pages/signIn/login.jsp'>登陆</a></li>
+	<li><a href='/ChuangYeJia/pages/signIn/register.jsp'>注册</a></li>
 <%
 	}
 %>
