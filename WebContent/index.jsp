@@ -2,6 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setAttribute("flag", "index");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -570,11 +571,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<hr class="featurette-divider" style="padding-bottom: 0px;padding-top: 0px; margin-top: 0px; margin-bottom: 0px; width: 100%;">
 		</div>
-		</div>
-	</div>
-	</div>
 		<!-- <?require("pages/module/bottom.php");?> -->
-
+		<jsp:include page="pages/module/bottom.jsp" flush="true"></jsp:include>
 		<!-- 点击登陆出现的登陆框 -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">

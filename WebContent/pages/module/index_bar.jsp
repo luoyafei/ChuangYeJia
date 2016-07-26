@@ -26,12 +26,10 @@
 					<div class="navbar-form pull-right">
 
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">首页</a></li>
-							<li><a class="a-item" href="pages/other_entity_list/project_list.php">项目</a></li>
-							<li><a class="a-item" href="pages/other_entity_list/money_list.php">资金</a></li>
-							<li><a class="a-item" href="pages/other_entity_list/technology_list.php">技术</a></li>
-							<li><a class="a-item" href="pages/other_entity_list/business_list.php">运营</a></li>
-							<li><a class="a-item" href="pages/other_entity_list/market_list.php">市场</a></li>
+							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("index")?"active":"" %>><a class="a-item" href="/ChuangYeJia/index.jsp">首页</a></li>
+							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("project")?"active":"" %>><a class="a-item" href="../other_entity_list/project_list.php">项目</a></li>
+							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("partner")?"active":"" %>><a class="a-item" href="#">合伙人</a></li>
+							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("product")?"active":"" %>><a class="a-item" href="#">产品</a></li>
 							<form class="navbar-form navbar-left" role="search">
 								<div class="form-group" style="margin-top: 8px;">
 									<a type="submit"><span class="glyphicon glyphicon-search"></span></a>

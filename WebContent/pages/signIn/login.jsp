@@ -130,11 +130,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="content-main" style="width: 100%;height: 550px;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div class="content-main-top" style="height: 27%;">
 					<div style="width: 80%;height: 100%;margin: 50px auto;">
-								<form action="../../action/user/user_login.php" method="post" onsubmit="return checkdata()">
+								<form action="" method="post">
                                     <div class="form-group">
 									    <label for="exampleInputEmail1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">账&nbsp;&nbsp;&nbsp;户</label>
 									    <div class="col-sm-10">
-									    	<input type="email" class="form-control" name="username"  id="exampleInputEmail1" placeholder="" onblur="checkemail()" placeholder="邮箱:123@163.com">
+									    	<input type="email" class="form-control" name="username"  id="exampleInputEmail1" placeholder="邮箱:123@163.com">
 									    
 										    <div class="alert alert-danger alert-email" role="alert" style="display: none">
 												请输入您的账户
@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									 <div class="form-group">
 									    <label for="exampleInputPassword1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;码</label>
 									    <div class="col-sm-10">
-									    	<input type="password" class="form-control" name="password" onblur="chechpassword()"  id="exampleInputPassword1" placeholder="" onblur="checkemail()" placeholder="密码">
+									    	<input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="密码">
 									    	<div class="alert alert-danger alert-password" role="alert" style="display: none;">
 												请输入您的密码
 											</div>
@@ -160,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="form-group">
 									    <label for="identifyCode" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">验证码</label>
 									    <div class="col-sm-10">
-											<input type="text" style="width: 60%;float: left;" class="form-control" name="identifyCode" id="identifyCode" placeholder="输入验证码" onblur="checkIdentifyCode()">
+											<input type="text" style="width: 60%;float: left;" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
 											<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
 												请输入验证码
 											</div>
@@ -168,7 +168,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<span class="identifycode-error">
 												</span>
 											</div>
-											<canvas alt="看不清，再点一下" id="canvas_identify" onclick="showIdentify()" style="width: 23%;height: 32px;float: right;background-color: #C4C4C4;"></canvas>
+											<!-- <div style="width: 23%;height: 32px;float: right;background-color: ;" onclick="changeImg()">
+												<span class="badge" id="regetIdentify">
+													<img alt="" id="validateCodeImg" src="/ChuangYeJia/IdentifyCode" style="width:100%;height:100%;">
+												</span>
+												<script type="text/javascript">
+													function changeImg(){
+					 									document.getElementById("validateCodeImg").src = "/ChuangYeJia/IdentifyCode?"+Math.random();
+													}
+												</script>
+											</div> -->
 									    </div>
 									</div>
                                     
@@ -187,60 +196,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<button type="submit" class="btn btn-default" style="color: #398BE5;" name="login" value="登陆">
 											登陆
 										</button>
-										<a class="btn btn-default" style="color: #398BE5;" href="register.php">注册</a>
+										<a class="btn btn-default" style="color: #398BE5;" href="register.jsp">注册</a>
 									</div>
 								</form>
 <script>
-	//此处是用来处理验证码问题的
-	var true_code = "";
-	
-	showIdentify();//进行第一次的调用
-	function showIdentify() {
-		var code_code = create_code();
-		true_code = code_code;
-		var identify = document.getElementById("canvas_identify");
-		var identify_context = identify.getContext("2d");
-		identify_context.clearRect(0, 0, 800, 800);
-		identify_context.font="Italic bolder 85px sans-serif";
-		identify_context.fillText(code_code, 10,110);
-	}
-	
-	function create_code() {
-		var strallcode = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		var strcode = "";
-		var i = 0;
-		for(; i < 4; i++) {
-			var codenum = parseInt(Math.random()*strallcode.length-1);
-			strcode += strallcode.charAt(codenum);
-		}
-		return strcode;
-	}
-	
-	function checkIdentifyCode() {//进行验证码判断
-		var identifycode = $("#identifyCode").val().trim();
-		
-		var alertidentifycode = $(".alert-identifycode");
-		var checkidentifycode = $(".alert-check-identifycode");
-		if (identifycode=="") {
-			//alert(identifycode);
-			alertidentifycode.attr("style", "display:inline-block;");
-			checkidentifycode.attr("style", "display:none;");
-			return false;
-		} else {
-			return checkIdentifyCodeDetailAJAX(identifycode);
-		}
-		
-	}
-	function checkIdentifyCodeDetailAJAX(identifyCode) {//进行验证码判断的ajax
-		if(identifyCode==true_code) {
-			$(".identifycode-error").text("正确");
-			return true;
-		} else {
-			$(".identifycode-error").text("您输入的验证码有误，请点击图片进行刷新后，重新输入！");
-			alert("您输入的验证码有误，请点击图片进行刷新后，重新输入！");
-			return false;
-		}
-	}
 	
 								
 function checkemail() {
@@ -317,52 +276,8 @@ function checkdata() {
 				</div>
 			</div>
 		</div>
-		<?require("../module/bottom.php");?>
-		<!-- 点击登陆出现的登陆框 -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">
-							请登录
-						</h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-horizontal" role="form">
-							<div class="form-group">
-								<div class="col-sm-10">
-									<input type="email" class="form-control" id="modal-email" placeholder="Email" onblur="checkModalEmail()">
-								</div>
-								<div class="modal-errorInfo">
-									<span id="modal-gly-info" class="glyphicon">
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-10">
-									<input type="password" class="form-control" id="modal-password" placeholder="Password">
-								</div>
-								<div class="modal-errorInfo">
-									<span id="modal-gly-password-info" class="glyphicon">
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">
-							关闭
-						</button>
-						<button type="button" class="btn btn-default" id="modal-submit" onclick="checkModalData()">
-							登陆
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		<jsp:include page="../module/bottom.jsp" flush="true" />
+		
 	</body>
 	<script>
 	$(document).ready(function() {

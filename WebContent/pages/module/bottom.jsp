@@ -5,16 +5,15 @@
 			<div class="main-footer" style="margin: 10px auto;height: 100%;width: 80%;overflow: hidden;">
 				
 				    <ul class="bs-docs-footer-links text-muted list-inline">
-				      <li><a href="/pages/user/aboutOur_1.php" style="color: black;" target="_blank">关于创业加</a></li>
+				      <li><a href="/ChuangYeJia/pages/aboutOur/aboutOur_about.jsp" style="color: black;" target="_blank">关于创业加</a></li>
 				      <li>|</li>
-				      <li><a href="/pages/user/aboutOur_2.php" style="color: black;" target="_blank">免责声明</a></li>
+				      <li><a href="/ChuangYeJia/pages/aboutOur/aboutOur_relief.jsp" style="color: black;" target="_blank">免责声明</a></li>
 				      <li>|</li>
-				      <li><a href="/pages/user/aboutOur_3.php" style="color: black;" target="_blank">联系我们</a></li>
+				      <li><a href="/ChuangYeJia/pages/aboutOur/aboutOur_contact.jsp" style="color: black;" target="_blank">联系我们</a></li>
 				      <li>|</li>
-				      <li><a href="/pages/user/aboutOur_4.php" style="color: black;" target="_blank">版本声明</a></li>
+				      <li><a href="/ChuangYeJia/pages/aboutOur/aboutOur_version.jsp" style="color: black;" target="_blank">版本声明</a></li>
 				    </ul>
 			    	<p>Copyright &copy;2015-2016 创业加 版权所有
 				
 			</div>	
-
 		</div>
