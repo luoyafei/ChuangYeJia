@@ -6,7 +6,7 @@ import com.chuangyejia.dto.UserDTO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class UserSianInAction extends ActionSupport {
+public class UserSignInAction extends ActionSupport {
 
 	
 	/**
@@ -15,12 +15,11 @@ public class UserSianInAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	
-	UserDTO ud = new UserDTO();
+	UserDTO ud;
 	
 	public UserDTO getUd() {
 		return ud;
 	}
-
 	public void setUd(UserDTO ud) {
 		this.ud = ud;
 	}
@@ -36,7 +35,7 @@ public class UserSianInAction extends ActionSupport {
 		System.out.println(ud.getUsername());
 		System.out.println(ud.getPassword());
 		System.out.println(ud.getIdentifyCode());
-		System.out.println(ac.getSession().get("code"));
+		
 		
 		return super.execute();
 	}

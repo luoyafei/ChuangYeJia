@@ -2,6 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+//用来区分导航栏bar字段的点击效果。
 request.setAttribute("flag", "index");
 %>
 

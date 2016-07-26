@@ -130,11 +130,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="content-main" style="width: 100%;height: 550px;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div class="content-main-top" style="height: 27%;">
 					<div style="width: 80%;height: 100%;margin: 50px auto;">
-								<form action="" method="post">
+								<form action="userSignIn!execute.action" method="post">
                                     <div class="form-group">
 									    <label for="exampleInputEmail1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">账&nbsp;&nbsp;&nbsp;户</label>
 									    <div class="col-sm-10">
-									    	<input type="email" class="form-control" name="username"  id="exampleInputEmail1" placeholder="邮箱:123@163.com">
+									    	<input type="email" class="form-control" name="ud.username"  id="exampleInputEmail1" placeholder="邮箱:123@163.com">
 									    
 										    <div class="alert alert-danger alert-email" role="alert" style="display: none">
 												请输入您的账户
@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									 <div class="form-group">
 									    <label for="exampleInputPassword1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;码</label>
 									    <div class="col-sm-10">
-									    	<input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="密码">
+									    	<input type="password" class="form-control" name="ud.password" id="exampleInputPassword1" placeholder="密码">
 									    	<div class="alert alert-danger alert-password" role="alert" style="display: none;">
 												请输入您的密码
 											</div>

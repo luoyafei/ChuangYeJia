@@ -27,7 +27,7 @@
 	
     <package name="default" extends="struts-default" namespace="/">
 		<action name="userSignIn" class="com.chuangyejia.action.UserSignInAction">
-			<result name="success">pages/signIn/success.jsp</result>
+			<result name="success">/pages/signIn/success.jsp</result>
 		</action>
 		
 		 
