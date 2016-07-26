@@ -27,6 +27,11 @@
 	
     <package name="default" extends="struts-default" namespace="/">
 		<action name="userSignIn" class="com.chuangyejia.action.UserSignInAction">
+			<result name="identifyCode" type="stream">
+				  <param name="contentType">image/jpeg</param>
+				  <param name="inputName">imageStream</param>
+				  <param name="bufferSize">2048</param>
+			</result>
 			<result name="success">/pages/signIn/success.jsp</result>
 		</action>
 		

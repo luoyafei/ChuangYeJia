@@ -143,23 +143,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div style="width: 80%;height: 100%;margin: 0 auto;">
 						<div class="main">
 							<div class="main-login">
-								<form action="../../action/user/user_register.php" method="post" name="form" onsubmit="return checkdata()">
+								<form action="userSignIn!register.action" method="post" name="form" onsubmit="return checkdata()">
 									<div class="form-group" style="margin-top: 30px;">
-										<input type="text" class="form-control" name="nickname" id="nickname" placeholder="昵称">
+										<input type="text" class="form-control" name="ud.nickname" id="nickname" placeholder="昵称">
 										<div class="alert alert-danger alert-nickname" role="alert" style="display: none">
 											请输入您的昵称
 										</div>
-										<!--<div class="alert alert-danger alert-check-nickname" role="alert" style="display:none;">
-											<span class="nickname-error">
-											</span>
-										</div>-->
 									</div>
 
 
 
 									<hr style="width: 100%; color: black;font-size: 2px;" />
 									<div class="form-group">
-										<input type="email" class="form-control" name="username" id="exampleInputEmail1" placeholder="邮箱" onblur="checkemail()">
+										<input type="email" class="form-control" name="ud.email" id="exampleInputEmail1" placeholder="邮箱" onblur="checkemail()">
 										<div class="alert alert-danger alert-email" role="alert" style="display: none">
 											请输入您的邮箱
 										</div>
@@ -170,76 +166,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 									<hr style="width: 100%; color: black;font-size: 2px;" />
 									<div class="form-group">
-										<input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="密码" onblur="chechpassword()">
+										<input type="password" class="form-control" name="ud.password" id="exampleInputPassword1" placeholder="密码" onblur="chechpassword()">
 										<div class="alert alert-danger alert-password" role="alert" style="display: none;">
 											请输入您的密码
 										</div>
 									</div>
 									<hr style="width: 100%; color: black;font-size: 2px;" />
 									<div class="form-group">
-										<input type="password" class="form-control" name="repassword" id="exampleInputPassword2" placeholder="确认密码" onblur="chechrepassword()">
+										<input type="password" class="form-control" name="ud.validatePassword" id="exampleInputPassword2" placeholder="确认密码" onblur="chechrepassword()">
 										<div class="alert alert-danger alert-repassword" role="alert" style="display: none;">
 											请核实密码与确认密码是一致的
 										</div>
 									</div>
 									<hr style="width: 100%; color: black;font-size: 2px;" />
 									<div class="form-group">
-										<input type="text" style="width: 65%;float: left;" class="form-control" name="identifyCode" id="identifyCode" placeholder="输入验证码" onblur="checkIdentifyCode()">
-										<canvas alt="看不清，再点一下" id="canvas_identify" onclick="showIdentify()" style="width: 30%;height: 32px;float: right;background-color: #C4C4C4;"></canvas>
-										<script>
-											//此处是用来处理验证码问题的
-											var true_code = "";
-
-											showIdentify();//进行第一次的调用
-											function showIdentify() {
-												var code_code = create_code();
-												true_code = code_code;
-												var identify = document.getElementById("canvas_identify");
-												var identify_context = identify.getContext("2d");
-												identify_context.clearRect(0, 0, 800, 800);
-												identify_context.font="Italic bolder 85px sans-serif";
-												identify_context.fillText(code_code, 10,110);
-											}
-
-											function create_code() {
-												var strallcode = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-												var strcode = "";
-												var i = 0;
-												for(; i < 4; i++) {
-													var codenum = parseInt(Math.random()*strallcode.length-1);
-													strcode += strallcode.charAt(codenum);
+										<input type="text" style="width: 65%;float: left;" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
+										<div onclick="showIdentify()" style="width: 30%;height: 32px;float: right;">
+											<!-- <span class="badge" id="regetIdentify">
+												<img alt="" id="validateCodeImg" src="/ChuangYeJia/IdentifyCode" style="width:100%;height:100%;">
+											</span>
+											<script type="text/javascript">
+												function changeImg(){
+				 									document.getElementById("validateCodeImg").src = "/ChuangYeJia/IdentifyCode?"+Math.random();
 												}
-												return strcode;
-											}
-
-											function checkIdentifyCode() {//进行验证码判断
-												var identifycode = $("#identifyCode").val().trim();
-
-												var alertidentifycode = $(".alert-identifycode");
-												var checkidentifycode = $(".alert-check-identifycode");
-												if (identifycode=="") {
-													//alert(identifycode);
-													alertidentifycode.attr("style", "display:inline-block;");
-													checkidentifycode.attr("style", "display:none;");
-													return false;
-												} else {
-													return checkIdentifyCodeDetailAJAX(identifycode);
-												}
-
-											}
-											function checkIdentifyCodeDetailAJAX(identifyCode) {//进行验证码判断的ajax
-
-												if(identifyCode==true_code) {
-													$(".identifycode-error").text("正确");
-													return true;
-												} else {
-													$(".identifycode-error").text("您输入的验证码有误，请点击图片进行刷新后，重新输入！");
-													alert("您输入的验证码有误，请点击图片进行刷新后，重新输入！");
-													return false;
-												}
-											}
-
-										</script>
+											</script> -->
+										</div>
+										
 										<br />
 										<br />
 										<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">

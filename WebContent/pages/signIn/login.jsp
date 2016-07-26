@@ -134,10 +134,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="form-group">
 									    <label for="exampleInputEmail1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">账&nbsp;&nbsp;&nbsp;户</label>
 									    <div class="col-sm-10">
-									    	<input type="email" class="form-control" name="ud.username"  id="exampleInputEmail1" placeholder="邮箱:123@163.com">
+									    	<input type="email" class="form-control" name="ud.email"  id="exampleInputEmail1" placeholder="邮箱:123@163.com">
 									    
 										    <div class="alert alert-danger alert-email" role="alert" style="display: none">
-												请输入您的账户
+												请输入您的邮箱
 											</div>
 											<div class="alert alert-danger alert-check-email" role="alert" style="display:none;">
 												<span class="email-error">
@@ -168,16 +168,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<span class="identifycode-error">
 												</span>
 											</div>
-											<!-- <div style="width: 23%;height: 32px;float: right;background-color: ;" onclick="changeImg()">
+											<div style="width: 23%;height: 32px;float: right;" onclick="changeImg()">
 												<span class="badge" id="regetIdentify">
-													<img alt="" id="validateCodeImg" src="/ChuangYeJia/IdentifyCode" style="width:100%;height:100%;">
+													<img alt="看不清，换一张" id="validateCodeImg" src="userSignIn!identifyCode.action" style="width:100%;height:100%;">
 												</span>
 												<script type="text/javascript">
 													function changeImg(){
-					 									document.getElementById("validateCodeImg").src = "/ChuangYeJia/IdentifyCode?"+Math.random();
+					 									document.getElementById("validateCodeImg").src = "userSignIn!identifyCode.action?i="+Math.random();
 													}
 												</script>
-											</div> -->
+											</div>
 									    </div>
 									</div>
                                     
