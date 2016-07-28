@@ -130,148 +130,75 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="content-main" style="width: 100%;height: 550px;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div class="content-main-top" style="height: 27%;">
 					<div style="width: 80%;height: 100%;margin: 50px auto;">
-								<form action="userSignIn!execute.action" method="post">
-                                    <div class="form-group">
-									    <label for="exampleInputEmail1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">账&nbsp;&nbsp;&nbsp;户</label>
-									    <div class="col-sm-10">
-									    	<input type="email" class="form-control" name="ud.email"  id="exampleInputEmail1" placeholder="邮箱:123@163.com">
-									    
-										    <div class="alert alert-danger alert-email" role="alert" style="display: none">
-												请输入您的邮箱
-											</div>
-											<div class="alert alert-danger alert-check-email" role="alert" style="display:none;">
-												<span class="email-error">
-												</span>
-											</div>
-									    	<hr />
-									    </div>
+						<form action="userSignIn!execute.action" method="post" onsubmit="return checkdata()">
+                                  <div class="form-group">
+							    <label for="exampleInputEmail1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">邮&nbsp;&nbsp;&nbsp;箱</label>
+							    <div class="col-sm-10">
+							    	<input type="email" class="form-control" name="ud.email"  id="email" placeholder="邮箱:123@163.com">
+							    
+								    <div class="alert alert-danger alert-email" role="alert" style="display: none">
+										请输入您的邮箱
 									</div>
-									 <div class="form-group">
-									    <label for="exampleInputPassword1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;码</label>
-									    <div class="col-sm-10">
-									    	<input type="password" class="form-control" name="ud.password" id="exampleInputPassword1" placeholder="密码">
-									    	<div class="alert alert-danger alert-password" role="alert" style="display: none;">
-												请输入您的密码
-											</div>
-										    <hr />
-									    </div>
+									<div class="alert alert-danger alert-check-email" role="alert" style="display:none;">
+										<span class="email-error">
+										</span>
 									</div>
-									
-									<div class="form-group">
-									    <label for="identifyCode" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">验证码</label>
-									    <div class="col-sm-10">
-											<input type="text" style="width: 60%;float: left;" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
-											<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
-												请输入验证码
-											</div>
-											<div class="alert alert-danger alert-check-identifycode" role="alert" style="display:none;">
-												<span class="identifycode-error">
-												</span>
-											</div>
-											<div style="width: 23%;height: 32px;float: right;" onclick="changeImg()">
-												<span class="badge" id="regetIdentify">
-													<img alt="看不清，换一张" id="validateCodeImg" src="userSignIn!identifyCode.action" style="width:100%;height:100%;">
-												</span>
-												<script type="text/javascript">
-													function changeImg(){
-					 									document.getElementById("validateCodeImg").src = "userSignIn!identifyCode.action?i="+Math.random();
-													}
-												</script>
-											</div>
-									    </div>
+							    	<hr />
+							    </div>
+							</div>
+							 <div class="form-group">
+							    <label for="exampleInputPassword1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;码</label>
+							    <div class="col-sm-10">
+							    	<input type="password" class="form-control" name="ud.password" id="password" placeholder="密码">
+							    	<div class="alert alert-danger alert-password" role="alert" style="display: none;">
+										请输入您的密码
 									</div>
-                                    
-                                    <div class="form-group">
-										<label for="exampleInputPassword1" style="text-align: right;" class="col-sm-2 control-label">
-										</label>
-										<div class="col-sm-10" style="margin-top: 20px;">
-											<input type="checkbox" checked="checked">
-											下次自动登陆</input>
-											<div style="float: right;"><a href="#">忘记密码</a></div>
-										</div>
-										
+								    <hr />
+							    </div>
+							</div>
+							
+							<div class="form-group">
+							    <label for="identifyCode" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">验证码</label>
+							    <div class="col-sm-10">
+									<input type="text" style="width: 60%;float: left;" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
+									<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
+										请输入验证码
 									</div>
-									
-									<div style="text-align: center;">
-										<button type="submit" class="btn btn-default" style="color: #398BE5;" name="login" value="登陆">
-											登陆
-										</button>
-										<a class="btn btn-default" style="color: #398BE5;" href="register.jsp">注册</a>
+									<div class="alert alert-danger alert-check-identifycode" role="alert" style="display:none;">
+										<span class="identifycode-error">
+										</span>
 									</div>
-								</form>
-<script>
-	
+									<div style="width: 23%;height: 32px;float: right;" onclick="changeImg()">
+										<span class="badge" id="regetIdentify">
+											<img alt="看不清，换一张" id="validateCodeImg" src="userSignIn!identifyCode.action" style="width:100%;height:100%;">
+										</span>
+										<script type="text/javascript">
+											function changeImg(){
+			 									document.getElementById("validateCodeImg").src = "userSignIn!identifyCode.action?i="+Math.random();
+											}
+										</script>
+									</div>
+							    </div>
+							</div>
+                                  
+                                  <div class="form-group">
+								<label for="exampleInputPassword1" style="text-align: right;" class="col-sm-2 control-label">
+								</label>
+								<div class="col-sm-10" style="margin-top: 20px;">
+									<input type="checkbox" checked="checked">
+									下次自动登陆</input>
+									<div style="float: right;"><a href="#">忘记密码</a></div>
+								</div>
 								
-function checkemail() {
-	var email = $("#exampleInputEmail1").val().trim();
-	var alertemail = $(".alert-email");
-	var checkemail = $(".alert-check-email");
-	if (email === "") {
-		alertemail.attr("style", "display:inline-block;");
-		checkemail.attr("style", "display:none;");
-	}
-	//当email的输入非空时，进行ajax验证
-	/* var xmlhttp = null;
-	if (email !== "") {
-		alertemail.attr("style", "display:none;");
-		if (window.XMLHttpRequest) {
-			xmlhttp = new XMLHttpRequest();
-		} else if (window.ActiveXObject) {
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
-		}
-		if (xmlhttp === null) {
-			alert("无法创建XMLHttpRequest对象");
-			return;
-		}
-		xmlhttp.open("GET", "../../action/ajax/registerAJAX.php?username=" + email, true);
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4) {
-				if (xmlhttp.status == 200) {
-					var result = xmlhttp.responseText;
-					//alert(result);
-					checkemail.attr("style", "display:inline-block;");
-					
-					
-					var is_registered = result.charAt(0);
-					if(is_registered == "1") {
-						$(".email-error").text("该账户存在");
-					} else {
-						$(".email-error").text("该邮箱尚未注册");
-					}
-
-				} else {
-					alert(xmlhttp.status);
-				}
-			}
-		}
-		xmlhttp.send(null); */
-	//}
-}
-
-function chechpassword() {
-	var password = $("#exampleInputPassword1").val().trim();
-	if (password === "") {
-		$(".alert-password").attr("style", "display:inline-block;");
-	} else {
-		$(".alert-password").attr("style", "display:none;");
-	}
-}
-
-function checkdata() {
-	var email = $("#exampleInputEmail1").val().trim();
-	var password = $("#exampleInputPassword1").val().trim();
-	var identifyCode = $("#identifyCode").val().trim();
-	if (email === "" || password === "" || identifyCode === "") {
-		alert("请您将信息填写完整");
-		return false;
-	} else if(!checkIdentifyCode()) {
-		alert("请将验证码填写正确！")
-		return false;
-	} else {
-		return true;
-	}
-}
-</script>
+							</div>
+							
+							<div style="text-align: center;">
+								<button type="submit" class="btn btn-default" style="color: #398BE5;" name="login" value="登陆">
+									登陆
+								</button>
+								<a class="btn btn-default" style="color: #398BE5;" href="register.jsp">注册</a>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>

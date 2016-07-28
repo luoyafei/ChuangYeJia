@@ -20,4 +20,10 @@ public class HibernateSessionFactory {
 		else
 			return new AnnotationConfiguration().configure().buildSessionFactory();
 	}
+	
+	public static void closeSessionFactory() {
+		
+		sf.close();
+		sf = null;
+	}
 }

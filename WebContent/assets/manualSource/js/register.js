@@ -1,7 +1,18 @@
 /**
  * 
  */
-
+/* 用来检测昵称的函数*/
+function checknickname() {
+	var alertnickname = $(".alert-nickname");
+	var nickname = $("#nickname").val().trim();
+	if (nickname === "" || nickname.length < 2) {
+		alertnickname.attr("style", "display:inline-block;");
+		return false;
+	} else {
+		alertnickname.attr("style", "display:none;");
+		return true;
+	}
+}
 /* 用来检测邮箱的函数 */
 function checkemail() {
 	var email = $("#email").val().trim();
@@ -52,7 +63,17 @@ function checkpassword() {
 		return true;
 	}
 }
-
+function checkrepassword() {
+	var password = $("#password").val().trim();
+	var repassword = $("#repassword").val().trim();
+	if (repassword === "" || password !== repassword) {
+		$(".alert-repassword").attr("style", "display:inline-block;");
+		return false;
+	} else if (password === repassword) {
+		$(".alert-repassword").attr("style", "display:none;");
+		return true;
+	}
+}
 
 /* 用来检测验证码的函数 */
 function checkIdentifyCode() {

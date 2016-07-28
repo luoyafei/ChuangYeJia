@@ -2,6 +2,7 @@ package com.chuangyejia.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -11,15 +12,35 @@ import com.chuangyejia.factory.HibernateSessionFactory;
 
 public class UserDaoImpl implements IUserDao {
 
+	@SuppressWarnings("finally")
 	@Override
 	public boolean saveUser(User user) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.save(user);
+			session.getTransaction().commit();
+			flag = true;
+		} catch(HibernateException e) {
+			flag = false;
+System.out.println("Hibernate往数据库中插入User数据时出现异常！");
+			e.printStackTrace();
+		} finally {
+			if(session.isOpen()) {
+				session.close();
+				session = null;
+			}
+			return flag;
+		}
+
 	}
 
 	@Override
 	public boolean deleteUser(String userId) {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -77,7 +98,7 @@ public class UserDaoImpl implements IUserDao {
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
-		Query q = session.createQuery("from User u where u.userEmail = :email");
+		Query q = session.createQuery("select userEmail from User u where u.userEmail = :email");
 		q.setString("email", email);
 		int count = q.list().size();
 		session.getTransaction().commit();

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.chuangyejia.factory.ServiceFactory;
-import com.chuangyejia.service.impl.UserServiceImpl;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ValidateAction extends ActionSupport {
@@ -71,6 +70,30 @@ public class ValidateAction extends ActionSupport {
 	
 	public void checkIdentifyCode() {
 		
+		boolean flag = false;
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		PrintWriter out = null;
+		
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			System.out.println("异步验证验证码时，获取输出管道出错！");
+			e.printStackTrace();
+		}
+		
+		/**
+		 * 使用正则表达式来匹配，收到的identifyCode必须是数字！
+		 */
+		flag = identifyCode.matches("[-]?[0-9]*");
+		if(flag) {
+			flag = identifyCode.equals(ServletActionContext.getRequest().getSession().getAttribute("code").toString());
+		}
+		
+		out.print(flag);
+		
+		out.flush();
+		out.close();
 	}
 	
 }

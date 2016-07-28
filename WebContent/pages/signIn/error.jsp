@@ -8,11 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<s:property value="ud.email"/>
+	<s:property value="ud.username"/>
 	<s:property value="ud.password"/>
 	<s:property value="ud.validatePassword"/>
 	<s:property value="ud.identifyCode"/>
 	<s:property value="#session.code"/>
+	
 	<s:debug></s:debug>
 </body>
 </html>

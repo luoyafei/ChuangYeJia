@@ -63,15 +63,17 @@ public class Test {
 		Session session = sf.getCurrentSession();
 		
 		session.beginTransaction();
-		
-		Query q = session.createQuery("from User where userId = :userId");
-		q.setString("userId", "12");
-		long result = (Long)q.uniqueResult();
-		
 		session.getTransaction().commit();
 		
-		System.out.println(result);
 	}
 
+	
+	@org.junit.Test
+	public void testReg() {
+		
+		//boolean isNum = "-9".matches("[-]?[0-9]*");
+		boolean flag = "1sdfsf2sfsdfsdf@3qq.db".matches("\\w+\\x40\\w+\\x2e\\w+");
+		System.out.println(flag);
+	}
 
 }
