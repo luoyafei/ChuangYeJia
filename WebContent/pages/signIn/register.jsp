@@ -144,18 +144,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="main">
 							<div class="main-login">
 								<form action="userSignIn!register.action" method="post" name="form" onsubmit="return checkdata()">
+								
 									<div class="form-group" style="margin-top: 30px;">
-										<input type="text" class="form-control" name="ud.nickname" id="nickname" placeholder="昵称">
+										<input type="text" class="form-control" name="ud.nickname" id="nickname" placeholder="昵称" maxlength="16" onblur="checknickname()">
 										<div class="alert alert-danger alert-nickname" role="alert" style="display: none">
 											请输入您的昵称
 										</div>
 									</div>
 
-
-
 									<hr style="width: 100%; color: black;font-size: 2px;" />
 									<div class="form-group">
-										<input type="email" class="form-control" name="ud.email" id="exampleInputEmail1" placeholder="邮箱" onblur="checkemail()">
+										<input type="email" class="form-control" name="ud.email" id="email" maxlength="30" placeholder="邮箱" onblur="checkemail()">
 										<div class="alert alert-danger alert-email" role="alert" style="display: none">
 											请输入您的邮箱
 										</div>
@@ -166,32 +165,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 									<hr style="width: 100%; color: black;font-size: 2px;" />
 									<div class="form-group">
-										<input type="password" class="form-control" name="ud.password" id="exampleInputPassword1" placeholder="密码" onblur="chechpassword()">
+										<input type="password" class="form-control" name="ud.password" id="password" maxlength="16" placeholder="密码" onblur="chechpassword()">
 										<div class="alert alert-danger alert-password" role="alert" style="display: none;">
 											请输入您的密码
 										</div>
 									</div>
 									<hr style="width: 100%; color: black;font-size: 2px;" />
 									<div class="form-group">
-										<input type="password" class="form-control" name="ud.validatePassword" id="exampleInputPassword2" placeholder="确认密码" onblur="chechrepassword()">
+										<input type="password" class="form-control" name="ud.validatePassword" id="repassword" placeholder="确认密码" onblur="chechrepassword()">
 										<div class="alert alert-danger alert-repassword" role="alert" style="display: none;">
 											请核实密码与确认密码是一致的
 										</div>
 									</div>
 									<hr style="width: 100%; color: black;font-size: 2px;" />
+									
 									<div class="form-group">
-										<input type="text" style="width: 65%;float: left;" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
-										<div onclick="showIdentify()" style="width: 30%;height: 32px;float: right;">
-											<!-- <span class="badge" id="regetIdentify">
-												<img alt="" id="validateCodeImg" src="/ChuangYeJia/IdentifyCode" style="width:100%;height:100%;">
+									
+										<div class="row">
+											<div class="col-md-8">
+										    	<input type="text" onblur="checkIdentifyCode()" maxlength="5" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
+										    </div>
+										    <div class="col-md-2">
+												<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
+													请输入验证码
+												</div>
+											</div>
+											<div class="col-md-2" onclick="changeImg()">
+												<span class="badge" id="regetIdentify">
+													<img alt="看不清，换一张" id="validateCodeImg" src="userSignIn!identifyCode.action" style="width:100%;height:100%;">
+												</span>
+												<script type="text/javascript">
+													function changeImg(){
+					 									document.getElementById("validateCodeImg").src = "userSignIn!identifyCode.action?i="+Math.random();
+													}
+												</script>
+											</div>
+										</div>
+																		
+										<!-- <input type="text" style="width: 60%;float: left;" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
+										<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
+											请输入验证码
+										</div>
+										<div style="width: 23%;height: 32px;float: right;" onclick="changeImg()">
+											<span class="badge" id="regetIdentify">
+												<img alt="看不清，换一张" id="validateCodeImg" src="userSignIn!identifyCode.action" style="width:100%;height:100%;">
 											</span>
 											<script type="text/javascript">
 												function changeImg(){
-				 									document.getElementById("validateCodeImg").src = "/ChuangYeJia/IdentifyCode?"+Math.random();
+				 									document.getElementById("validateCodeImg").src = "userSignIn!identifyCode.action?i="+Math.random();
 												}
-											</script> -->
-										</div>
-										
+											</script>
+										</div> -->
+									<!-- 	
 										<br />
 										<br />
 										<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
@@ -200,11 +225,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<div class="alert alert-danger alert-check-identifycode" role="alert" style="display:none;">
 											<span class="identifycode-error">
 											</span>
-										</div>
+										</div> -->
 										<!--<div class="alert alert-danger alert-repassword" role="alert" style="display: none;">请核实密码与确认密码是一致的</div>-->
 									</div>
 									<hr style="width: 100%; color: black;font-size: 2px;" />
-									<div class="checkbox">
+									<div class="checkbox form-group">
 										<label>
 											<input type="checkbox" checked="checked">
 											我已阅读并同意</input>
@@ -254,100 +279,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								    </div>
 								  </div>
 								</div>
-
-
-
-
 								<script>
-
-
-/*
-function checknickname() {
-	//var nickname = $("#nickname").val().trim();
-	var alertnickname = $(".alert-nickname");
-	var checknickname = $(".alert-check-nickname");
-	if (nickname === "") {
-		alertnickname.attr("style", "display:inline-block;");
-		checknickname.attr("style", "display:none;");
-	}
-	//当nickname的输入非空时，进行ajax验证
-	var xmlhttp = null;
-	if (nickname !== "") {
-		alertnickname.attr("style", "display:none;");
-		if (window.XMLHttpRequest) {
-			xmlhttp = new XMLHttpRequest();
-		} else if (window.ActiveXObject) {
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
-		}
-		if (xmlhttp === null) {
-			alert("无法创建XMLHttpRequest对象");
-			return;
-		}
-		xmlhttp.open("GET", "../action/ajax/RegisterToCheckNicknameForAJAX.php?nickname=" + nickname, true);
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4) {
-				if (xmlhttp.status == 200) {
-					var result = xmlhttp.responseText;
-					//alert(result);
-					checknickname.attr("style", "display:inline-block;");
-					$(".nickname-error").text(result);
-				} else {
-					alert(xmlhttp.status);
-				}
-			}
-		}
-		xmlhttp.send(null);
-	}
-}
-	*/
-
-
-function checkemail() {
-	var email = $("#exampleInputEmail1").val().trim();
-	var alertemail = $(".alert-email");
-	var checkemail = $(".alert-check-email");
-	if (email === "") {
-		alertemail.attr("style", "display:inline-block;");
-		checkemail.attr("style", "display:none;");
-	}
-	//当email的输入非空时，进行ajax验证
-	var xmlhttp = null;
-	if (email !== "") {
-		alertemail.attr("style", "display:none;");
-		if (window.XMLHttpRequest) {
-			xmlhttp = new XMLHttpRequest();
-		} else if (window.ActiveXObject) {
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
-		}
-		if (xmlhttp === null) {
-			alert("无法创建XMLHttpRequest对象");
-			return;
-		}
-		xmlhttp.open("GET", "../../action/ajax/registerAJAX.php?username=" + email, true);
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4) {
-				if (xmlhttp.status == 200) {
-					var result = xmlhttp.responseText;
-					checkemail.attr("style", "display:inline-block;");
-					// alert(result)
-					var is_registered = result.charAt(0);
-					if(is_registered == "1") {
-						$(".email-error").text("该邮箱已被注册");
-					} else {
-						$(".email-error").text("该邮箱可用");
-					}
-
-				} else {
-					alert(xmlhttp.status);
-				}
-			}
-		}
-		xmlhttp.send(null);
-	}
-}
+									
+									<!-- 用来检测昵称的函数 -->
+									function checknickname() {
+										var alertnickname = $(".alert-nickname");
+										var nickname = $("#nickname").val().trim();
+										if (nickname === "") {
+											alertnickname.attr("style", "display:inline-block;");
+										} else {
+											alertnickname.attr("style", "display:none;");
+										}
+									}
+									
+									function checkemail() {
+										var email = $("#email").val().trim();
+										var alertemail = $(".alert-email");
+										var checkemail = $(".alert-check-email");
+										if (email === "") {
+											alertemail.attr("style", "display:inline-block;");
+											checkemail.attr("style", "display:none;");
+										}
+										
+										if (email !== "") {
+											
+											alertemail.attr("style", "display:none;");
+											
+											$.post('vaction!checkEmail.action', { 
+												email : email
+											}, function(data, textStatus) {
+												if(textStatus == "success") {
+													checkemail.attr("style", "display:inline-block;");
+													if(data)
+														$(".email-error").text("该邮箱已被注册");
+													else
+														$(".email-error").text("该邮箱可用");
+												} else {
+													alert(textStatus);
+												}
+											}, 'json');
+										}
+									}
 
 function chechpassword() {
-	var password = $("#exampleInputPassword1").val().trim();
+	var password = $("#password").val().trim();
 	if (password === "") {
 		$(".alert-password").attr("style", "display:inline-block;");
 	} else {
@@ -356,19 +331,28 @@ function chechpassword() {
 }
 
 function chechrepassword() {
-	var password = $("#exampleInputPassword1").val().trim();
-	var repassword = $("#exampleInputPassword2").val().trim();
+	var password = $("#password").val().trim();
+	var repassword = $("#repassword").val().trim();
 	if (repassword === "" || password !== repassword) {
 		$(".alert-repassword").attr("style", "display:inline-block;");
 	} else if (password === repassword) {
 		$(".alert-repassword").attr("style", "display:none;");
 	}
 }
-
+function checkIdentifyCode() {
+	var identifyCode = $("#identifyCode").val().trim();
+	if(identifyCode === "")
+		$(".alert-identifycode").attr("style", "display:inline-block;");
+	else {
+		
+	}
+		//$(".alert-identifycode").attr("style", "display:none;");
+		
+}
 function checkdata() {
-	var email = $("#exampleInputEmail1").val().trim();
-	var password = $("#exampleInputPassword1").val().trim();
-	var repassword = $("#exampleInputPassword2").val().trim();
+	var email = $("#email").val().trim();
+	var password = $("#password").val().trim();
+	var repassword = $("#repassword").val().trim();
 	if (email === "" || password === "" || repassword === "") {
 		alert("请您将信息填写完整");
 		return false;

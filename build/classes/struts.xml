@@ -35,7 +35,9 @@
 			<result name="success">/pages/signIn/success.jsp</result>
 		</action>
 		
-		 
+		<!-- 处理ajax数据的action -->
+		<action name="vaction" class="com.chuangyejia.ajax.ValidateAction"/>
+		
     <!-- 	<global-results>
     		<result name="exception">/exception.jsp</result>
     	</global-results> -->

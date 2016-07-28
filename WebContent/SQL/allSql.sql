@@ -1,5 +1,5 @@
 create table User (
-    userId integer primary key auto_increment,
+    userId varchar(32) primary key,
     userNickName varchar(20) not null,
     userEmail varchar(30) unique,
     userPassword varchar(20) not null,

@@ -7,33 +7,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class User {
 
-	private int userId;
-	private String userNickName = "";//用户昵称
-	private String userEmail = "";//用户邮箱
-	private String userRealName = "";//用户真实姓名
-	private String userPassword = "";
-	private String userIntroduce = "";
-	private String userGender = "";
+	private String userId = null;
+	private String userNickName = null;//用户昵称
+	private String userEmail = null;//用户邮箱
+	private String userRealName = null;//用户真实姓名
+	private String userPassword = "123456";
+	private String userIntroduce = null;
+	private String userGender = null;
 	private Timestamp userBirthday = null;
 	private String userPhoto = "";//用户头像
 	private String userRealPhoto = "";//用户照片
 	private String userProvince = "";
-	private String userCity = "";
-	private String userWeChat = "";
-	private String userIdCard = "";
+	private String userCity = null;
+	private String userWeChat = null;
+	private String userIdCard = null;
 	private Timestamp userCreateDate = null;
-	private String isVerify = "";//是否认证
-	private String userTel = "";//电话
+	private String isVerify = "0";//是否认证
+	private String userTel = null;//电话
 	
 	@Id
-	@GeneratedValue
-	public int getUserId() {
+	@GenericGenerator(name="uuid", strategy="uuid")
+	@GeneratedValue(generator="uuid")
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getUserNickName() {

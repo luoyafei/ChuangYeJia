@@ -2,9 +2,6 @@ package com.chuangyejia.action;
 
 import java.io.ByteArrayInputStream;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.ServletActionContext;
 
 import com.chuangyejia.dto.UserDTO;
@@ -43,6 +40,7 @@ public class UserSignInAction extends ActionSupport {
 		IdentifyCode ic = new IdentifyCode();
 		imageStream = ic.createCode();
 		Integer code = ic.getResult();
+		
 		ServletActionContext.getRequest().getSession().setAttribute("code", code);
 		return "identifyCode";
 	}

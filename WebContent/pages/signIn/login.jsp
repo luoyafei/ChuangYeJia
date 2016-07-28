@@ -211,7 +211,7 @@ function checkemail() {
 		checkemail.attr("style", "display:none;");
 	}
 	//当email的输入非空时，进行ajax验证
-	var xmlhttp = null;
+	/* var xmlhttp = null;
 	if (email !== "") {
 		alertemail.attr("style", "display:none;");
 		if (window.XMLHttpRequest) {
@@ -244,8 +244,8 @@ function checkemail() {
 				}
 			}
 		}
-		xmlhttp.send(null);
-	}
+		xmlhttp.send(null); */
+	//}
 }
 
 function chechpassword() {
