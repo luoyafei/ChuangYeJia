@@ -10,9 +10,11 @@
 <body>
 	<s:property value="ud.email"/>
 	<s:property value="ud.password"/>
-	<s:property value="ud.validatePassword"/>
 	<s:property value="ud.identifyCode"/>
-	<s:property value="#session.code"/>
+	
+	<s:property value="errors.password[0]" />
+	<s:property value="fieldErrors.password[0]" />
+	<s:fielderror />
 	<s:debug></s:debug>
 </body>
 </html>

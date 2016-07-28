@@ -2,7 +2,10 @@ package com.chuangyejia.action;
 
 import java.io.ByteArrayInputStream;
 
+import javax.xml.crypto.dsig.XMLSignatureFactory;
+
 import org.apache.struts2.ServletActionContext;
+import org.omg.CORBA.Request;
 
 import com.chuangyejia.bean.User;
 import com.chuangyejia.dto.UserSignDTO;
@@ -18,10 +21,15 @@ public class UserSignInAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String LOGIN = "login";//验证登录失败后，返回登录页面
+	private static final String REGISTER = "register";//验证注册失败后，返回住处页面
+	private static final String BACK = "back";//从哪里登录就从哪里返回
+	
 	
 	
 	private UserSignDTO ud;
-	private ByteArrayInputStream imageStream;  
+	private ByteArrayInputStream imageStream;//输出的图片流
+	private String backUrl;//从哪里进行登陆时url
 	public UserSignDTO getUd() {
 		return ud;
 	}
@@ -34,6 +42,13 @@ public class UserSignInAction extends ActionSupport {
 	public void setImageStream(ByteArrayInputStream imageStream) {
 		this.imageStream = imageStream;
 	}
+	public String getBackUrl() {
+		return backUrl;
+	}
+	public void setBackUrl(String backUrl) {
+		this.backUrl = backUrl;
+	}
+
 	
 	/**
 	 * 用来生成验证码的
@@ -51,44 +66,34 @@ public class UserSignInAction extends ActionSupport {
 	
 	public String register() {
 		
-		System.out.println("register() executed!"); 
+		String returnStr = INPUT;
 		
 		String code = String.valueOf(ServletActionContext.getRequest().getSession().getAttribute("code"));//先将session中的验证码结果取出
 		if(ud.getIdentifyCode().equals(code)) {//如果判断相等，则继续执行
-//System.out.println("ud.getIdentifyCode().equals(code)" + ":" + ud.getIdentifyCode().equals(code));
 			ud.setIsLogin(false);
-//System.out.println("ud.checkDataDispatchor()" + ":" + ud.checkDataDispatchor());
-
 			if(ud.checkDataDispatchor()) {
-//System.out.println("1111111111111111");
 				IUserService ius = ServiceFactory.createUserService();
 				boolean emailIsExisted = ius.checkEmail(ud.getEmail());//判断数据库中是否存在该email
 				if(!emailIsExisted) {
-//System.out.println("!emailIsExisted" + ":" + !emailIsExisted);
 					User user = ud.toUser();
 					if(ius.saveUser(user))  {//将User对象存入数据库中。
-//System.out.println("u.getUserId : " + u.getUserId());
 						ServletActionContext.getRequest().getSession().setAttribute("user", user);//将插入成功的User对象放入Session中
-						return SUCCESS;
-					} else
-						return INPUT;
-				} else {
-					return INPUT;
+						returnStr =  SUCCESS;
+					}
 				}
-			} else {
-				return INPUT;
 			}
-		} else {
-			return INPUT;
 		}
+		return returnStr;
 	}
 	
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println(ud.getEmail() + "：" + ud.getPassword() + ":" + ud.getIdentifyCode());
+		this.addFieldError("password", "邮箱或密码错误！");
 		
 		
-		return super.execute();
+		
+		return "loginsuccess";
 	}
-
 }

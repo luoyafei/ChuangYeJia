@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,6 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="<%=path%>/assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
 		<script src="<%=path%>/assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
 		<script src="<%=path%>/assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+			
+		<script src="<%=path%>/assets/manualSource/js/login.js"></script>	
 			
 		<style>
 		body {
@@ -130,11 +133,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="content-main" style="width: 100%;height: 550px;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div class="content-main-top" style="height: 27%;">
 					<div style="width: 80%;height: 100%;margin: 50px auto;">
+					<div style="text-align: center; color:red;"><s:property value="errors.password[0]" /></div>
 						<form action="userSignIn!execute.action" method="post" onsubmit="return checkdata()">
-                                  <div class="form-group">
-							    <label for="exampleInputEmail1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">邮&nbsp;&nbsp;&nbsp;箱</label>
+                            <div class="form-group">
+							    <label for="email" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">邮&nbsp;&nbsp;&nbsp;箱</label>
 							    <div class="col-sm-10">
-							    	<input type="email" class="form-control" name="ud.email"  id="email" placeholder="邮箱:123@163.com">
+							    	<input type="email" class="form-control" name="ud.email" maxlength="16" id="email" placeholder="邮箱" onblur="checkemail()">
 							    
 								    <div class="alert alert-danger alert-email" role="alert" style="display: none">
 										请输入您的邮箱
@@ -147,9 +151,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    </div>
 							</div>
 							 <div class="form-group">
-							    <label for="exampleInputPassword1" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;码</label>
+							    <label for="password" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;码</label>
 							    <div class="col-sm-10">
-							    	<input type="password" class="form-control" name="ud.password" id="password" placeholder="密码">
+							    	<input type="password" class="form-control" name="ud.password" id="password" maxlength="16" placeholder="密码" onblur="checkpassword()">
 							    	<div class="alert alert-danger alert-password" role="alert" style="display: none;">
 										请输入您的密码
 									</div>
@@ -158,17 +162,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							
 							<div class="form-group">
-							    <label for="identifyCode" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">验证码</label>
-							    <div class="col-sm-10">
-									<input type="text" style="width: 60%;float: left;" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
-									<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
-										请输入验证码
+									
+								<div class="row">
+									<label for="email" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">验证码</label>
+									
+									<div class="col-sm-5">
+								    	<input type="text" onblur="checkIdentifyCode()" maxlength="5" class="form-control" name="ud.identifyCode" id="identifyCode" placeholder="请直接输入数字结果，如:8">
+								    </div>
+								    <div class="col-sm-2">
+										<div class="alert alert-danger alert-identifycode" role="alert" style="display: none">
+											请输入验证码
+										</div>
+										<div class="alert alert-danger alert-check-identifycode" role="alert" style="display:none;">
+											<span class="identifycode-error">
+												输入错误
+											</span>
+										</div>
 									</div>
-									<div class="alert alert-danger alert-check-identifycode" role="alert" style="display:none;">
-										<span class="identifycode-error">
-										</span>
-									</div>
-									<div style="width: 23%;height: 32px;float: right;" onclick="changeImg()">
+									<div class="col-sm-3" onclick="changeImg()">
 										<span class="badge" id="regetIdentify">
 											<img alt="看不清，换一张" id="validateCodeImg" src="userSignIn!identifyCode.action" style="width:100%;height:100%;">
 										</span>
@@ -178,17 +189,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											}
 										</script>
 									</div>
-							    </div>
+								</div>
+																
 							</div>
                                   
-                                  <div class="form-group">
-								<label for="exampleInputPassword1" style="text-align: right;" class="col-sm-2 control-label">
-								</label>
-								<div class="col-sm-10" style="margin-top: 20px;">
-									<input type="checkbox" checked="checked">
-									下次自动登陆</input>
-									<div style="float: right;"><a href="#">忘记密码</a></div>
-								</div>
+                            <div class="form-group">
+                            	<div class="row">
+                            		<div class="col-sm-2"></div>
+                            		<div class="col-sm-8">
+										<input type="checkbox" checked="checked" />下次自动登陆
+									</div>
+									<div class="col-sm-2"><a href="#">忘记密码</a></div>
+                            	</div>
 								
 							</div>
 							

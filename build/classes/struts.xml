@@ -34,6 +34,7 @@
 			</result>
 			<result name="success">/index.jsp</result>
 			<result name="input">/pages/signIn/register.jsp</result>
+			<result name="loginsuccess">/pages/signIn/login.jsp</result>
 		</action>
 		
 		<!-- 处理ajax数据的action -->

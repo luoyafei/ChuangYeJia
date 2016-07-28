@@ -10,7 +10,6 @@ function checkemail() {
 	if (email === "") {
 		alertemail.attr("style", "display:inline-block;");
 		checkemail.attr("style", "display:none;");
-		return 0;
 	} else {
 		alertemail.attr("style", "display:none;");
 		if(email.match(/^[a-z0-9]+([._]*[a-z0-9]+)*@[a-z0-9]+([_.][a-z0-9]+)+$/gi)) {
@@ -22,21 +21,18 @@ function checkemail() {
 				if(textStatus == "success") {
 					checkemail.attr("style", "display:inline-block;");
 					if(data) {
-						$(".email-error").text("该邮箱已被注册");
-						return 0;
+						//$(".email-error").text("该邮箱");
+						checkemail.attr("style", "display:none;");
 					} else {
-						$(".email-error").text("该邮箱可用");
-						return 1;
+						$(".email-error").text("该邮箱暂未注册");
 					}
 				} else {
 					alert("网络出错" + textStatus);
-					return 0;
 				}
 			}, 'json');
 		} else {
 			checkemail.attr("style", "display:inline-block;");
 			$(".email-error").text("请输入正确的邮箱地址,例如:chuangyejia@163.com");
-			return 0;
 		}
 	}
 }
@@ -81,7 +77,7 @@ function checkIdentifyCode() {
 }
 function checkdata() {
 	
-	if(checknickname() && checkpassword() && checkrepassword() && $("#email").val().trim()!=="" && $("#identifyCode").val().trim()!=="")
+	if(checkpassword() && $("#email").val().trim()!=="" && $("#identifyCode").val().trim()!=="")
 	 	return true;
 	else {
 		alert("请将信息核实正确并填写完整！");
