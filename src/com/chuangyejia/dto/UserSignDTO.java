@@ -79,14 +79,6 @@ public class UserSignDTO {
 
 		boolean rightEmailFormat = email.matches(emailPattern);
 		
-/*System.out.println("rightEmailFormat  :" + rightEmailFormat);
-System.out.println("nickname,password,validatePassword,identifyCode  :" + nickname + "," + password + "," + validatePassword + "," + identifyCode);
-
-System.out.println("nickname != 0 :" + (nickname.trim().hashCode()!=0));
-System.out.println("password.trim().equals(validatePassword.trim()) :" + (password.trim().equals(validatePassword.trim())));
-System.out.println("password != 0 :" + (password.trim().hashCode()!=0));
-System.out.println("identifyCode != 0 :" + (identifyCode.trim().hashCode()!=0));*/
-
 		if(nickname.trim().hashCode() != 0 && rightEmailFormat && password.trim().equals(validatePassword.trim()) && password.trim().hashCode() != 0 && identifyCode.trim().hashCode() != 0)
 			return true;
 		else
@@ -98,7 +90,7 @@ System.out.println("identifyCode != 0 :" + (identifyCode.trim().hashCode()!=0));
 	 * @return
 	 */
 	public boolean checkDataDispatchor() {
-System.out.println("isLogin :" + isLogin);
+//System.out.println("isLogin :" + isLogin);
 		if(isLogin)
 			return checkLogin();
 		else

@@ -79,9 +79,8 @@ public interface IUserDao {
 	public boolean checkEmail(String email);
 	/**
 	 * 在登录时检测email和password是否正确
-	 * @param email
-	 * @param password
-	 * @return boolean
+	 * @param user.getUserEmail user.getUserPassword
+	 * @return User
 	 */
-	public boolean checkEmailAndPassword(String email, String password);
+	public User checkEmailAndPassword(User user);
 }

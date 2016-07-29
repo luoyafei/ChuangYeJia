@@ -64,9 +64,7 @@ public class ValidateAction extends ActionSupport {
 		out.close();
 	}
 	
-	public void checkEandP() {
-		
-	}
+	public void checkEandP() {}
 	
 	public void checkIdentifyCode() {
 		

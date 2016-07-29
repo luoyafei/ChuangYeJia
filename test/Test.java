@@ -75,5 +75,15 @@ public class Test {
 		boolean flag = "1sdfsf2sfsdfsdf@3qq.db".matches("\\w+\\x40\\w+\\x2e\\w+");
 		System.out.println(flag);
 	}
+	
+	@org.junit.Test
+	public void testString() {
+		
+		String backUrl = "/ChuangYeJa/ChuangYeJia/index.jsp";
+		if(backUrl.contains("/ChuangYeJia") && backUrl.startsWith("/ChuangYeJia")) {
+			System.out.println(backUrl.substring(12));
+		} else
+			System.out.println("error");
+	}
 
 }

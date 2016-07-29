@@ -225,6 +225,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<button type="submit" class="btn btn-success btn-l btn-block" name="register" value="注册">
 										注册
 									</button>
+									<input type="hidden" name="backUrl" value='<s:property value="#parameters.backUrl/"/>'  />
 								</form>
 
 

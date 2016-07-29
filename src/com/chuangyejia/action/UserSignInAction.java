@@ -22,8 +22,8 @@ public class UserSignInAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String LOGIN = "login";//验证登录失败后，返回登录页面
-	private static final String REGISTER = "register";//验证注册失败后，返回住处页面
-	private static final String BACK = "back";//从哪里登录就从哪里返回
+	private static final String REGISTER = "register";//验证注册失败后，返回注册页面
+	private static final String BACK = "back";//从哪个登录登录的，成功后就返回那个页面
 	
 	
 	
@@ -46,7 +46,15 @@ public class UserSignInAction extends ActionSupport {
 		return backUrl;
 	}
 	public void setBackUrl(String backUrl) {
-		this.backUrl = backUrl;
+		if(backUrl.trim().hashCode() == 0)
+			this.backUrl = "/index.jsp";
+		else {
+			if(backUrl.contains("/ChuangYeJia") && backUrl.startsWith("/ChuangYeJia")) {
+				this.backUrl = backUrl.substring(12);
+			} else {
+				this.backUrl = "/index.jsp";
+			}
+		}
 	}
 
 	
@@ -66,8 +74,6 @@ public class UserSignInAction extends ActionSupport {
 	
 	public String register() {
 		
-		String returnStr = INPUT;
-		
 		String code = String.valueOf(ServletActionContext.getRequest().getSession().getAttribute("code"));//先将session中的验证码结果取出
 		if(ud.getIdentifyCode().equals(code)) {//如果判断相等，则继续执行
 			ud.setIsLogin(false);
@@ -78,22 +84,38 @@ public class UserSignInAction extends ActionSupport {
 					User user = ud.toUser();
 					if(ius.saveUser(user))  {//将User对象存入数据库中。
 						ServletActionContext.getRequest().getSession().setAttribute("user", user);//将插入成功的User对象放入Session中
-						returnStr =  SUCCESS;
+						return BACK;
 					}
 				}
 			}
 		}
-		return returnStr;
+		return REGISTER;
 	}
 	
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(ud.getEmail() + "：" + ud.getPassword() + ":" + ud.getIdentifyCode());
-		this.addFieldError("password", "邮箱或密码错误！");
+System.out.println("backUrl :" + backUrl);
 		
+		String code = String.valueOf(ServletActionContext.getRequest().getSession().getAttribute("code"));//先将session中的验证码结果取出
+		if(ud.getIdentifyCode().equals(code)) {//如果判断相等，则继续执行
+			ud.setIsLogin(true);
+			if(ud.checkDataDispatchor()) {
+				IUserService ius = ServiceFactory.createUserService();
+				
+				User user = ius.checkEmailAndPassword(ud.toUser());//判断数据库中是否存在该email和password
+				if(user != null) {
+//System.out.println(user.getUserNickName());
+					ServletActionContext.getRequest().getSession().setAttribute("user", user);//将User对象放入Session中
+					return BACK;
+				} else {
+					this.addFieldError("error", "邮箱或登录密码错误！");
+				}
+			} else
+				this.addFieldError("error", "邮箱格式错误！");
+		} else
+			this.addFieldError("error", "验证码错误！");
 		
-		
-		return "loginsuccess";
+		return LOGIN;
 	}
 }

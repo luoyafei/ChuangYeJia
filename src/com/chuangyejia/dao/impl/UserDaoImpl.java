@@ -109,10 +109,39 @@ System.out.println("Hibernate往数据库中插入User数据时出现异常！")
 			return true;//有
 	}
 
+	@SuppressWarnings("finally")
 	@Override
-	public boolean checkEmailAndPassword(String email, String password) {
+	public User checkEmailAndPassword(User user) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean flag = false;
+		
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query q = session.createQuery("from User u where u.userEmail = :email and u.userPassword = :password");
+			q.setString("email", user.getUserEmail());
+			q.setString("password", user.getUserPassword());
+			int count = q.list().size();
+			if(count == 1) {
+				flag =  true;
+				user = (User)q.list().get(0);
+			}
+			session.getTransaction().commit();
+			
+		} catch(HibernateException e) {
+			flag = false;
+System.out.println("验证用户的邮箱和密码时出错！");
+			e.printStackTrace();
+		} finally {
+			if(session.isOpen()) {
+				session.close();
+				session = null;
+			}
+			if(flag)
+				return user;
+			else
+				return null;
+		}
 	}
 
 }

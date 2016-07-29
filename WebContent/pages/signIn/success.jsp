@@ -16,5 +16,10 @@
 	<s:property value="fieldErrors.password[0]" />
 	<s:fielderror />
 	<s:debug></s:debug>
+	
+	<s:property value="#request.getRequestURI"/>
+	<%-- <%
+		out.print(request.getRequestURI());
+	%> --%>
 </body>
 </html>

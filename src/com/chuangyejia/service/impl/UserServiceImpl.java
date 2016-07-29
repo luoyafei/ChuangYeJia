@@ -82,9 +82,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public boolean checkEmailAndPassword(String email, String password) {
+	public User checkEmailAndPassword(User user) {
 		// TODO Auto-generated method stub
-		return ud.checkEmailAndPassword(email, password);
+		return ud.checkEmailAndPassword(user);
 	}
 
 }

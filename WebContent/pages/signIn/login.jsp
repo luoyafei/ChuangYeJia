@@ -133,7 +133,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="content-main" style="width: 100%;height: 550px;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div class="content-main-top" style="height: 27%;">
 					<div style="width: 80%;height: 100%;margin: 50px auto;">
-					<div style="text-align: center; color:red;"><s:property value="errors.password[0]" /></div>
+					
+					
+					<div style="text-align: center; color:red;"><s:property value="errors.error[0]" /></div>
+					
 						<form action="userSignIn!execute.action" method="post" onsubmit="return checkdata()">
                             <div class="form-group">
 							    <label for="email" style="text-align: right;margin-top: 6px;" class="col-sm-2 control-label">邮&nbsp;&nbsp;&nbsp;箱</label>
@@ -210,6 +213,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</button>
 								<a class="btn btn-default" style="color: #398BE5;" href="register.jsp">注册</a>
 							</div>
+							<input type="hidden" name="backUrl" value='<s:property value="#parameters.backUrl/"/>'  />
 						</form>
 					</div>
 				</div>
