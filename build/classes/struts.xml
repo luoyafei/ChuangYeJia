@@ -10,6 +10,7 @@
 	<constant name="struts.multipart.maxSize" value="2097152" />
 	<!-- 配置临时存储地址 -->
 	<constant name="struts.multipart.saveDir" value="/tmp"/>
+	
 	<package name="main" extends="struts-default" namespace="/">
 	
 		<!-- 默认action，在url中随意敲击，可以跳转到指定地方。 -->
@@ -49,6 +50,13 @@
 		
 		<!-- 用来处理用户更改头像ajax的action -->
 		<action name="uploadPicture" class="com.chuangyejia.ajax.UploadUserPicture" />
+		
+		<!-- 用来处理创建公司的action -->
+		<action name="createStartups" class="com.chuangyejia.action.CreateStartupsAction">
+			<result name="input">/pages/startups/create_startups.jsp</result>
+			<result name="back"></result>
+		</action>
+		
 		
     <!-- 	<global-results>
     		<result name="exception">/exception.jsp</result>

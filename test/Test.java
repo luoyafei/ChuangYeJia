@@ -3,6 +3,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 import com.chuangyejia.bean.Startups;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.factory.HibernateSessionFactory;
+import com.chuangyejia.factory.ServiceFactory;
+import com.chuangyejia.service.IUserService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -93,11 +96,12 @@ public class Test {
 	@org.junit.Test
 	public void testNull() {
 		
-		SessionFactory sf = HibernateSessionFactory.createSessionFactory();
+	/*	SessionFactory sf = HibernateSessionFactory.createSessionFactory();
 		Session session = sf.getCurrentSession();
 		
 		session.beginTransaction();
-		session.getTransaction().commit();
+		session.getTransaction().commit();*/
+		new SchemaExport(new AnnotationConfiguration().configure()).create(true, true);
 		
 	}
 
@@ -176,7 +180,7 @@ public class Test {
 		Session session = HibernateSessionFactory.createSessionFactory().openSession();
 		session.beginTransaction();
 		
-		User user = (User)session.load(User.class, "402881fc5643d429015643d42cf10001");
+		User user = (User)session.load(User.class, "402881fc5644a6cb015644a6cdd20001");
 		Query q = session.createQuery("from Startups s where s.startupsLeader.userId = :userId");
 		q.setString("userId", user.getUserId());
 		List<Startups> startups = (List<Startups>)q.list();
@@ -230,8 +234,102 @@ System.out.println(users.size());
 		session.close();
 		//boolean result = ius.saveUser(user);
 		//System.out.println(result);
+	}
+	
+	@org.junit.Test
+	public void testSaveOneUser() {
 		
+		IUserService ius = ServiceFactory.createUserService();
+		User user = new User();
+		
+		user.setUserNickName("罗亚飞");
+		user.setUserEmail("123@qq.com");
+		user.setUserPassword("luoyafei");
+		
+		ius.saveUser(user);
 		
 	}
 	
+	@org.junit.Test
+	public void testCreateStartups() {
+		
+		
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		
+		session.beginTransaction();
+		
+	/*	Query query = session.createQuery("from Startups s where s.startupsLeader.userId = :id");
+		query.setString("id", "402881fc5644a6cb015644a6cdd20001");
+		
+		List<Startups> ss = (List<Startups>)query.list();
+		
+System.out.println(ss.size());
+		
+		User user = (User)session.load(User.class, "402881fc5644afe1015644afe3f90001");
+		
+		Set<Startups> ss = user.getAllJoinStartups();
+System.out.println(ss.size());
+		Iterator<Startups> ssiterator = ss.iterator();
+		while(ssiterator.hasNext()) {
+			System.out.println(ssiterator.next().getStartupsName());
+		}
+		
+		*/
+		
+		User user = (User)session.load(User.class, "402881fc5644a6cb015644a6cdd20001");
+		
+		
+		Set<Startups> s1 = user.getAllLeaderStartups();
+System.out.println(s1.size());
+
+		Set<Startups> s2 = user.getAllJoinStartups();
+System.out.println(s2.size());
+
+		//Startups s = (Startups)session.load(Startups.class, "402881fc5645272e0156452731a40001");
+		
+		//s.getCopartner().add(user);
+		
+		//session.update(s);
+		
+		
+		/*
+		Startups startups = new Startups();
+		startups.setStartupsName("创业加3");
+		startups.setStartupsAddress("陕西西安3");
+		startups.setStartupsBrief("简介3");
+		
+		startups.setStartupsLeader(user);
+		
+		session.save(startups);
+		*/
+		
+		
+		
+		//Startups startups = (Startups)session.load(Startups.class, "402881fc5644aa12015644aa147c0001");
+		
+		/*User leader = startups.getStartupsLeader();
+		Set<User> ss = startups.getCopartner();
+		Iterator<User> ssiterator = ss.iterator();
+		System.out.println("leader:" + leader.toString());
+		while(ssiterator.hasNext()) {
+			System.out.println(ssiterator.next().toString());
+		}*/
+		/*for(int i = 0; i < 10; i++) {
+			User user = new User();
+			user.setUserNickName("罗亚飞" + i);
+			user.setUserEmail("123" + i + "@qq.com");
+			user.setUserPassword("luoyafei" + i);
+			session.save(user);
+			startups.getCopartner().add(user);
+		}*/
+		
+		//session.update(startups);
+		//session.save(startups);
+		
+		session.getTransaction().commit();
+		
+		
+		
+		
+	}
 }

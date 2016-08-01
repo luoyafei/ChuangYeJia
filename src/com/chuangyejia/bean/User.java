@@ -10,12 +10,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class User {
+	
+	private final static String PHOTO_DEFAULT = "/ChuangYeJia/assets/img/defaultImg/head.png";
 
 	private String userId = null;
 	private String userNickName = null;//用户昵称
@@ -38,7 +41,13 @@ public class User {
 	/**
 	 * 获取该用户所创建的所有的创业公司
 	 */
-	private Set<Startups> allStartups = new HashSet<Startups>();
+	private Set<Startups> allLeaderStartups = new HashSet<Startups>();
+	
+
+	/**
+	 * 获取该用户参与的所有的创业公司
+	 */
+	private Set<Startups> allJoinStartups = new HashSet<Startups>();
 	
 	public User() {}
 	
@@ -114,12 +123,12 @@ public class User {
 	}
 	public String getUserPhoto() {
 		if(userPhoto == null || userPhoto.trim().hashCode() == 0)
-			userPhoto = "/ChuangYeJia/assets/img/defaultImg/head.png";
+			userPhoto = PHOTO_DEFAULT;
 		return userPhoto;
 	}
 	public void setUserPhoto(String userPhoto) {
 		if(userPhoto == null || userPhoto.trim().hashCode() == 0)
-			userPhoto = "/ChuangYeJia/assets/img/defaultImg/head.png";
+			userPhoto = PHOTO_DEFAULT;
 		this.userPhoto = userPhoto;
 	}
 	public String getUserRealPhoto() {
@@ -188,17 +197,31 @@ public class User {
 		this.userTel = userTel;
 	}
 	
-	
+	/**
+	 * 这里是一对多双向关联，获取到该用户是leader的所有创业公司
+	 * 注意：这里与之对应的是 Startups类中的User(startupsLeader)对象
+	 * @return
+	 */
+	@OneToMany(mappedBy="startupsLeader",cascade={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch=FetchType.LAZY)
+	public Set<Startups> getAllLeaderStartups() {
+		return allLeaderStartups;
+	}
+	public void setAllLeaderStartups(Set<Startups> allLeaderStartups) {
+		this.allLeaderStartups = allLeaderStartups;
+	}
+
+	/**
+	 * 多对多双向关联，可以获得到该用户参与的所有的创业公司
+	 * 注意：不包含他是leader的身份的创业公司，仅仅是以普通成员的身份参与其中的创业公司
+	 * @return
+	 */
 	@ManyToMany(mappedBy="copartner",cascade={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch=FetchType.LAZY)
-	public Set<Startups> getAllStartups() {
-		return allStartups;
+	public Set<Startups> getAllJoinStartups() {
+		return allJoinStartups;
 	}
-
-	public void setAllStartups(Set<Startups> allStartups) {
-		this.allStartups = allStartups;
+	public void setAllJoinStartups(Set<Startups> allJoinStartups) {
+		this.allJoinStartups = allJoinStartups;
 	}
-
-	
 	
 	@Override
 	public String toString() {
@@ -222,5 +245,5 @@ public class User {
 				+ ", userTel:" + userTel
 				+ "]";
 	}
-	
+
 }

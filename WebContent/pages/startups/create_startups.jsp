@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta http-equiv="expires" content="0">    
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<title>
-			发布项目
+			创建公司
 		</title>
 		<!-- Bootstrap core CSS -->
 		<link href="<%=path%>/assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,13 +103,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<span><img src="<%=path %>/assets/img/project/head.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;"></span>
 								<span>
 									<a style="font-size: 14px;text-decoration: none;">
-											<span style="display: block;">用户名</span>
+											<span style="display: block;">
+												昵称：<%-- <s:property value="#session.user.userNickName"/> --%>
+											</span>
 								</a>
-								<a style="font-size: 14px;text-decoration: none;">
+								
+								<%-- <a style="font-size: 14px;text-decoration: none;">
 									<span style="display: block;">信用等级:4</span>
-								</a>
+								</a> --%>
+								
 								</span>
-								<span><img src="<%=path %>/assets/img/project/level.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;"></span>
+								<%-- <span><img src="<%=path %>/assets/img/project/level.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;"></span> --%>
 							</div>
 
 							<p style="margin-bottom: 0px;font-size: 32px;">
@@ -128,176 +133,153 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="contenttitle" style="margin-bottom: 10px;">
 					<p style="margin-bottom: 4px;">HOW&nbsp;&nbsp;&nbsp;&nbsp;TO&nbsp;&nbsp;&nbsp;&nbsp;CREATE</p>
 					<p style="float: right;">随经济全球化以及生产专业化现象的普遍，社会分工和协同合作已经成为了一种创业趋势。</p>
-					<h2 style="margin-top: 0;" style="color: black;">项目分类</h2>
+					<h2 style="margin-top: 0;" style="color: black;">创建公司</h2>
 				</div>
 			</div>
 
 			<div class="marketing-nav">
 				<ul class="nav nav-tabs marketing-nav-content" role="tablist" id="myTab">
-					<li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab" style="color: #398BE5;">创建项目</a></li>
+					<li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab" style="color: #398BE5;">创建公司</a></li>
 				</ul>
 			</div>
 
 			<div class="tab-content" style="background-color: white;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div role="tabpanel" class="tab-pane active" id="home">
-					<div class="tab-content-1" style="width: 80%;height: 1100px;margin: 0 auto; background-color: white;">
-						<form class="form-horizontal" role="form" style="margin-left: 0px;" action="<%=path %>/action/project/action_publish_project.php" method="post" enctype="multipart/form-data">
-
+				
+					<div class="tab-content-1" style="width: 80%;height: 100%;margin: 0 auto; background-color: white;">
+						<form class="form-horizontal" role="form" style="margin-left: 0px;" action="createStartups" method="post" enctype="multipart/form-data">
+						
 							<div class="form-group" style="margin-right: 0px;margin-left: -10px;">
 								<div style="margin-top: 23px;">
-									<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">项目名称</label>
+									<label for="name" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">公司名称</label>
 									<div class="col-sm-12">
-										<input type="text" class="form-control" name="project_name_detail" style="background-color: #F5F5F5;" id="create-project-name1" placeholder="">
+										<input type="text" maxlength="16" class="form-control" name="sd.name" style="background-color: #F5F5F5;" id="name" />
 									</div>
 								</div>
 								<hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px;">
 							</div>
-
-							<h4>项目类型</h4>
-							<div id="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
+							<h4>服务类型</h4>
+							<div class="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
 								
 								<div class="btn-group" data-toggle="buttons">
 								  <label class="btn btn-default active">
-								    <input type="radio" name="project_catagory" id="project_catagory1" autocomplete="off" checked value="1">移动互联网
+								    <input type="radio" name="sd.type" autocomplete="off" checked value="1">移动互联网
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory2" autocomplete="off" value="2">电子商务
+								    <input type="radio" name="sd.type" autocomplete="off" value="2">电子商务
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory3" autocomplete="off" value="3">文化艺术
+								    <input type="radio" name="sd.type" autocomplete="off" value="3">文化艺术
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory4" autocomplete="off" value="4">教育体育
+								    <input type="radio" name="sd.type" autocomplete="off" value="4">教育体育
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory5" autocomplete="off" value="5">汽车
+								    <input type="radio" name="sd.type" autocomplete="off" value="5">汽车
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory6" autocomplete="off" value="6">旅游户外
+								    <input type="radio" name="sd.type" autocomplete="off" value="6">旅游户外
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory7" autocomplete="off" value="7">房产
+								    <input type="radio" name="sd.type" autocomplete="off" value="7">房产
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory8" autocomplete="off" value="8">营销广告
+								    <input type="radio" name="sd.type" autocomplete="off" value="8">营销广告
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory9" autocomplete="off" value="9">硬件
+								    <input type="radio" name="sd.type" autocomplete="off" value="9">硬件
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory10" autocomplete="off" value="10">工具软件
+								    <input type="radio" name="sd.type" autocomplete="off" value="10">工具软件
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory11" autocomplete="off" value="11">企业服务
+								    <input type="radio" name="sd.type" autocomplete="off" value="11">企业服务
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory12" autocomplete="off" value="12">搜索安全
+								    <input type="radio" name="sd.type" autocomplete="off" value="12">搜索安全
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory13" autocomplete="off" value="13">医疗健康
+								    <input type="radio" name="sd.type" autocomplete="off" value="13">医疗健康
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory14" autocomplete="off" value="14">媒体资讯
+								    <input type="radio" name="sd.type" autocomplete="off" value="14">媒体资讯
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory15" autocomplete="off" value="15">生活消费
+								    <input type="radio" name="sd.type" autocomplete="off" value="15">生活消费
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="project_catagory" id="project_catagory16" autocomplete="off" value="0">其他
+								    <input type="radio" name="sd.type" autocomplete="off" value="0">其他
 								  </label>
 								</div>
 							</div>
 
-							<h4>项目需求</h4>
-							<div id="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
+							<h4>合伙人需求</h4>
+							<div class="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
 
 								<div class="btn-group" data-toggle="buttons">
-									  <label class="btn btn-default">
-									    <input type="radio" name="project_require" id="project_require1" autocomplete="off" checked value="1">资金
-									  </label>
-									  <label class="btn btn-default">
-									    <input type="radio" name="project_require" id="project_require2" autocomplete="off" value="2">技术
-									  </label>
-									  <label class="btn btn-default">
-									    <input type="radio" name="project_require" id="project_require3" autocomplete="off" value="3">运营
-									  </label>
 									  <label class="btn btn-default active">
-									    <input type="radio" name="project_require" id="project_require4" autocomplete="off" value="4">市场
+									    <input type="radio" name="sb.require" autocomplete="off" checked value="1">资金
+									  </label>
+									  <label class="btn btn-default">
+									    <input type="radio" name="sb.require" autocomplete="off" value="2">技术
+									  </label>
+									  <label class="btn btn-default">
+									    <input type="radio" name="sb.require" autocomplete="off" value="3">运营
 									  </label>
 								</div>
-
 							</div>
 
 							<h4>运营阶段</h4>
-							<div id="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
+							<div class="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
 								
 								<div class="btn-group" data-toggle="buttons">
 									  <label class="btn btn-default active">
-									    <input type="radio" name="business_status" id="business_status1" autocomplete="off" checked value="1">概念阶段
+									    <input type="radio" name="sd.stage" autocomplete="off" checked value="1">概念阶段
 									  </label>
 									  <label class="btn btn-default">
-									    <input type="radio" name="business_status" id="business_status2" autocomplete="off" value="2">产品研发中
+									    <input type="radio" name="sd.stage" autocomplete="off" value="2">产品研发中
 									  </label>
 									  <label class="btn btn-default">
-									    <input type="radio" name="business_status" id="business_status3" autocomplete="off" value="3">产品已经上线
+									    <input type="radio" name="sd.stage" autocomplete="off" value="3">产品已经上线
 									  </label>
 								</div>
 							</div>
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
 								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
-									<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">产品归属地</label>
+									<label for="address" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">公司归属地</label>
 									<div class="col-sm-12">
-										<input type="text" class="form-control" name="introduce_address_main" style="background-color: #F5F5F5;" id="create-project-name1" placeholder="">
-									</div>
-								</div>
-							</div>
-							<!--
-                            	作者：635142812@qq.com
-                            	时间：2016-04-21
-                            	描述：增加项目的简介编辑
-                            -->
-							<div style="border-bottom: dashed #A9A9A9 1px;">
-								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
-									<label for="brief" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">项目简介&nbsp;&nbsp;</label>
-									<div class="col-sm-12">
-										<input type="text" class="form-control" name="brief" style="background-color: #F5F5F5;" id="brief" placeholder="">
+										<input type="text" class="form-control" name="sd.address" maxlength="50" style="background-color: #F5F5F5;" id="address">
 									</div>
 								</div>
 							</div>
 
-							<script>
-								//此处是使用KE在线编辑器
-								KE.show({
-									id: 'content2',
-									resizeMode: 1,
-									allowPreviewEmoticons: false,
-									allowUpload: false,
-									items: [
-										'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline',
-										'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-										'insertunorderedlist', '|', 'emoticons', 'image', 'link'
-									]
-								});
-							</script>
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
+									<label for="brief" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">公司简介&nbsp;&nbsp;</label>
+									<div class="col-sm-12">
+										<input type="text" class="form-control" name="sd.brief" style="background-color: #F5F5F5;" id="brief" />
+									</div>
+								</div>
+							</div>
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
 								<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
 									<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">详细内容&nbsp;&nbsp;</label>
 									<div class="col-sm-12">
-										<textarea id="content2" name="project_content_detail" style="width:100%;height:200px;visibility:hidden;"></textarea>
+										<textarea id="detail" name="sd.detail" style="width:100%;height:200px;"></textarea>
 									</div>
 								</div>
 							</div>
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
 								<div class="form-group" style="margin-right: 0px;margin-left: -45px;padding-top: 15px;">
-									<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">上传封面</label>
+									<label class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">上传封面</label>
 									<div class="col-sm-10">
 										<div>
-											<input type="file" class="project_upload_class" style="display: none;" name="file1"></input>
-											<input type="file" class="project_upload_class" style="display: none;" name="file2"></input>
-											<input type="file" class="project_upload_class" style="display: none;" name="file3"></input>
+											<input type="file" class="project_upload_class" style="display: none;" name="file1" accept="image/*" />
+											<input type="file" class="project_upload_class" style="display: none;" name="file2" accept="image/*" />
+											<input type="file" class="project_upload_class" style="display: none;" name="file3" accept="image/*" />
 										</div>
 										<div style="text-align: center;">
 											<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;" onclick="project_upload()">立即上传</a>
@@ -315,7 +297,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<div style="margin: 50px auto;">
 								<div class="form-group" style="margin: 0 auto; text-align: center;">
-									<button type="submit" class="btn btn-default" name="submit_create_project" value="创建项目"style="border: solid #A9A9A9 2px; border-radius: 10px;">发送</button>
+									<button type="submit" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">发送</button>
 								</div>
 							</div>
 
@@ -327,7 +309,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 
 		</div>
-
+	<jsp:include page="../module/bottom.jsp" flush="true" />
 
 	</body>
 	<script>
@@ -338,15 +320,3 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 
 </html>
-
-<!--<?
-		}
-	}
-} else {
-	//echo "please login";
-	echo "<script>window.location.href='../../pages/module/not_login_redirect.php';</script>";  //登陆界面
-
-	//echo "<script>window.location.href='../../pages/user/login.php";
-}
-?>
--->
