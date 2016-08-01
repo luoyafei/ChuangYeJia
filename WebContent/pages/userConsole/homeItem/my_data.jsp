@@ -29,17 +29,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="uk-width-medium-1-2 uk-row-first">
                             <div class="uk-panel">
                              	<div class="uk-thumbnail uk-thumbnail-large">
-									<img  style="height: 300px;" src="<%=path %>/1.png" />
+									<img  style="height: 300px;" src='<s:property value="#session.user.userPhoto"/>' />
 								</div>
                             </div>
                         </div>
                         <div class="uk-width-medium-1-2">
                             <div class="uk-panel">
                                 <ul class="uk-list uk-list-line">
-									<li>用户昵称:<s:property value="#session.user.userNickName"/></li>
-									<li>用户邮箱:<s:property value="#session.user.userEmail"/></li>
-									<li>所属地址:<s:property value="#session.user.user"/></li>
-									<li>用户简介:</li>
+									<li>用户昵称:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userNickName"/></span></li>
+									<li>用户邮箱:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userEmail"/></span></li>
+									<li>所属地址:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userProvince"/>省<s:property value="#session.user.userCity"/>市</span></li>
+									<li>用户简介:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userIntroduce"/></span></li>
 								</ul>
                             </div>
                         </div>

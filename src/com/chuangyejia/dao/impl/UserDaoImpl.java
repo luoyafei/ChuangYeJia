@@ -16,6 +16,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public boolean saveUser(User user) {
 		// TODO Auto-generated method stub
+System.out.println(user.toString());
 		boolean flag = false;
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
 		try {
@@ -44,10 +45,31 @@ System.out.println("Hibernate往数据库中插入User数据时出现异常！")
 		return false;
 	}
 
+	
+	@SuppressWarnings("finally")
 	@Override
 	public boolean updateUser(User user) {
 		// TODO Auto-generated method stub
-		return false;
+//System.out.println(user.toString());
+		boolean flag = false;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.update(user);
+			session.getTransaction().commit();
+			flag = true;
+		} catch(HibernateException e) {
+			flag = false;
+System.out.println("Hibernate往数据库中更新User数据时出现异常！");
+			e.printStackTrace();
+		} finally {
+			if(session.isOpen()) {
+				session.close();
+				session = null;
+			}
+			return flag;
+		}
+
 	}
 
 	@Override

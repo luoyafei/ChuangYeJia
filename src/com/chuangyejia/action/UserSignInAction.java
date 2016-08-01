@@ -1,11 +1,11 @@
 package com.chuangyejia.action;
 
 import java.io.ByteArrayInputStream;
+import java.util.Enumeration;
 
-import javax.xml.crypto.dsig.XMLSignatureFactory;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.omg.CORBA.Request;
 
 import com.chuangyejia.bean.User;
 import com.chuangyejia.dto.UserSignDTO;
@@ -24,7 +24,7 @@ public class UserSignInAction extends ActionSupport {
 	private static final String LOGIN = "login";//验证登录失败后，返回登录页面
 	private static final String REGISTER = "register";//验证注册失败后，返回注册页面
 	private static final String BACK = "back";//从哪个登录登录的，成功后就返回那个页面
-	
+	private static final String SIGNOUT = "signout";//用户注销处理
 	
 	
 	private UserSignDTO ud;
@@ -46,10 +46,11 @@ public class UserSignInAction extends ActionSupport {
 		return backUrl;
 	}
 	public void setBackUrl(String backUrl) {
+System.out.println(backUrl);
 		if(backUrl.trim().hashCode() == 0)
 			this.backUrl = "/index.jsp";
 		else {
-			if(backUrl.contains("/ChuangYeJia") && backUrl.startsWith("/ChuangYeJia")) {
+			if(backUrl.contains("/ChuangYeJia") && backUrl.startsWith("/ChuangYeJia") && !backUrl.contains("/login.jsp") && !backUrl.contains("/register.jsp")) {
 				this.backUrl = backUrl.substring(12);
 			} else {
 				this.backUrl = "/index.jsp";
@@ -71,7 +72,10 @@ public class UserSignInAction extends ActionSupport {
 		ServletActionContext.getRequest().getSession().setAttribute("code", code);
 		return "identifyCode";
 	}
-	
+	/**
+	 * 用来处理用户注册的action
+	 * @return
+	 */
 	public String register() {
 		
 		String code = String.valueOf(ServletActionContext.getRequest().getSession().getAttribute("code"));//先将session中的验证码结果取出
@@ -82,6 +86,11 @@ public class UserSignInAction extends ActionSupport {
 				boolean emailIsExisted = ius.checkEmail(ud.getEmail());//判断数据库中是否存在该email
 				if(!emailIsExisted) {
 					User user = ud.toUser();
+System.out.println("register() : " + user.toString());
+					/**
+					 * 将ip存入user
+					 */
+					user.setUserIp(ServletActionContext.getRequest().getRemoteAddr());
 					if(ius.saveUser(user))  {//将User对象存入数据库中。
 						ServletActionContext.getRequest().getSession().setAttribute("user", user);//将插入成功的User对象放入Session中
 						return BACK;
@@ -92,6 +101,9 @@ public class UserSignInAction extends ActionSupport {
 		return REGISTER;
 	}
 	
+	/**
+	 * 用来处理用户登录的action
+	 */
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
@@ -104,6 +116,8 @@ System.out.println("backUrl :" + backUrl);
 				IUserService ius = ServiceFactory.createUserService();
 				
 				User user = ius.checkEmailAndPassword(ud.toUser());//判断数据库中是否存在该email和password
+				//String userIp = ;
+				
 				if(user != null) {
 //System.out.println(user.getUserNickName());
 					ServletActionContext.getRequest().getSession().setAttribute("user", user);//将User对象放入Session中
@@ -117,5 +131,17 @@ System.out.println("backUrl :" + backUrl);
 			this.addFieldError("error", "验证码错误！");
 		
 		return LOGIN;
+	}
+	
+	/**
+	 * 用来处理用户注销的action
+	 * @return
+	 */
+	public String signOut() {
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Enumeration<String> sessionNames = session.getAttributeNames();
+		while(sessionNames.hasMoreElements())
+			session.removeAttribute(sessionNames.nextElement());
+		return SIGNOUT;
 	}
 }

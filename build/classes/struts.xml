@@ -6,7 +6,10 @@
 	<constant name="struts.devMode" value="true"/>
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
 	<constant name="struts.custom.i18n.resources" value="app" />
-	
+	<!-- 设置最大上传文件的大小 2M-->
+	<constant name="struts.multipart.maxSize" value="2097152" />
+	<!-- 配置临时存储地址 -->
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	<package name="main" extends="struts-default" namespace="/">
 	
 		<!-- 默认action，在url中随意敲击，可以跳转到指定地方。 -->
@@ -32,14 +35,20 @@
 				  <param name="inputName">imageStream</param>
 				  <param name="bufferSize">2048</param>
 			</result>
-			<result name="success">/index.jsp</result>
+			<result name="signout">/index.jsp</result>
 			<result name="register">/pages/signIn/register.jsp</result>
 			<result name="login">/pages/signIn/login.jsp</result>
-			<result name="back">${backUrl}</result>
+			<result name="back" type="redirect">${backUrl}</result>
 		</action>
 		
-		<!-- 处理ajax数据的action -->
+		<!-- 处理登录注册的数据，ajax的action -->
 		<action name="vaction" class="com.chuangyejia.ajax.ValidateAction"/>
+		
+		<!-- 处理修改用户信息的数据，ajax的action -->
+		<action name="modifyUserInfo" class="com.chuangyejia.ajax.UserInfoModifyAction"/>
+		
+		<!-- 用来处理用户更改头像ajax的action -->
+		<action name="uploadPicture" class="com.chuangyejia.ajax.UploadUserPicture" />
 		
     <!-- 	<global-results>
     		<result name="exception">/exception.jsp</result>

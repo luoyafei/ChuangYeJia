@@ -98,32 +98,42 @@ public class IdentifyCode {
 		 */
 		String[] arr1 = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
 		String[] arr2 = {"+", "-", "*"};
-		String[] arr3 = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+		String[] arr3 = {"-", "+"};
 		
-		String s1 = arr1[random.nextInt(9)];
-		String s2 = arr2[random.nextInt(2)];
-		String s3 = arr3[random.nextInt(8)];
-		
+		String s1 = arr1[random.nextInt(10)];
+		String s2 = arr2[random.nextInt(3)];//运算符
+		String s3 = arr1[random.nextInt(10)];
+		String s4 = arr3[random.nextInt(2)];//运算符(第二个运算符只给+-，防止因为运算符的优先级问题，导致前台答案混淆)
+		String s5 = arr1[random.nextInt(10)];
 		/**
 		 * 计算数字结果
 		 */
 		result = 0;
-		switch(s2) {
-		case "+":
-			result = Integer.valueOf(s1) + Integer.valueOf(s3);
+		switch(s2+s4) {
+		case "+-":
+			result = Integer.valueOf(s1) + Integer.valueOf(s3) - Integer.valueOf(s5);
 			break;
-		case "-":
-			result = Integer.valueOf(s1) - Integer.valueOf(s3);
+		case "++":
+			result = Integer.valueOf(s1) + Integer.valueOf(s3) + Integer.valueOf(s5);
 			break;
-		case "*":
-			result = Integer.valueOf(s1) * Integer.valueOf(s3);
+		case "-+":
+			result = Integer.valueOf(s1) - Integer.valueOf(s3) + Integer.valueOf(s5);
+			break;
+		case "--":
+			result = Integer.valueOf(s1) - Integer.valueOf(s3) - Integer.valueOf(s5);
+			break;
+		case "*+":
+			result = Integer.valueOf(s1) * Integer.valueOf(s3) + Integer.valueOf(s5);
+			break;
+		case "*-":
+			result = Integer.valueOf(s1) * Integer.valueOf(s3) - Integer.valueOf(s5);
 			break;
 		}
 
 		/**
 		 * 将数字和运算符转换为汉字
 		 */
-		String code = changeNumber(Integer.valueOf(s1)) + changeSign(s2) + changeNumber(Integer.valueOf(s3)) + "等于";
+		String code = changeNumber(Integer.valueOf(s1)) + changeSign(s2) + changeNumber(Integer.valueOf(s3)) + changeSign(s4) + changeNumber(Integer.valueOf(s5));
 		
 		/**
 		 * 进行绘画处理

@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- Bootstrap core CSS -->
 		<link href="<%=path%>/assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="<%=path%>/assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
-		<script charset="utf-8" src="<%=path%>/assets/ke/kindeditor.js"></script>
 		<link href="<%=path%>/assets/bootstrap-3.3.5/docs/examples/carousel/carousel.css" rel="stylesheet">
 		
 		<!-- Bootstrap core JavaScript
@@ -134,7 +133,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="content-main-top" style="height: 27%;">
 					<div style="width: 80%;height: 100%;margin: 50px auto;">
 					
-					
 					<div style="text-align: center; color:red;"><s:property value="errors.error[0]" /></div>
 					
 						<form action="userSignIn!execute.action" method="post" onsubmit="return checkdata()">
@@ -213,7 +211,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</button>
 								<a class="btn btn-default" style="color: #398BE5;" href="register.jsp">注册</a>
 							</div>
-							<input type="hidden" name="backUrl" value='<s:property value="#parameters.backUrl/"/>'  />
+							<input type="hidden" name="backUrl" value='<s:property value="#parameters.backUrl"/>'  />
+							
 						</form>
 					</div>
 				</div>
