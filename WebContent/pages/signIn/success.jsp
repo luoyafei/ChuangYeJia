@@ -8,13 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<s:property value="ud.email"/>
-	<s:property value="ud.password"/>
-	<s:property value="ud.identifyCode"/>
+	<s:property value="sd.name"/>
+	<s:property value="sd.address"/>
+	<s:property value="sd.type"/>
+	<s:property value="sd.require"/>
+	<s:property value="sd.detail"/>
+	<s:property value="sd.brief"/>
+	<s:property value="sd.stage"/>
 	
-	<s:property value="errors.password[0]" />
-	<s:property value="fieldErrors.password[0]" />
-	<s:fielderror />
+	<br />
+	<s:property value="imgFileName"/>
+	
 	<s:debug></s:debug>
 	
 	<s:property value="#request.getRequestURI"/>

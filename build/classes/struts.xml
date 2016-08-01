@@ -53,7 +53,19 @@
 		
 		<!-- 用来处理创建公司的action -->
 		<action name="createStartups" class="com.chuangyejia.action.CreateStartupsAction">
+			
+			<interceptor-ref name="timer" />
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="execAndWait">
+				<!-- 设置等待时间为1000ms -->
+				<param name="delay">1000</param>
+				
+			</interceptor-ref>
+		
+			<result name="wait">/pages/startups/wait.jsp</result>
+			
 			<result name="input">/pages/startups/create_startups.jsp</result>
+			<result name="success">/pages/signIn/success.jsp</result>
 			<result name="back"></result>
 		</action>
 		

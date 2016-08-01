@@ -14,7 +14,33 @@ public class CreateStartupsAction extends ActionSupport {
 
 	private StartupsCreateDTO sd;
 	
-	private File[] cover;
+	public File[] getImg() {
+		return img;
+	}
+
+	public void setImg(File[] img) {
+		this.img = img;
+	}
+
+	public String[] getImgFileName() {
+		return imgFileName;
+	}
+
+	public void setImgFileName(String[] imgFileName) {
+		this.imgFileName = imgFileName;
+	}
+
+	public String[] getImgContentType() {
+		return imgContentType;
+	}
+
+	public void setImgContentType(String[] imgContentType) {
+		this.imgContentType = imgContentType;
+	}
+
+	private File[] img;
+	private String[] imgFileName;
+	private String[] imgContentType;
 	
 
 	public StartupsCreateDTO getSd() {
@@ -28,7 +54,9 @@ public class CreateStartupsAction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
-		return super.execute();
+System.out.println(sd.getName() + sd.getRequire()[0] + sd.getType());
+System.out.println(imgFileName[0] + imgFileName[1] + imgFileName[2]);
+		return SUCCESS;
 	}
 	
 	

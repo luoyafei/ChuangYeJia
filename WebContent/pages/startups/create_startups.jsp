@@ -214,18 +214,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 
 							<h4>合伙人需求</h4>
+							
 							<div class="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
-
 								<div class="btn-group" data-toggle="buttons">
-									  <label class="btn btn-default active">
-									    <input type="radio" name="sb.require" autocomplete="off" checked value="1">资金
-									  </label>
-									  <label class="btn btn-default">
-									    <input type="radio" name="sb.require" autocomplete="off" value="2">技术
-									  </label>
-									  <label class="btn btn-default">
-									    <input type="radio" name="sb.require" autocomplete="off" value="3">运营
-									  </label>
+								  <label class="btn btn-default active">
+								    <input type="checkbox" name="sd.require" autocomplete="off" value="1" checked>资金
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="checkbox" name="sd.require" autocomplete="off" value="2">技术
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="checkbox" name="sd.require" autocomplete="off" value="3">运营
+								  </label>
 								</div>
 							</div>
 
@@ -276,21 +276,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<div class="form-group" style="margin-right: 0px;margin-left: -45px;padding-top: 15px;">
 									<label class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">上传封面</label>
 									<div class="col-sm-10">
-										<div>
-											<input type="file" class="project_upload_class" style="display: none;" name="file1" accept="image/*" />
-											<input type="file" class="project_upload_class" style="display: none;" name="file2" accept="image/*" />
-											<input type="file" class="project_upload_class" style="display: none;" name="file3" accept="image/*" />
-										</div>
-										<div style="text-align: center;">
-											<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;" onclick="project_upload()">立即上传</a>
-											<span>&nbsp;(1~3张图片)</span>
-										</div>
-										
-										<script>
-											function project_upload() {
-												$(".project_upload_class").attr("style", "display: inline;");
-											}
-										</script>
+										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
+									</div>
+								</div>
+							</div>
+							
+
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -45px;padding-top: 15px;">
+									<label class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">上传封面</label>
+									<div class="col-sm-10">
+										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
+										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
+										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
 									</div>
 								</div>
 							</div>
