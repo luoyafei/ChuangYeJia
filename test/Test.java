@@ -3,7 +3,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -327,9 +326,17 @@ System.out.println(s2.size());
 		//session.save(startups);
 		
 		session.getTransaction().commit();
+	}
+	
+	@org.junit.Test
+	public void testMethod1() {
 		
-		
-		
-		
+		int i = 0;
+		add(i);
+		System.out.println(i);
+	}
+	
+	private void add(int i) {
+		++i;
 	}
 }
