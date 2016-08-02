@@ -7,7 +7,7 @@
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
 	<constant name="struts.custom.i18n.resources" value="app" />
 	<!-- 设置最大上传文件的大小 2M-->
-	<constant name="struts.multipart.maxSize" value="2097152" />
+	<constant name="struts.multipart.maxSize" value="5242880" />
 	<!-- 配置临时存储地址 -->
 	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	
@@ -61,14 +61,17 @@
 				<param name="delay">1000</param>
 				
 			</interceptor-ref>
-		
 			<result name="wait">/pages/startups/wait.jsp</result>
 			
 			<result name="input">/pages/startups/create_startups.jsp</result>
-			<result name="success">/pages/signIn/success.jsp</result>
-			<result name="back"></result>
+			<result name="success">/pages/startups/end_startups.jsp</result>
 		</action>
 		
+		<!-- 处理点击公司想要访问该公司信息的页面时，根据公司的id，将公司的信息获取 -->
+		<action name="getStartupsItem" class="com.chuangyejia.action.GetStartupsInId">
+			<result name="success">/pages/startups/show_startups.jsp</result>
+			<result name="none"></result>
+		</action>
 		
     <!-- 	<global-results>
     		<result name="exception">/exception.jsp</result>

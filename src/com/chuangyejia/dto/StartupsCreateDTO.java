@@ -1,5 +1,8 @@
 package com.chuangyejia.dto;
 
+import com.chuangyejia.bean.Startups;
+import com.chuangyejia.tools.StartupsUtil;
+
 public class StartupsCreateDTO {
 
 	private String name;
@@ -53,6 +56,62 @@ public class StartupsCreateDTO {
 		this.detail = detail;
 	}
 	
+	/**
+	 * 用于粗略的检验接收到的数据是否为空
+	 * @return
+	 */
+	public boolean checkData() {
+		// TODO Auto-generated method stub
+		
+		return (notEmpty(name) && notEmpty(type) && notEmpty(stage) && notEmpty(address) && notEmpty(brief) && notEmpty(detail));
+		
+	}
 	
+	/**
+	 * 用来检验字符串是否为空
+	 * @param param
+	 * @return
+	 */
+	private boolean notEmpty(String param) {
+		if(param != null && param.trim().hashCode() != 0)
+			return true;
+		else
+			return false;
+	}
+	public Startups toStartups() {
+		// TODO Auto-generated method stub
+		
+		Startups startups = new Startups();
+		String startupsRequire = "";
+		if(require.length != 0) {
+			try {
+				for(int i = 0; i < require.length; i++) {
+					startupsRequire += StartupsUtil.CopartnerRequire[Integer.parseInt(require[i])];
+				}
+			} catch(NumberFormatException e) {
+				startupsRequire = "暂无";
+			}
+		} else {
+			startupsRequire = "暂无";
+		}
+		
+		String startupsServiceType = "";
+		try {
+			startupsServiceType = StartupsUtil.ServiceType[Integer.parseInt(type)];
+		} catch(NumberFormatException e) {
+			startupsServiceType = "其他";
+		}
+		
+		
+		startups.setStartupsName(name.trim());
+		startups.setStartupsServiceType(startupsServiceType);
+		startups.setStartupsCopartnerRequire(startupsRequire);
+		startups.setStartupsOperationStage(stage.trim());
+		startups.setStartupsAddress(address.trim());
+		startups.setStartupsBrief(brief.trim());
+		startups.setStartupsDetail(detail.trim());
+		
+		return startups;
+	}
 	
 }

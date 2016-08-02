@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <ul class="uk-list uk-list-line">
 									<li>用户昵称:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userNickName"/></span></li>
 									<li>用户邮箱:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userEmail"/></span></li>
-									<li>所属地址:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userProvince"/>省<s:property value="#session.user.userCity"/>市</span></li>
+									<li>所属地址:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userAddress"/></span></li>
 									<li>用户简介:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userIntroduce"/></span></li>
 								</ul>
                             </div>

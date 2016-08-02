@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<div class="container marketing" style="background-color: #F5F5F5; padding:50px 0px;width: 68%;">
-			<!-- Three columns of text below the carousel -->
+			
 			<div class="content-main" style="width: 100%;height: 550px;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div class="content-main-top" style="height: 27%;">
 					<div style="width: 80%;height: 100%;margin: 50px auto;">

@@ -86,13 +86,14 @@ System.out.println(backUrl);
 				boolean emailIsExisted = ius.checkEmail(ud.getEmail());//判断数据库中是否存在该email
 				if(!emailIsExisted) {
 					User user = ud.toUser();
-System.out.println("register() : " + user.toString());
+//System.out.println("register() : " + user.toString());
 					/**
 					 * 将ip存入user
 					 */
 					user.setUserIp(ServletActionContext.getRequest().getRemoteAddr());
 					if(ius.saveUser(user))  {//将User对象存入数据库中。
-						ServletActionContext.getRequest().getSession().setAttribute("user", user);//将插入成功的User对象放入Session中
+						HttpSession session = ServletActionContext.getRequest().getSession(); 
+						session.setAttribute("user", user);//将插入成功的User对象放入Session中
 						return BACK;
 					}
 				}
@@ -120,7 +121,9 @@ System.out.println("backUrl :" + backUrl);
 				
 				if(user != null) {
 //System.out.println(user.getUserNickName());
-					ServletActionContext.getRequest().getSession().setAttribute("user", user);//将User对象放入Session中
+					HttpSession session = ServletActionContext.getRequest().getSession();
+					session.setAttribute("user", user);//将User对象放入Session中
+//System.out.println(session.toString() + ":" + session.getAttribute("user").toString());
 					return BACK;
 				} else {
 					this.addFieldError("error", "邮箱或登录密码错误！");

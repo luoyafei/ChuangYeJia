@@ -4,7 +4,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
@@ -22,7 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- Bootstrap core CSS -->
 		<link href="<%=path%>/assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="<%=path%>/assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
-		<script charset="utf-8" src="<%=path%>/assets/ke/kindeditor.js"></script>
 		<link href="<%=path%>/assets/bootstrap-3.3.5/docs/examples/carousel/carousel.css" rel="stylesheet">
 
 		<!-- Bootstrap core JavaScript
@@ -93,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<jsp:include page="/pages/module/index_bar.jsp" flush="true" />
 
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 0px;">
-			<!-- Indicators -->
+			
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<img class="" src="<%=path %>/assets/img/project/333.png" alt="">
@@ -147,9 +145,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div role="tabpanel" class="tab-pane active" id="home">
 				
 					<div class="tab-content-1" style="width: 80%;height: 100%;margin: 0 auto; background-color: white;">
-						<form class="form-horizontal" role="form" style="margin-left: 0px;" action="createStartups" method="post" enctype="multipart/form-data">
-						
+						<form class="form-horizontal" role="form" style="margin-left: 0px;" action="createStartups" method="post" enctype="multipart/form-data" onsubmit="return checkCreateStartups()">
+							
 							<div class="form-group" style="margin-right: 0px;margin-left: -10px;">
+							
+								<s:if test="#session.user == null">
+									<div class="alert alert-danger" role="alert" style="text-align: center;">
+								      <strong>注意！请您</strong> <a href="/ChuangYeJia/pages/signIn/login.jsp?backUrl=<%=request.getRequestURI() %>" class="alert-link">登录</a>
+								      后再进行创业公司的发布，如果您还没有注册，欢迎您<a href="/ChuangYeJia/pages/signIn/register.jsp?backUrl=<%=request.getRequestURI() %>" class="alert-link">点击这里</a>进行注册！
+								    </div>
+								</s:if>
+								
+								<p style="color:red;text-align: center;">
+									<span id="errorBack">
+										<s:property value="errors.error[0]" />
+									</span>
+								</p>
+							
 								<div style="margin-top: 23px;">
 									<label for="name" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">公司名称</label>
 									<div class="col-sm-12">
@@ -163,52 +175,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								
 								<div class="btn-group" data-toggle="buttons">
 								  <label class="btn btn-default active">
-								    <input type="radio" name="sd.type" autocomplete="off" checked value="1">移动互联网
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" checked value="1">移动互联网
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="2">电子商务
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="2">电子商务
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="3">文化艺术
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="3">文化艺术
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="4">教育体育
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="4">教育体育
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="5">汽车
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="5">汽车
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="6">旅游户外
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="6">旅游户外
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="7">房产
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="7">房产
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="8">营销广告
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="8">营销广告
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="9">硬件
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="9">硬件
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="10">工具软件
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="10">工具软件
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="11">企业服务
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="11">企业服务
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="12">搜索安全
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="12">搜索安全
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="13">医疗健康
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="13">医疗健康
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="14">媒体资讯
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="14">媒体资讯
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="15">生活消费
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="15">生活消费
 								  </label>
 								   <label class="btn btn-default">
-								    <input type="radio" name="sd.type" autocomplete="off" value="0">其他
+								    <input type="radio" name="sd.type" class="type" autocomplete="off" value="0">其他
 								  </label>
 								</div>
 							</div>
@@ -218,13 +230,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
 								<div class="btn-group" data-toggle="buttons">
 								  <label class="btn btn-default active">
-								    <input type="checkbox" name="sd.require" autocomplete="off" value="1" checked>资金
+								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="1" checked />资金
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="checkbox" name="sd.require" autocomplete="off" value="2">技术
+								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="2" />技术
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="checkbox" name="sd.require" autocomplete="off" value="3">运营
+								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="3" />运营
 								  </label>
 								</div>
 							</div>
@@ -234,13 +246,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								
 								<div class="btn-group" data-toggle="buttons">
 									  <label class="btn btn-default active">
-									    <input type="radio" name="sd.stage" autocomplete="off" checked value="1">概念阶段
+									    <input type="radio" name="sd.stage" class="stage" autocomplete="off" checked value="1">概念阶段
 									  </label>
 									  <label class="btn btn-default">
-									    <input type="radio" name="sd.stage" autocomplete="off" value="2">产品研发中
+									    <input type="radio" name="sd.stage" class="stage" autocomplete="off" value="2">产品研发中
 									  </label>
 									  <label class="btn btn-default">
-									    <input type="radio" name="sd.stage" autocomplete="off" value="3">产品已经上线
+									    <input type="radio" name="sd.stage" class="stage" autocomplete="off" value="3">产品已经上线
 									  </label>
 								</div>
 							</div>
@@ -265,7 +277,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
 								<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
-									<label for="create-project-name1" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">详细内容&nbsp;&nbsp;</label>
+									<label for="detail" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">详细内容&nbsp;&nbsp;</label>
 									<div class="col-sm-12">
 										<textarea id="detail" name="sd.detail" style="width:100%;height:200px;"></textarea>
 									</div>
@@ -273,34 +285,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
-								<div class="form-group" style="margin-right: 0px;margin-left: -45px;padding-top: 15px;">
-									<label class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">上传封面</label>
-									<div class="col-sm-10">
+							
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
+									<label class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">上传封面(logo)</label>
+									<div class="col-sm-12">
 										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
 									</div>
 								</div>
+								
+							
 							</div>
 							
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
-								<div class="form-group" style="margin-right: 0px;margin-left: -45px;padding-top: 15px;">
-									<label class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">上传封面</label>
-									<div class="col-sm-10">
+							
+							<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
+									<label class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">上传公司照片</label>
+									<div class="col-sm-12">
 										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
 										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
 										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
 									</div>
 								</div>
+							
 							</div>
 
 							<div style="margin: 50px auto;">
 								<div class="form-group" style="margin: 0 auto; text-align: center;">
+									<p style="color:red;text-align: center;"><span id="errorSpan"></span></p>
 									<button type="submit" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">发送</button>
+									
 								</div>
 							</div>
-
 						</form>
-
+						<script type="text/javascript">
+							function checkCreateStartups() {
+								var name = $("#name").val().trim();
+								var type = $(".type").val().trim();
+								var require = $(".require").val().trim();
+								var stage = $(".stage").val().trim();
+								var address = $("#address").val().trim();
+								var brief = $("#brief").val().trim();
+								var detail = $("#detail").val().trim();
+								var img = $(".upload_img");
+								
+								if(name === "") {
+									$("#errorSpan").text("请填写公司名称！");
+									return false;
+								}
+								if(address === "") {
+									$("#errorSpan").text("请填写公司归属地！");
+									return false;
+								}
+								if(brief === "") {
+									$("#errorSpan").text("请填写公司简介！");
+									return false;
+								}
+								if(detail === "") {
+									$("#errorSpan").text("请填写公司详细内容！");
+									return false;
+								}
+								
+								for(var i = 0; i < 4; i++) {
+									if(img.eq(i).val().trim() === "") {
+										$("#errorSpan").text("请选择图片！");
+										return false;
+									}
+								}
+								return true;
+							}
+						</script>
 					</div>
 				</div>
 

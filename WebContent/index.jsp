@@ -78,16 +78,6 @@ request.setAttribute("flag", "index");
    			}
 		</style>
 
-		<!-- <script>
-			function barHide() {
-				if ($(window).scrollTop() > 100) {
-					$("#navbar").hide();
-				} else {
-					$("#navbar").show();
-				}
-			}
-		</script>
- -->
 	</head>
 
 	<body onscroll="barHide()">
@@ -95,7 +85,7 @@ request.setAttribute("flag", "index");
 		<jsp:include page="/pages/module/index_bar.jsp" flush="true" />
 			
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 0px;">
-			<!-- Indicators -->
+			
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<img class="" src="assets/img/indexpage/333.png" alt="">
@@ -110,7 +100,7 @@ request.setAttribute("flag", "index");
 								<br> 欢迎来到创业加网站，在这里，我们能为你提供最具有潜力的项目，最可靠的资源，最优秀的团队，最专业的分析
 							</p>
 							<p style="padding-top: 10px;margin-bottom: 0px;">
-								<a class="btn btn-primary" href="pages/team/create_team.jsp" role="button" style="border-radius: 20px;">创建你的团队</a>
+								<a class="btn btn-primary" href="/ChuangYeJia/pages/startups/create_startups.jsp" role="button" style="border-radius: 20px;">创建你的公司</a>
 							</p>
 						</div>
 					</div>
@@ -118,12 +108,12 @@ request.setAttribute("flag", "index");
 			</div>
 		</div>
 		<div class="container marketing" style="background-color: #F5F5F5; padding:50px 0px;">
-			<!-- Three columns of text below the carousel -->
+			
 			<div class="thumbtitle">
 				<div class="contenttitle" style="margin-bottom: 10px;">
 					<p style="margin-bottom: 4px;">WHAT&nbsp;&nbsp;&nbsp;&nbsp;WE&nbsp;&nbsp;&nbsp;&nbsp;DO</p>
 					<p style="float: right;">随经济全球化以及生产专业化现象的普遍，社会分工和协同合作已经成为了一种创业趋势。</p>
-					<h2 style="margin-top: 0;" style="color: black;">项目分类</h2>
+					<h2 style="margin-top: 0;" style="color: black;">公司分类</h2>
 				</div>
 			</div>
 			<div class="marketing-nav">
@@ -171,7 +161,6 @@ request.setAttribute("flag", "index");
 									?>
 									 -->
 								</h6>
-							</a>
 						</div>
 					</div>
 				</div>
