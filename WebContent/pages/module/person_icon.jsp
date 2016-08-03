@@ -12,8 +12,8 @@
 	<li><a href="userSignIn!signOut.action">注销</a></li>
 </s:if>
 <s:else>
-	<li><a href="/ChuangYeJia/pages/signIn/login.jsp?backUrl=<%=request.getRequestURI() %>">登陆</a></li>
-	<li><a href="/ChuangYeJia/pages/signIn/register.jsp?backUrl=<%=request.getRequestURI() %>">注册</a></li>
+	<li><a href="/ChuangYeJia/pages/signIn/login.jsp?backUrl=<%=request.getRequestURI()+'?'+request.getQueryString() %>">登陆</a></li>
+	<li><a href="/ChuangYeJia/pages/signIn/register.jsp?backUrl=<%=request.getRequestURI()+'?'+request.getQueryString() %>">注册</a></li>
 </s:else>
 </ul>
 

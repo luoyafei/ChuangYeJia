@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ page import="com.chuangyejia.bean.User" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -107,17 +108,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="carousel-caption">
 							<div class="logo-img" style="width: 100%;">
 								<span>
-									<img src="<%=path %>/assets/img/project/head.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;">
+									<img data-holder-rendered="true" src="<s:property value='#request.sts.startupsCover'/>" style="width: 100px; height: 100px;" class="img-circle" />
 								</span>
-								<span>
+								
+								<%-- <span>
 									<a style="font-size: 14px;text-decoration: none;">
 										<span style="display: block;">公司：</span>
 									</a>
-								</span>
+								</span> --%>
 								
 							</div>
 							<p style="margin-bottom: 0px;font-size: 32px;">
-								<br> 公司名称
+								<br> <s:property value='#request.sts.startupsName'/>
 							</p>
 							<br />
 							<br />
@@ -158,9 +160,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                              		
                              		<div class="uk-slidenav-position" data-uk-slideshow>
                                         <ul style="height: 197px;" class="uk-slideshow" data-uk-slideshow="{autoplay:true}">
-                                            <li style="height: 197px;" class="uk-active" aria-hidden="false"><div style="background-image: url(/ChuangYeJia/pages/startups/1.jpg);" class="uk-cover-background uk-position-cover"></div><canvas style="width: 100%; height: auto; opacity: 0;" height="400" width="800"></canvas></li>
-                                            <li class="" style="height: 197px;" aria-hidden="true"><div style="background-image: url(/ChuangYeJia/pages/startups/2.jpg);" class="uk-cover-background uk-position-cover"></div><canvas style="width: 100%; height: auto; opacity: 0;" height="400" width="800"></canvas></li>
-                                            <li class="" style="height: 197px;" aria-hidden="true"><div style="background-image: url(/ChuangYeJia/pages/startups/3.jpg);" class="uk-cover-background uk-position-cover"></div><canvas style="width: 100%; height: auto; opacity: 0;" height="400" width="800"></canvas></li>
+                                            <li style="height: 197px;" class="uk-active" aria-hidden="false"><div style="background-image: url(<s:property value='#request.sts.startupsPhoto1'/>);" class="uk-cover-background uk-position-cover"></div><canvas style="width: 100%; height: auto; opacity: 0;" height="400" width="800"></canvas></li>
+                                            <li class="" style="height: 197px;" aria-hidden="true"><div style="background-image: url(<s:property value='#request.sts.startupsPhoto2'/>);" class="uk-cover-background uk-position-cover"></div><canvas style="width: 100%; height: auto; opacity: 0;" height="400" width="800"></canvas></li>
+                                            <li class="" style="height: 197px;" aria-hidden="true"><div style="background-image: url(<s:property value='#request.sts.startupsPhoto3'/>);" class="uk-cover-background uk-position-cover"></div><canvas style="width: 100%; height: auto; opacity: 0;" height="400" width="800"></canvas></li>
                                         </ul>
                                         <ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-text-center uk-flex-center">
 									        <li data-uk-slideshow-item="0"><a href=""></a></li>
@@ -175,11 +177,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="uk-width-medium-1-2">
                             <div class="uk-panel">
                                 <ul class="uk-list uk-list-line">
-									<li>公司名称:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value=""/></span></li>
-									<li>公司类型:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value=""/></span></li>
-									<li>运营阶段:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value=""/></span></li>
-									<li>合伙人需求:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value=""/></span></li>
-									<li>公司所属地:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value=""/></span></li>
+									<li>公司名称:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsName"/></span></li>
+									<li>服务类型:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsServiceType"/></span></li>
+									<li>运营阶段:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsOperationStage"/></span></li>
+									<li>合伙人需求:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsCopartnerRequire"/></span></li>
+									<li>公司所属地:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsAddress"/></span></li>
 								</ul>
                             </div>
                         </div>
@@ -195,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  </div>
 					  <div class="panel-body">
 					    <span>
-					    	公司简介公司简介公司简介
+					    	<s:property value="#request.sts.startupsBrief"/>
 					    </span>
 					  </div>
 					</div>
@@ -226,7 +228,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- 公司详情 -->
 				<div role="tabpanel" class="tab-pane active" id="home">
 					<div style="width: 80%;margin: 20px auto;">
-						公司详情
+						<span>
+							<s:property value="#request.sts.startupsDetail"/>
+						</span>
 					</div>
 				</div>
 				
@@ -242,8 +246,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div style="width: 80%;height: 100%;float: right;">
 								<div style="width: 100px;height: 100%;">
 									<a href="">
-										<img src="" alt="logo.jpg" style="width: 80px;height: 80%;margin: 0 auto;padding-right: 10px;" />
-										<button class="btn btn-sm" style="width: 70px;overflow: hidden;">userName</button>
+										<img src='<s:property value="#request.sts.startupsLeader.userPhoto"/>' alt="logo.jpg" style="width: 80px;height: 80%;margin: 0 auto;padding-right: 10px;" />
+										<button class="btn btn-sm" style="width: 70px;overflow: hidden;">
+											<s:property value="#request.sts.startupsLeader.userNickName"/>
+										</button>
 									</a>
 								</div>
 							</div>
@@ -254,20 +260,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<h4>公司成员</h4>
 							</div>
 
-
-							<div style="width: 80%;height: 90px;float: right;">
+							<div style="width: 80%;float: right;margin-top:10px;margin-bottom: 20px;">
 								<div class="row">
-									<div class="col-md-2">
-										<a href="">
-											<img src="" alt="logo.jpg" style="width: 80px;height: 80%;margin: 0 auto;padding-right: 10px;" />
-											<button class="btn btn-sm" style="width: 70px;overflow: hidden;">userName</button>
-										</a>
-								    </div>
-		
+								
+									<s:iterator value="#request.sts.copartner" var="x">
+										<div class="col-md-2">
+											<a href="">
+												<img data-holder-rendered="true" src="<s:property value="#x.UserPhoto" />" alt="图片加载失败" style="width: 80px; height: 80px;" class="img-circle" />
+												<button class="btn btn-sm" style="width: 70px;overflow: hidden;">
+													<s:property value="#x.UserNickName" />
+												</button>
+											</a>
+									    </div>
+									</s:iterator>
+									
+									<br /><br />
 								</div>
 							</div>
 							<hr />
 						</div>
+						
 					</div>
 				</div>
 
@@ -278,63 +290,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div style="width: 20%;height: 100%;float: left;">
 								<h4>创业产品</h4>
 							</div>
-							<div style="width: 80%;height: 500px;float: right;overflow-y: auto;">
-								<div>
+							<div style="width: 80%;float: right;overflow-y: auto;">
 						
-									<a class="uk-thumbnail" href="">
-	                                    <img src="" alt="" style="width: 200px;height: 100px;">
-	                                    <div class="uk-thumbnail-caption" style="width: 200px;white-space: nowrap;overflow: hidden;">
-	                                    	product_name
-	                                    </div>
-	                                </a>
+								<a class="uk-thumbnail" href="">
+                                    <img src="" alt="" style="width: 200px;height: 100px;">
+                                    <div class="uk-thumbnail-caption" style="width: 200px;white-space: nowrap;overflow: hidden;">
+                                    	product_name
+                                    </div>
+                                </a>
 
-								</div>
 
 							</div>
 						</div>
 					</div>
 				</div>
-				
-			</div>
-					
-					
-					<div class="uk-button-group uk-width-1-1">
-					    <a class="uk-button uk-button-primary uk-button-large uk-width-1-2" href="/project/modify_project.php?projectid=project_id">编辑</a>
-					    <a class="uk-button uk-button-danger uk-button-large uk-width-1-2" onclick="delete_return()">删除</a>
-					</div>
-				</div>
-
-<script>
-	function delete_return() {
-		$('#delete_modal').modal('show');
-	}
-</script>
-
-<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title" id="my_delete_modal">
-						删除提醒
-					</h4>
-			</div>
-			<div class="modal-body">
-				<h3>您确认要删除该项目吗？</h3>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">
-					关闭
-				</button>
-				<a href="#" class="btn btn-danger">
-					删除
-				</a>
 			</div>
 		</div>
-	</div>
-</div>
+		
+		<s:if test="#session.user != null && #session.user.userId.equals(item)">	
+			<div style="text-align: center;" >
+				<div class="uk-button-group">
+				    <a class="uk-button uk-button-primary uk-button-large uk-width-1-2" href="/project/modify_project.php?projectid=project_id">编辑</a>
+				    <a class="uk-button uk-button-danger uk-button-large uk-width-1-2" onclick="delete_return()">删除</a>
+				</div>
+			</div>
+			<script>
+				function delete_return() {
+					$('#delete_modal').modal('show');
+				}
+			</script>
+			<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title" id="my_delete_modal">
+									删除提醒
+								</h4>
+						</div>
+						<div class="modal-body">
+							<h3>您确认要删除该项目吗？</h3>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								关闭
+							</button>
+							<a href="#" class="btn btn-danger">
+								删除
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</s:if>			
 		
 	<jsp:include page="../module/bottom.jsp" flush="true" />
 

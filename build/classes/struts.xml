@@ -40,6 +40,12 @@
 			<result name="register">/pages/signIn/register.jsp</result>
 			<result name="login">/pages/signIn/login.jsp</result>
 			<result name="back" type="redirect">${backUrl}</result>
+			<!-- 当检测到是从show_startups.jsp登录的时候，将backUrl转换为action，保留item参数，将其跳转到名字为getStartupsItem的action -->
+			<result name="rdaction" type="redirectAction">
+				 <param name="actionName">getStartupsItem</param>
+		         <param name="namespace">/</param>
+		         <param name="item">${backUrl}</param>
+			</result>
 		</action>
 		
 		<!-- 处理登录注册的数据，ajax的action -->

@@ -3,6 +3,7 @@ package com.chuangyejia.service;
 import java.util.List;
 
 import com.chuangyejia.bean.Startups;
+import com.chuangyejia.tools.StartupsTempShow;
 
 /**
  * Startups对象的service层的接口
@@ -50,6 +51,14 @@ public interface IStartupsService {
 	 * @return Startups
 	 */
 	public Startups getStartupsInId(String startupsId);
+	/**
+	 * 通过Startups对象的startupsId来获取StratupsTempShow对象
+	 * @param startupsId
+	 * @return
+	 */
+	public StartupsTempShow getStaratupsInId(String startupsId);
+	
+	
 	
 	/**
 	 * 通过公司Startups对象的leaderId来获取整个对象

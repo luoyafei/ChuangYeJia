@@ -12,7 +12,6 @@ import com.chuangyejia.factory.HibernateSessionFactory;
 
 public class UserDaoImpl implements IUserDao {
 
-	@SuppressWarnings("finally")
 	@Override
 	public boolean saveUser(User user) {
 		// TODO Auto-generated method stub
@@ -28,13 +27,8 @@ System.out.println(user.toString());
 			flag = false;
 System.out.println("Hibernate往数据库中插入User数据时出现异常！");
 			e.printStackTrace();
-		} finally {
-			if(session.isOpen()) {
-				session.close();
-				session = null;
-			}
-			return flag;
-		}
+		} 
+		return flag;
 
 	}
 
@@ -46,7 +40,6 @@ System.out.println("Hibernate往数据库中插入User数据时出现异常！")
 	}
 
 	
-	@SuppressWarnings("finally")
 	@Override
 	public boolean updateUser(User user) {
 		// TODO Auto-generated method stub
@@ -62,13 +55,8 @@ System.out.println("Hibernate往数据库中插入User数据时出现异常！")
 			flag = false;
 System.out.println("Hibernate往数据库中更新User数据时出现异常！");
 			e.printStackTrace();
-		} finally {
-			if(session.isOpen()) {
-				session.close();
-				session = null;
-			}
-			return flag;
 		}
+		return flag;
 
 	}
 
@@ -87,7 +75,20 @@ System.out.println("Hibernate往数据库中更新User数据时出现异常！")
 	@Override
 	public User getUserInId(String userId) {
 		// TODO Auto-generated method stub
-		return null;
+		User user = null;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			
+			user = (User)session.get(User.class, userId);
+			
+			session.getTransaction().commit();
+			
+		} catch(HibernateException e) {
+System.out.println("根据UserId获取User对象时，出错！");
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	@Override
@@ -131,7 +132,6 @@ System.out.println("Hibernate往数据库中更新User数据时出现异常！")
 			return true;//有
 	}
 
-	@SuppressWarnings("finally")
 	@Override
 	public User checkEmailAndPassword(User user) {
 		// TODO Auto-generated method stub
@@ -154,16 +154,11 @@ System.out.println("Hibernate往数据库中更新User数据时出现异常！")
 			flag = false;
 System.out.println("验证用户的邮箱和密码时出错！");
 			e.printStackTrace();
-		} finally {
-			if(session.isOpen()) {
-				session.close();
-				session = null;
-			}
-			if(flag)
-				return user;
-			else
-				return null;
 		}
+		if(flag)
+			return user;
+		else
+			return null;
 	}
 
 }

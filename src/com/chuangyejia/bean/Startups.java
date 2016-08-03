@@ -2,6 +2,7 @@ package com.chuangyejia.bean;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.chuangyejia.tools.StartupsTempShow;
+import com.chuangyejia.tools.UserTempShow;
 
 /**
  * 创业公司，实体类
@@ -235,7 +239,7 @@ public class Startups {
 	 * 多对多双向向关联，可以获得，该公司下的所有user
 	 * @return
 	 */
-	@ManyToMany(cascade={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch=FetchType.LAZY)
+	@ManyToMany(cascade={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch=FetchType.EAGER)
 	@JoinTable(name="startups_user",
 				joinColumns={@JoinColumn(name="startupsId", referencedColumnName="startupsId")},
 				inverseJoinColumns={@JoinColumn(name="userId", referencedColumnName="userId")}
@@ -248,5 +252,38 @@ public class Startups {
 		this.copartner = copartner;
 	}
 	
-	
+	/**
+	 * 将Startups对象，转换为具有安全性的StartupsTempShow对象
+	 * @return StartupsTempShow
+	 */
+	public StartupsTempShow toStartupsTempShow() {
+		StartupsTempShow sts = new StartupsTempShow();
+		
+		sts.setStartupsId(startupsId);
+		sts.setStartupsName(startupsName);
+		sts.setStartupsCreateDate(startupsCreateDate);
+		sts.setStartupsBrief(startupsBrief);
+		sts.setStartupsDetail(startupsDetail);
+		sts.setStartupsServiceType(startupsServiceType);
+		sts.setStartupsAddress(startupsAddress);
+		sts.setStartupsCopartnerRequire(startupsCopartnerRequire);
+		sts.setStartupsOperationStage(startupsOperationStage);
+		sts.setStartupsCover(startupsCover);
+		sts.setStartupsVideo(startupsVideo);
+		sts.setStartupsPhoto1(startupsPhoto1);
+		sts.setStartupsPhoto2(startupsPhoto2);
+		sts.setStartupsPhoto3(startupsPhoto3);
+		
+		sts.setStartupsLeader(startupsLeader.toUserTempShow());
+		
+		Set<UserTempShow> temps = new HashSet<UserTempShow>();
+		Iterator<User> iteratorCop = copartner.iterator();
+		while(iteratorCop.hasNext()) {
+			temps.add(iteratorCop.next().toUserTempShow());
+		}
+		
+		sts.setCopartner(temps);
+		
+		return sts;
+	}
 }

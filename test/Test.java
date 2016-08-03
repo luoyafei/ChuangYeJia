@@ -3,6 +3,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import com.chuangyejia.bean.Startups;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.factory.HibernateSessionFactory;
 import com.chuangyejia.factory.ServiceFactory;
+import com.chuangyejia.service.IStartupsService;
 import com.chuangyejia.service.IUserService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -27,8 +29,28 @@ public class Test {
 		
 		//new SchemaExport(new AnnotationConfiguration().configure()).create(true, true);
 	
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		
-		Session session = HibernateSessionFactory.createSessionFactory().openSession();
+		//Startups s = (Startups)session.get(Startups.class, "402881fc564a670b01564a6882a70001");
+//System.out.println(s.getStartupsName());
+
+		IStartupsService iss = ServiceFactory.createStartupsService();
+		Startups s = iss.getStartupsInId("402881fc564e779601564e7799260001");
+/*		
+		User user = new User();
+		user.setUserNickName("成员");
+		user.setUserEmail("chengyuan@qq.com");
+		user.setUserPassword("chengyuan");
+
+		IUserService is = ServiceFactory.createUserService();
+		is.saveUser(user);
+		*/
+		//s.getCopartner().add(user);
+
+		//iss.updateStartups(s);
+		
+		/*Session session = HibernateSessionFactory.createSessionFactory().openSession();
 		session.beginTransaction();
 		
 		User user = (User)session.load(User.class, "402881fc5643d429015643d42cf10001");
@@ -46,7 +68,7 @@ public class Test {
 		
 		session.getTransaction().commit();
 		session.close();
-		
+		*/
 		
 		
 		/*SessionFactory sf = HibernateSessionFactory.createSessionFactory();
@@ -275,20 +297,27 @@ System.out.println(ss.size());
 		
 		*/
 		
-		User user = (User)session.load(User.class, "402881fc5644a6cb015644a6cdd20001");
+/*		User user = (User)session.load(User.class, "402881fc5644a6cb015644a6cdd20001");
 		
 		
 		Set<Startups> s1 = user.getAllLeaderStartups();
 System.out.println(s1.size());
 
 		Set<Startups> s2 = user.getAllJoinStartups();
-System.out.println(s2.size());
+System.out.println(s2.size());*/
 
-		//Startups s = (Startups)session.load(Startups.class, "402881fc5645272e0156452731a40001");
+		Startups s = (Startups)session.load(Startups.class, "402881fc564e779601564e7799260001");
 		
-		//s.getCopartner().add(user);
-		
-		//session.update(s);
+		for(int i = 0; i < 10; i++) {
+			User user = new User();
+			user.setUserNickName("罗亚飞" + i);
+			user.setUserEmail("123" + i + "@qq.com");
+			user.setUserPassword("luoyafei" + i);
+			session.save(user);
+			s.getCopartner().add(user);
+		}
+		session.update(s);
+
 		
 		
 		/*
@@ -313,14 +342,9 @@ System.out.println(s2.size());
 		while(ssiterator.hasNext()) {
 			System.out.println(ssiterator.next().toString());
 		}*/
-		/*for(int i = 0; i < 10; i++) {
-			User user = new User();
-			user.setUserNickName("罗亚飞" + i);
-			user.setUserEmail("123" + i + "@qq.com");
-			user.setUserPassword("luoyafei" + i);
-			session.save(user);
-			startups.getCopartner().add(user);
-		}*/
+
+
+		
 		
 		//session.update(startups);
 		//session.save(startups);
@@ -339,4 +363,38 @@ System.out.println(s2.size());
 	private void add(int i) {
 		++i;
 	}
+	
+	@org.junit.Test
+	public void testStartupsIsNull() {
+		
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Startups s = (Startups)session.get(Startups.class, "402881fc564a670b01564a6882a70001");
+		session.getTransaction().commit();
+		//session.close();
+		System.out.println(s.getStartupsLeader().getUserId());
+		System.out.println(s.getCopartner().size());
+		//System.out.println(s.getCopartner().size());
+	}
+	
+	@org.junit.Test
+	public void testStartupsIsNull1() {
+		
+		IStartupsService iss = ServiceFactory.createStartupsService();
+		Startups st = iss.getStartupsInId("402881fc564e779601564e7799260001");
+		//StartupsTempShow s = iss.getStaratupsInId("402881fc564e779601564e7799260001");
+	/*	IUserService is = ServiceFactory.createUserService();
+		User user = is.getUserInId("402881fc564e70fa01564e70fda60001 ");
+		
+		s.getCopartner().add(user);
+		iss.saveStartups(s);*/
+		//System.out.println(s.getStartupsLeader().getUserId());
+		Iterator<User> us = st.getCopartner().iterator();
+		
+		
+		System.out.println(us.next().getUserId());
+		//System.out.println(st.getCopartner().size());
+	}
+	
 }

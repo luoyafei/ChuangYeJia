@@ -38,4 +38,12 @@ public class StartupsUtil {
 			,",技术"					//2
 			,",运营"					//3
 	};
+	
+	
+	public final static String[] OperationStage = {
+			"暂无"                  //0
+			,"概念阶段"             //1
+			,"产品研发中"           //2
+			,"产品已经上线"           //3
+	};
 }

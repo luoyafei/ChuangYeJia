@@ -104,11 +104,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="carousel-caption">
 							<div class="logo-img" style="width: 100%;">
 								<span>
-									<img src="<%=path %>/assets/img/user/logo.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;">
+									<img data-holder-rendered="true" src="<s:property value='#session.user.userPhoto'/>" style="width: 100px; height: 100px;" class="img-circle" />
 								</span>
 								<span>
 									<a style="font-size: 14px;text-decoration: none;">
-										<span style="display: block;">ID:姓名/昵称</span>
+										<span style="display: block;">
+											<s:property value="#session.user.userNickName"/>，您好
+										</span>
 									</a>
 								</span>
 								<span>

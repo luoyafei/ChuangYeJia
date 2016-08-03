@@ -102,11 +102,17 @@ public class StartupsCreateDTO {
 			startupsServiceType = "其他";
 		}
 		
+		String OperationStage = "";
+		try {
+			OperationStage = StartupsUtil.OperationStage[Integer.parseInt(stage)];
+		} catch(NumberFormatException e) {
+			OperationStage = "暂无";
+		}
 		
 		startups.setStartupsName(name.trim());
 		startups.setStartupsServiceType(startupsServiceType);
 		startups.setStartupsCopartnerRequire(startupsRequire);
-		startups.setStartupsOperationStage(stage.trim());
+		startups.setStartupsOperationStage(OperationStage);
 		startups.setStartupsAddress(address.trim());
 		startups.setStartupsBrief(brief.trim());
 		startups.setStartupsDetail(detail.trim());

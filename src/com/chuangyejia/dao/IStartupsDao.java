@@ -3,6 +3,7 @@ package com.chuangyejia.dao;
 import java.util.List;
 
 import com.chuangyejia.bean.Startups;
+import com.chuangyejia.tools.StartupsTempShow;
 
 /**
  * 提供数据库dao层的接口
@@ -49,6 +50,14 @@ public interface IStartupsDao {
 	 * @return Startups
 	 */
 	public Startups getStartupsInId(String startupsId);
+	/**
+	 * 通过Startups对象的startupsId来获取StratupsTempShow对象
+	 * @param startupsId
+	 * @return
+	 */
+	public StartupsTempShow getStaratupsInId(String startupsId);
+	
+	
 	
 	/**
 	 * 通过公司Startups对象的leaderId来获取整个对象

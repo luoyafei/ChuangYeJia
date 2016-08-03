@@ -6,6 +6,7 @@ import com.chuangyejia.bean.Startups;
 import com.chuangyejia.dao.IStartupsDao;
 import com.chuangyejia.factory.DaoFactory;
 import com.chuangyejia.service.IStartupsService;
+import com.chuangyejia.tools.StartupsTempShow;
 
 public class StartupsServiceImpl implements IStartupsService {
 
@@ -63,5 +64,13 @@ public class StartupsServiceImpl implements IStartupsService {
 		// TODO Auto-generated method stub
 		return sd.isNameRepeat(startupsName);
 	}
+
+	@Override
+	public StartupsTempShow getStaratupsInId(String startupsId) {
+		// TODO Auto-generated method stub
+		return sd.getStaratupsInId(startupsId);
+	}
+
+	
 
 }

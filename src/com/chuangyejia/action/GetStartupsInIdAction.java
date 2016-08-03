@@ -1,8 +1,10 @@
 package com.chuangyejia.action;
 
-import com.chuangyejia.bean.Startups;
+import org.apache.struts2.ServletActionContext;
+
 import com.chuangyejia.factory.ServiceFactory;
 import com.chuangyejia.service.IStartupsService;
+import com.chuangyejia.tools.StartupsTempShow;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -31,10 +33,13 @@ public class GetStartupsInIdAction extends ActionSupport {
 		// TODO Auto-generated method stub
 		if(item != null && item.trim().hashCode() != 0) {
 			
-			//IStartupsService iss = ServiceFactory.createStartupsService();
-			//Startups s = iss.getStartupsInId(item);
-			
-			return SUCCESS;
+			IStartupsService iss = ServiceFactory.createStartupsService();
+			StartupsTempShow sts = iss.getStaratupsInId(item);
+			if(sts != null) {
+				ServletActionContext.getRequest().setAttribute("sts", sts);
+				return SUCCESS;
+			} else 
+				return NONE;
 			
 		} else {
 			return NONE;

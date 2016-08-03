@@ -15,6 +15,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.chuangyejia.tools.UserTempShow;
+
 @Entity
 public class User {
 	
@@ -246,4 +248,28 @@ public class User {
 				+ "]";
 	}
 
+	/**
+	 * 提供了一个UserTempShow对象，将给被人展示的信息装入，不要将整个User对象拿出，具有安全信息！
+	 * @return
+	 */
+	public UserTempShow toUserTempShow() {
+		
+		UserTempShow uts = new UserTempShow();
+		
+		uts.setUserId(userId);
+		uts.setUserNickName(userNickName);
+		uts.setUserEmail(userEmail);
+		uts.setUserIntroduce(userIntroduce);
+		uts.setUserGender(userGender);
+		uts.setUserAddress(userAddress);
+		uts.setUserPhoto(userPhoto);
+		uts.setUserWeChat(userWeChat);
+		uts.setUserTel(userTel);
+		uts.setUserCreateDate(userCreateDate);
+		uts.setIsVerify(isVerify);
+		
+		return uts;
+		
+	}
+	
 }
