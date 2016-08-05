@@ -236,7 +236,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="2" />技术
 								  </label>
 								  <label class="btn btn-default">
-								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="3" />运营
+								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="3" />推广
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="4" />运营
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="checkbox" name="sd.require" class="require" autocomplete="off" value="0" />其他
 								  </label>
 								</div>
 							</div>
@@ -259,7 +265,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
 								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
-									<label for="address" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">公司归属地</label>
+									<label for="address" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">所属高校</label>
 									<div class="col-sm-12">
 										<input type="text" class="form-control" name="sd.address" maxlength="50" style="background-color: #F5F5F5;" id="address">
 									</div>

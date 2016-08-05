@@ -13,6 +13,7 @@ import com.chuangyejia.dto.UserInfoDTO;
 import com.chuangyejia.factory.ServiceFactory;
 import com.chuangyejia.jsonbean.UserModifyAjaxReturnBean;
 import com.chuangyejia.service.IUserService;
+import com.chuangyejia.tools.UserUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
@@ -120,13 +121,23 @@ System.out.println("用户修改信息，通过ajax,UserInfoModifyAction的modif
 		 UserModifyAjaxReturnBean error = uid.checkData();
 
 		if(error.isSuccess()) {
+			
+			
 			User user = (User)session.getAttribute("user");
 			
 			User userToSave = user;
 			
+			String copartnerCategory = UserUtil.copartnerCategory[Integer.parseInt(uid.getCategory())];
+			String userField = UserUtil.userField[Integer.parseInt(uid.getField())];
+			
 			userToSave.setUserNickName(uid.getNickname().trim());
 			userToSave.setUserAddress(uid.getAddress().trim());
 			userToSave.setUserIntroduce(uid.getProfile().trim());
+			
+			userToSave.setCopartnerCategory(copartnerCategory);
+			userToSave.setUserField(userField);
+			userToSave.setStartAbility(uid.getAbility());
+			userToSave.setIntroduceVideo(uid.getVideo().trim());
 			
 			IUserService su = ServiceFactory.createUserService();
 			boolean result = su.updateUser(userToSave);

@@ -1,6 +1,8 @@
 package com.chuangyejia.tools;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 提供一个User的展现信息的类
@@ -23,6 +25,35 @@ public class UserTempShow {
 	private Timestamp userCreateDate = null;
 	private String isVerify = "0";//是否认证
 	private String userTel = null;//电话
+	
+	private String copartnerCategory = null;//合伙人类型（资金，技术，推广，运营，其他）
+	private String startAbility = null;//创业能力
+	private String userField = null;//领域 (移动互联网，电子商务，文化艺术，教育体育，汽车，旅游户外，房产，营销广告，硬件，工具软件，企业服务，搜索安全，医疗健康，媒体资讯，生活消费，其他)
+	private String introduceVideo = null;//介绍视频
+	
+	/**
+	 * 获取该用户所创建的所有的创业公司
+	 */
+	private Set<StartupsTempShow> allLeaderStartups = new HashSet<StartupsTempShow>();
+	
+	/**
+	 * 获取该用户参与的所有的创业公司
+	 */
+	private Set<StartupsTempShow> allJoinStartups = new HashSet<StartupsTempShow>();
+	
+	public Set<StartupsTempShow> getAllLeaderStartups() {
+		return allLeaderStartups;
+	}
+	public void setAllLeaderStartups(Set<StartupsTempShow> allLeaderStartups) {
+		this.allLeaderStartups = allLeaderStartups;
+	}
+	public Set<StartupsTempShow> getAllJoinStartups() {
+		return allJoinStartups;
+	}
+	public void setAllJoinStartups(Set<StartupsTempShow> allJoinStartups) {
+		this.allJoinStartups = allJoinStartups;
+	}
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -88,6 +119,30 @@ public class UserTempShow {
 	}
 	public void setUserTel(String userTel) {
 		this.userTel = userTel;
+	}
+	public String getCopartnerCategory() {
+		return copartnerCategory;
+	}
+	public void setCopartnerCategory(String copartnerCategory) {
+		this.copartnerCategory = copartnerCategory;
+	}
+	public String getStartAbility() {
+		return startAbility;
+	}
+	public void setStartAbility(String startAbility) {
+		this.startAbility = startAbility;
+	}
+	public String getUserField() {
+		return userField;
+	}
+	public void setUserField(String userField) {
+		this.userField = userField;
+	}
+	public String getIntroduceVideo() {
+		return introduceVideo;
+	}
+	public void setIntroduceVideo(String introduceVideo) {
+		this.introduceVideo = introduceVideo;
 	}
 	
 	

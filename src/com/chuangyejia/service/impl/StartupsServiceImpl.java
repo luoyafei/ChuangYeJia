@@ -42,9 +42,9 @@ public class StartupsServiceImpl implements IStartupsService {
 	}
 
 	@Override
-	public List<Startups> getStartups(Integer start, Integer length) {
+	public List<StartupsTempShow> getStartupTempShows(Integer start, Integer length, String sort) {
 		// TODO Auto-generated method stub
-		return sd.getStartups(start, length);
+		return sd.getStartupTempShows(start, length, sort);
 	}
 
 	@Override
@@ -66,9 +66,9 @@ public class StartupsServiceImpl implements IStartupsService {
 	}
 
 	@Override
-	public StartupsTempShow getStaratupsInId(String startupsId) {
+	public StartupsTempShow getStartupsTempShowInId(String startupsId) {
 		// TODO Auto-generated method stub
-		return sd.getStaratupsInId(startupsId);
+		return sd.getStartupsTempShowInId(startupsId);
 	}
 
 	

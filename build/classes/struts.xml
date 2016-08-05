@@ -39,12 +39,20 @@
 			<result name="signout">/index.jsp</result>
 			<result name="register">/pages/signIn/register.jsp</result>
 			<result name="login">/pages/signIn/login.jsp</result>
+			<!-- 这是普通的不带参数的跳转 -->
 			<result name="back" type="redirect">${backUrl}</result>
 			<!-- 当检测到是从show_startups.jsp登录的时候，将backUrl转换为action，保留item参数，将其跳转到名字为getStartupsItem的action -->
-			<result name="rdaction" type="redirectAction">
+			<result name="rdactionforitem" type="redirectAction">
 				 <param name="actionName">getStartupsItem</param>
 		         <param name="namespace">/</param>
 		         <param name="item">${backUrl}</param>
+			</result>
+			
+			<!-- 当检测到是从user_profile.jsp登录的时候，将backUrl转换为action，保留mark参数，将其跳转到名字为getUserMark的action -->
+			<result name="rdactionformark" type="redirectAction">
+				 <param name="actionName">getUserMark</param>
+		         <param name="namespace">/</param>
+		         <param name="mark">${backUrl}</param>
 			</result>
 		</action>
 		
@@ -56,6 +64,9 @@
 		
 		<!-- 用来处理用户更改头像ajax的action -->
 		<action name="uploadPicture" class="com.chuangyejia.ajax.UploadUserPicture" />
+		
+		<!-- 首页中获取公司数据给予显示的ajax的action -->
+		<action name="supportStartups" class="com.chuangyejia.ajax.SupportFourStartupsAction" />
 		
 		<!-- 用来处理创建公司的action -->
 		<action name="createStartups" class="com.chuangyejia.action.CreateStartupsAction">
@@ -76,6 +87,12 @@
 		<!-- 处理点击公司想要访问该公司信息的页面时，根据公司的id，将公司的信息获取 -->
 		<action name="getStartupsItem" class="com.chuangyejia.action.GetStartupsInIdAction">
 			<result name="success">/pages/startups/show_startups.jsp</result>
+			<result name="none" type="redirect">/index.jsp</result>
+		</action>
+		
+		<!-- 处理点击User之后，要访问User对象的信息页面时，根据User的id，将User的信息取出 -->
+		<action name="getUserMark" class="com.chuangyejia.action.GetUserInIdAction">
+			<result name="success">/pages/home/user_profile.jsp</result>
 			<result name="none" type="redirect">/index.jsp</result>
 		</action>
 		

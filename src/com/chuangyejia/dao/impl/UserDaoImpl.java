@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.dao.IUserDao;
 import com.chuangyejia.factory.HibernateSessionFactory;
+import com.chuangyejia.tools.UserTempShow;
 
 public class UserDaoImpl implements IUserDao {
 
@@ -159,6 +160,27 @@ System.out.println("验证用户的邮箱和密码时出错！");
 			return user;
 		else
 			return null;
+	}
+
+	@Override
+	public UserTempShow getUserTempShowInId(String userId) {
+		// TODO Auto-generated method stub
+		UserTempShow uts = null;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			
+			User user = (User)session.get(User.class, userId);
+			
+			uts = user.toUserTempShow();
+			
+			session.getTransaction().commit();
+			
+		} catch(HibernateException e) {
+System.out.println("根据UserId获取User对象时，出错！");
+			e.printStackTrace();
+		}
+		return uts;
 	}
 
 }

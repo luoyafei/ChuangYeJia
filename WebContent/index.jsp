@@ -12,7 +12,7 @@ request.setAttribute("flag", "index");
 	<head>
 	
 		<base href="<%=basePath%>">
-		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="pragma" content="no-cache">
@@ -26,12 +26,20 @@ request.setAttribute("flag", "index");
 		<link href="assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
 		<link href="assets/bootstrap-3.3.5/docs/examples/carousel/carousel.css" rel="stylesheet">
-		<link rel="shortcut icon" href="assets/img/icon1.jpg">
+		
 		<!-- Bootstrap core JavaScript
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
 		<script src="assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
 		<script src="assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+		
+		<!-- uikit -->
+		<script src="<%=path%>/assets/uikit/uikit.js"></script>
+		<link href="<%=path%>/assets/uikit/uikit.css" rel="stylesheet"/>
+		<link href="<%=path%>/assets/uikit/slideshow.css" rel="stylesheet"/>
+		<script src="<%=path%>/assets/uikit/uikit.js"></script>
+		<script src="<%=path%>/assets/uikit/slideshow.js"></script>
 
 		
 		
@@ -126,84 +134,112 @@ request.setAttribute("flag", "index");
 				</ul>
 			</div>
 
-
-
-			<div class="row" style="width: 100%;margin:0 auto">
-<!-- 
-			<?php
-			if(is_array($project_list) && count($project_list,COUNT_NORMAL)>0){
-				$num = 0;
-				foreach ($project_list as $project) {
-			?>
- -->
-			<div class="col-lg-3 row-col-lg-3-1 row-col-lg-3-projectcatagory<? echo $num+1?>" style="position: relative;border-bottom: solid black 1px;">
-				<div style="width: 97%;height: 220px;">
-					<%-- <img class="img-thumb" src="<?echo $project['project_face'];?>" alt="Generic placeholder image" style="width:100%; height: 220px;"> --%>
-				</div>
-
-				<!--###########################此为鼠标移入后的显示###################################-->
-				<div class="row-col-lg-3-projectcatagory-main<? echo $num+1?>" style="visibility: hidden; position:absolute;width:97%;height:220px;color: white; background:url(assets/img/indexpage/半透明.png);z-indent:2;left:0;top:0;">
-					<div style="width: 60%;height: 55%;margin: 0 auto;">
-						<div class="container">
-							<a href = "pages/project/project_show.php">
-							<img src="assets/img/indexpage/分享.png" style="width:150px;height:32px;margin: 20px auto;margin: 50px auto;" />
-							</a>
-						</div>
+			
+			<div class="uk-margin">
+			
+				<div class="uk-grid">
+				    <div class="uk-width-medium-1-4">
+						<div class="uk-thumbnail">
+	                   		<figure class="uk-overlay uk-overlay-hover">
+	                           <img src="" style="height: 194.15px;" class="uk-overlay-spin startupsCover" alt="正在玩命加载中请稍后...">
+	                           <figcaption class="uk-overlay-panel uk-overlay-background  uk-overlay-bottom uk-overlay-slide-bottom">
+	                             	 <a class="startupsLeader" href=""></a>
+	                             </figcaption> 
+	                            
+	                         </figure>
+	                   		<div class="uk-thumbnail-caption">
+		                   		<a href="" class="linkStartups">
+		                   			<span style="color:#222222;">公司名称:</span>
+		                   			&nbsp;&nbsp;<span class="startupsName"></span>
+		                   		</a>
+	                   		</div>
+	                   	</div>
 					</div>
-					<div style="width: 80%;height: 45%; margin: 0 auto;overflow: hidden;">
-						<div class="container projectcatagory-brief" style="font-size: 12px;width: 100%;height: 100%;font-family: STHeiti;">
-								<h6 style="">
-								<!-- 
-								<?php
-									echo "<a href='pages/project/project_show.php?projectid=".$project['project_id']."'>";
-									echo $project["project_brief"];
-									echo "</a>";
-									?>
-									 -->
-								</h6>
-						</div>
+				     <div class="uk-width-medium-1-4">
+						<div class="uk-thumbnail">
+	                   		<figure class="uk-overlay uk-overlay-hover">
+	                           <img src="" style="height: 194.15px;" class="uk-overlay-spin startupsCover" alt="正在玩命加载中请稍后...">
+	                           <figcaption class="uk-overlay-panel uk-overlay-background  uk-overlay-bottom uk-overlay-slide-bottom">
+	                             	 <a class="startupsLeader" href=""></a>
+	                             </figcaption> 
+	                            
+	                         </figure>
+	                   		<div class="uk-thumbnail-caption">
+		                   		<a href="" class="linkStartups">
+		                   			<span style="color:#222222;">公司名称:</span>
+		                   			&nbsp;&nbsp;<span class="startupsName"></span>
+		                   		</a>
+	                   		</div>
+	                   	</div>
+					</div>
+					 <div class="uk-width-medium-1-4">
+						<div class="uk-thumbnail">
+	                   		<figure class="uk-overlay uk-overlay-hover">
+	                           <img src="" style="height: 194.15px;" class="uk-overlay-spin startupsCover" alt="正在玩命加载中请稍后...">
+	                           <figcaption class="uk-overlay-panel uk-overlay-background  uk-overlay-bottom uk-overlay-slide-bottom">
+	                             	 <a class="startupsLeader" href=""></a>
+	                             </figcaption> 
+	                            
+	                         </figure>
+	                   		<div class="uk-thumbnail-caption">
+		                   		<a href="" class="linkStartups">
+		                   			<span style="color:#222222;">公司名称:</span>
+		                   			&nbsp;&nbsp;<span class="startupsName"></span>
+		                   		</a>
+	                   		</div>
+	                   	</div>
+					</div>
+					 <div class="uk-width-medium-1-4">
+						<div class="uk-thumbnail">
+	                   		<figure class="uk-overlay uk-overlay-hover">
+	                           <img src="" style="height: 194.15px;" class="uk-overlay-spin startupsCover" alt="正在玩命加载中请稍后...">
+	                           <figcaption class="uk-overlay-panel uk-overlay-background  uk-overlay-bottom uk-overlay-slide-bottom">
+	                             	 <a class="startupsLeader" href=""></a>
+	                             </figcaption> 
+	                            
+	                         </figure>
+	                   		<div class="uk-thumbnail-caption">
+		                   		<a href="" class="linkStartups">
+		                   			<span style="color:#222222;">公司名称:</span>
+		                   			&nbsp;&nbsp;<span class="startupsName"></span>
+		                   		</a>
+	                   		</div>
+	                   	</div>
 					</div>
 				</div>
-				<h7>
+			</div>
 
-					<!--
-                    	作者：635142812@qq.com
-                    	时间：2016-05-25
-                    	描述：更改为所属团队
-                   
-					<?
-						$pro = new Project($project['project_id']);
-						$group = $pro -> get_group();
-						// echo "<a style='white-space: nowrap;text-overflow: ellipsis;' href='pages/user/other_show.php?userid=".$group[0]['user_id']."'/>";
-						echo "所属团队：".$group[0]['group_name'];
-					?>
-					 -->
-				</h7>
-				<hr style="margin: 0 auto 0 auto;" />
-				<h6 style="overflow: hidden;">
-				<!-- 
-				<?php
-					echo "<a style='white-space: nowrap;text-overflow: ellipsis;' href='pages/project/project_show.php?projectid=".$project['project_id']."'/>";
-					echo "项目名称：".$project["project_name"];
-					echo "</a>";
-				?>
-				 -->
-				</h6>
-			</div>
-<!-- 
-			<?php
-			++$num;
-				}
-			}
-			?>
- -->
-			</div>
+			
+			<script type="text/javascript">
+			/* href="getStartupsItem?item=" */
+				$(document).ready(function() {
+					$.post('supportStartups!getStartups.action', {}, function(data, textStatus) {
+						if(textStatus == 'success') {
+							//alert(data.stl.length);
+							for(var i = 0;i < data.stl.length; i++) {
+								
+								$(".startupsName").eq(i).text(data.stl[i].startupsName);
+								$(".linkStartups").eq(i).attr("href", "getStartupsItem?item="+data.stl[i].startupsId);
+								$(".startupsLeader").eq(i).text("总监："+data.stl[i].startupsLeader.userNickName);
+								$(".startupsLeader").eq(i).attr("href", "getUserMark?mark="+data.stl[i].startupsLeader.userId);
+								$(".startupsLeader").eq(i).attr("style", "color: #FFFFFF;");
+								$(".startupsCover").eq(i).attr("src", data.stl[i].startupsCover);
+							}
+						} else {
+							alert("网络出错！请刷新重试！");
+						}
+					}, 'json');
+				}); 
+			</script>
+			
 			<div class="jumbotitle">
 				<div class="container">
 					<a href="pages/other_entity_list/project_list.php"class="btn btn-lg" style="border-radius: 20px; border: solid black 2px; float: right;margin-top: 20px;">更多内容</a>
 				</div>
 			</div>
 		</div>
+
+
 
 		<!--##########################################		此处为资金对接细节	########################################################################-->
 

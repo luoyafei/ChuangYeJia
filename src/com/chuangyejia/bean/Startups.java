@@ -41,7 +41,7 @@ public class Startups {
 	private String startupsAccount = null;//公司账户
 	private String startupsPassword = null;//公司密码
 	private String startupsCopartnerRequire = null;
-	//合伙人需求   (资金，技术，运营)
+	//合伙人需求   (资金，技术，推广，运营，其他)
 	private String startupsOperationStage = null;//运营阶段
 	private String startupsCover = null;//公司封面
 	private String startupsVideo = null;//公司视频

@@ -25,8 +25,10 @@ public class UserSignInAction extends ActionSupport {
 	private static final String REGISTER = "register";//验证注册失败后，返回注册页面
 	private static final String BACK = "back";//从哪个登录登录的，成功后就返回那个页面
 	private static final String SIGNOUT = "signout";//用户注销处理
-	private static final String RDA_BACK = "rdaction";//当用户是从show_startups.jsp来的时候，将其跳转到名字为getStartupsItem的action
-	private boolean fromShowStartups = false;//标志，用来区分应该redirect还是redirectAction
+	private static final String RDA_BACK_ITEM = "rdactionforitem";//当用户是从show_startups.jsp来的时候，进行redirectAction的跳转，跳入getStartupsItem
+	private static final String RDA_BACK_MARK = "rdactionformark";//当用户是从show_startups.jsp来的时候，进行redirectAction的跳转，跳入getStartupsItem
+	private boolean fromShowStartups = false;//标志，说明是不是来自show_startups.jsp
+	private boolean fromUserProfile = false;//标志，说明是不是来自user_profile.jsp
 	
 	private UserSignDTO ud;
 	private ByteArrayInputStream imageStream;//输出的图片流
@@ -95,10 +97,12 @@ System.out.println(backUrl);
 					if(ius.saveUser(user))  {//将User对象存入数据库中。
 						HttpSession session = ServletActionContext.getRequest().getSession(); 
 						session.setAttribute("user", user);//将插入成功的User对象放入Session中
-						if(!fromShowStartups)
-							return BACK;
+						if(fromShowStartups)
+							return RDA_BACK_ITEM;
+						else if(fromUserProfile)
+							return RDA_BACK_MARK;
 						else
-							return RDA_BACK;
+							return BACK;
 					}
 				}
 			}
@@ -126,10 +130,12 @@ System.out.println("backUrl :" + backUrl);
 				if(user != null) {
 					HttpSession session = ServletActionContext.getRequest().getSession();
 					session.setAttribute("user", user);//将User对象放入Session中
-					if(!fromShowStartups)
-						return BACK;
+					if(fromShowStartups)
+						return RDA_BACK_ITEM;
+					else if(fromUserProfile)
+						return RDA_BACK_MARK;
 					else
-						return RDA_BACK;
+						return BACK;
 				} else {
 					this.addFieldError("error", "邮箱或登录密码错误！");
 				}
@@ -144,11 +150,16 @@ System.out.println("backUrl :" + backUrl);
 	@Override
 	public void validate() {
 
-		// TODO Auto-generated method stub
+		/**
+		 * 如果是来自show_startups.jsp，则将item的参数保留，为redirectAction做准备
+		 * 如果来自user_profile.jsp，则将mark的参数保留，为redirectionAction做准备
+		 */
 		if(backUrl != null && backUrl.trim().contains("/pages/startups/show_startups.jsp")) {
 			backUrl = backUrl.split("item=")[1];
-//System.out.println("backUrl split :" + backUrl);
 			fromShowStartups = true;
+		} else if(backUrl != null && backUrl.trim().contains("/pages/home/user_profile.jsp")) {
+			backUrl = backUrl.split("mark=")[1];
+			fromUserProfile = true;
 		}
 	}
 	/**

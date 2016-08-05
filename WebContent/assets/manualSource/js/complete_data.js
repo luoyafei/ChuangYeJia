@@ -51,17 +51,25 @@ function submitModifyInfo() {
 	var nickname = $("#nickname").val().trim();
 	var address = $("#address").val().trim();
 	var profile = $("#profile").val().trim();
-	var flag = checkInfoData(nickname, address, profile);
+	var ability = $("#ability").val().trim();
+	var videoTemp = $("#video").val().trim().split("src=")[1];
+	var video = videoTemp.split('"')[1];
+	
+	var flag = checkInfoData(nickname, address, profile, ability, video);
 	if(flag) {
 		$.post('modifyUserInfo!modifyInfo.action', {
 			"uid.nickname" : nickname,
 			"uid.address" : address,
-			"uid.profile" : profile
+			"uid.profile" : profile,
+			"uid.ability" : ability,
+			"uid.category" : $('input[name="uid.category"]:checked').val(),
+			"uid.field" : $('input[name="uid.field"]:checked').val(),
+			"uid.video" : video
 		}, function(data, textStatus) {
 			if(textStatus == "success") {
 				//alert(JSON.stringify(data));
 				if(!data.errorInfo.success) {
-					errorInfo.text(data.errorInfo.nickname+" "+data.errorInfo.address+" "+data.errorInfo.profile+" "+data.errorInfo.update);
+					errorInfo.text(data.errorInfo.nickname+" "+data.errorInfo.address+" "+data.errorInfo.profile+" "+data.errorInfo.update + "" + data.errorInfo.category + "" + data.errorInfo.ability + "" + data.errorInfo.field);
 					alert("信息修改失败");
 				} else {
 					errorInfo.text("信息修改成功！");
@@ -74,10 +82,12 @@ function submitModifyInfo() {
 		}, 'json');
 	}
 }
-function checkInfoData(nickname, address, profile) {
+function checkInfoData(nickname, address, profile, ability, video) {
 	var flagNickname = false;
 	var flagAddress = false;
 	var flagProfile = false;
+	var flagAbility = false;
+	var flagVideo = false;
 	if(nickname === "" || nickname.length < 2 || 16 < nickname.length) {
 		errorInfo.text("用户昵称长度必须在2-16个字之间");
 	} else
@@ -93,7 +103,14 @@ function checkInfoData(nickname, address, profile) {
 	} else
 		flagProfile = true;
 	
-	if(flagNickname && flagAddress && flagProfile)
+	if(ability === "") {
+		errorInfo.text("请进信息填写完整！");
+	} else {
+		flagAbility = true;
+	}
+	
+	
+	if(flagNickname && flagAddress && flagProfile && flagAbility)
 		return true;
 	else
 		return false;

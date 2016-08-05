@@ -34,7 +34,7 @@ public class GetStartupsInIdAction extends ActionSupport {
 		if(item != null && item.trim().hashCode() != 0) {
 			
 			IStartupsService iss = ServiceFactory.createStartupsService();
-			StartupsTempShow sts = iss.getStaratupsInId(item);
+			StartupsTempShow sts = iss.getStartupsTempShowInId(item);
 			if(sts != null) {
 				ServletActionContext.getRequest().setAttribute("sts", sts);
 				return SUCCESS;

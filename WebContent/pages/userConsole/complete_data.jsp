@@ -34,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<!-- uikit -->
 		<script src="<%=path%>/assets/uikit/uikit.js"></script>
+		<script src="<%=path%>/assets/uikit/lightbox.js"></script>
 		<link href="<%=path%>/assets/uikit/uikit.css" rel="stylesheet"/>
 		
 		<style>
@@ -170,25 +171,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<div class="tab-content" style="background-color: white;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 				<div role="tabpanel" class="tab-pane active" id="home">
-					<div class="tab-content-1" style="width: 80%;height: 720px;margin: 0 auto; background-color: white;">
+					<div class="tab-content-1" style="width: 80%;height: 100%;margin: 0 auto; background-color: white;">
 						<div class="form-horizontal" role="form" style="margin-left: 0px;"  method="post" method="post" enctype="multipart/form-data">
 							
 							<label id="modifyInfoError" style="text-align: center;color: #398BE5; width: 100%;"></label>
 							
+							<!-- <hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px;"> -->
 							
-							<div class="form-group" style="margin-right: 0px;margin-left: -45px;">
-								<div style="margin-top: 23px;">
-									<label for="nickname" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">昵称</label>
-									<div class="col-sm-10">
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
+									<label for="nickname" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">昵称&nbsp;&nbsp;</label>
+									<div class="col-sm-12">
 										<input type="text" id="nickname" maxlength="16" name="uid.nickname" class="form-control" style="background-color: #F5F5F5;" value="<s:property value='#session.user.userNickName'/>" />
 									</div>
 								</div>
-								<hr class="featurette-divider" style="padding-bottom: 0px; margin-bottom: 0px;">
 							</div>
-							<div class="form-group" style="margin-right: 0px;margin-left: -45px;">
-								<div style="margin-top: 23px;">
-									<label class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">头像</label>
-									<div class="col-sm-10">
+							
+							
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
+									<label class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">头像&nbsp;&nbsp;</label>
+									<div class="col-sm-12">
 										<article class="uk-comment">
 		                                    <header class="uk-comment-header">
 		                                        <img class="uk-comment-avatar" id="userImg" src="<s:property value='#session.user.userPhoto' />" alt="图片加载失败" height="50" width="50">
@@ -205,27 +208,155 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 								</div>
 							</div>
-							<div style="border-bottom: dashed #A9A9A9 1px;border-top: dashed #A9A9A9 1px;">
-								<div class="form-group" style="margin-right: 0px;margin-left: -45px;;padding-top: 15px;">
-									<label for="address" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">地址</label>
-									<div class="col-sm-10">
+							
+							
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
+									<label for="address" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">所属高校&nbsp;&nbsp;</label>
+									<div class="col-sm-12">
 										<input type="text" id="address" maxlength="16" name="uid.address" value="<s:property value='#session.user.userAddress'/>" class="form-control" style="background-color: #F5F5F5;">
+									</div>
+								</div>
+							</div>	
+							
+							
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
+									<label for="profile" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">个人经历&nbsp;&nbsp;</label>
+									<div class="col-sm-12">
+										<textarea id="profile" name="uid.profile" style="width:100%;height:150px;"><s:property value='#session.user.userIntroduce'/></textarea>
 									</div>
 								</div>
 							</div>
 							
+								
+						<h4>关注领域</h4>
+							<div class="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
+								
+								<div class="btn-group" data-toggle="buttons">
+								  <label class="btn btn-default active">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" checked value="1">移动互联网
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="2">电子商务
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="3">文化艺术
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="4">教育体育
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="5">汽车
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="6">旅游户外
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="7">房产
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="8">营销广告
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="9">硬件
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="10">工具软件
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="11">企业服务
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="12">搜索安全
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="13">医疗健康
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="14">媒体资讯
+								  </label>
+								  <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="15">生活消费
+								  </label>
+								   <label class="btn btn-default">
+								    <input type="radio" name="uid.field" class="field" autocomplete="off" value="0">其他
+								  </label>
+								</div>
+							</div>
+						
+							<h4>能力方向</h4>
+								<div class="choicelabel" style="border-bottom: dashed #A9A9A9 1px;padding-bottom: 10px;">
+								
+									<div class="btn-group" data-toggle="buttons">
+									
+									  	  <label class="btn btn-default active" onclick="category(1)">
+										    <input type="radio" name="uid.category" class="category" autocomplete="off" value="1" checked />资金
+										  </label>
+										  <label class="btn btn-default" onclick="category(2)" >
+										    <input type="radio" name="uid.category" class="category" autocomplete="off" value="2" />技术
+										  </label>
+										  <label class="btn btn-default" onclick="category(3)" >
+										    <input type="radio" name="uid.category" class="category" autocomplete="off" value="3" />推广
+										  </label>
+										  <label class="btn btn-default" onclick="category(4)" >
+										    <input type="radio" name="uid.category" class="category" autocomplete="off" value="4" />运营
+										  </label>
+										  <label class="btn btn-default" onclick="category(0)" >
+										    <input type="radio" name="uid.category" class="category" autocomplete="off" value="0" />其他
+										  </label>
+									</div>
+							</div>
+							
 							<div style="border-bottom: dashed #A9A9A9 1px;">
-								<div class="form-group" style="margin-right: 0px;margin-left: -45px;padding-top:15px;">
-									<label for="profile" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">简介</label>
-									<div class="col-sm-10">
-										<textarea id="profile" name="uid.profile" style="width:100%;height:200px;"><s:property value='#session.user.userIntroduce'/></textarea>
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
+									<label for="ability" class="col-sm-2 control-label" id="abilityLabel" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">资金信息&nbsp;&nbsp;</label>
+									<div class="col-sm-12">
+										<textarea id="ability" class="ability" name="uid.ability" style="width:100%;height:150px;"><s:property value='#session.user.startAbility'/></textarea>
 									</div>
 								</div>
 							</div>
+							
+							
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
+									<label for="video" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">介绍视频&nbsp;&nbsp;</label>
+									<div class="col-md-8">
+										<input type="text" id="video" name="uid.video" placeholder="请点击右侧的视频说明按钮，了解如何进行这一步的操作！" class="form-control" style="background-color: #F5F5F5;" />
+									</div>
+									<div class="col-md-2">
+									
+										<div class="uk-button-group">
+		                                    <button class="uk-button" onclick="testVideo()">点击测试</button>
+		                                    <a class="uk-button" href="<%=path %>/assets/manualSource/img/videoExplain.png" data-uk-lightbox="" title="视频说明">视频说明</a>
+		                                </div>
+									</div>
+								</div>
+							</div>
+							
+							
+							<div class="uk-cover iframeDiv" style="display: none;">
+							    <iframe src="" class="iframeSrc" style="width: 100%; height: 100%;" frameborder=0 allowfullscreen></iframe>
+							</div>
+							
+							<script teyp="text/javascript">
+								function testVideo() {
+									if($("#video").val().trim() !== "") {
+										$(".iframeDiv").attr("style", "display: inline;");
+										var videoTemp = $("#video").val().trim().split("src=")[1];
+										var videoUrl = videoTemp.split('"')[1];
+										$(".iframeSrc").attr("src", videoUrl);
+									} else {
+										alert("请先输入地址！");
+									}
+									
+								}
+							</script>
+							
 							<div style="margin: 50px auto;">
 								<div class="form-group" style="margin: 0 auto; text-align: center;">
-									<button type="submit" onclick="submitModifyInfo()" value="发送个人信息" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">
-										发送
+									<button type="submit" onclick="submitModifyInfo()" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">
+										确认修改
 									</button>
 								</div>
 							</div>
@@ -293,6 +424,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ready(function() {
 			$("td").attr("style", "border-top: solid #333333 1px;");
 		});
+		function category(index) {
+			if(index === 1) {
+				$("#abilityLabel").text("资金信息");
+			} else if(index === 2) {
+				$("#abilityLabel").text("技术信息");
+			} else if(index === 3) {
+				$("#abilityLabel").text("推广信息");
+			} else if(index === 4) {
+				$("#abilityLabel").text("运营信息");
+			} else if(index === 0) {
+				$("#abilityLabel").text("创业能力");
+			}
+			
+		}
 		
 	</script>
 </html>

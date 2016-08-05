@@ -3,6 +3,7 @@ package com.chuangyejia.service;
 import java.util.List;
 
 import com.chuangyejia.bean.User;
+import com.chuangyejia.tools.UserTempShow;
 /**
  * 定义用户服务类的接口
  * @author Diamond
@@ -45,6 +46,13 @@ public interface IUserService {
 	 * @return User
 	 */
 	public User getUserInId(String userId);
+	/**
+	 * 通过userId 获取UserTempShow对象
+	 * @param userId
+	 * @return User
+	 */
+	public UserTempShow getUserTempShowInId(String userId);
+	
 	/**
 	 * 通过userEmail(邮箱) 获取User对象
 	 * @param userEmail

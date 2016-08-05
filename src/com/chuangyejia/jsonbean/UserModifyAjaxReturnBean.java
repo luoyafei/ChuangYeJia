@@ -16,6 +16,10 @@ public class UserModifyAjaxReturnBean {
 	private String nickname = "";
 	private String address = "";
 	private String profile = "";
+	private String category = "";
+	private String ability = "";
+	private String field = "";
+	private String video = "";
 	
 	/**
 	 * 往数据库中插入失败的标识
@@ -63,6 +67,30 @@ public class UserModifyAjaxReturnBean {
 	}
 	public void setSuccess(boolean success) {
 		this.success = success;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public String getAbility() {
+		return ability;
+	}
+	public void setAbility(String ability) {
+		this.ability = ability;
+	}
+	public String getField() {
+		return field;
+	}
+	public void setField(String field) {
+		this.field = field;
+	}
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
 	}
 	
 	

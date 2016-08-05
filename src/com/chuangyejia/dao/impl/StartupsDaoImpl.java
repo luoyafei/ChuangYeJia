@@ -1,8 +1,10 @@
 package com.chuangyejia.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import com.chuangyejia.bean.Startups;
@@ -68,10 +70,26 @@ System.out.println("dao层中，在StartupsDaoImpl类，更新公司时，进行
 		return 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Startups> getStartups(Integer start, Integer length) {
+	public List<StartupsTempShow> getStartupTempShows(Integer start, Integer length, String sort) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		List<StartupsTempShow> stsList = new ArrayList<StartupsTempShow>();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from Startups s order by :sort desc").setString("sort", "s."+sort).setMaxResults(4).setFirstResult(length);
+			List<Startups> startupsList = (List<Startups>)query.list();
+			for(int i = 0; i < startupsList.size(); i++)
+				stsList.add(startupsList.get(i).toStartupsTempShow());
+
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+System.out.println("dao层中，在StartupsDdaoImpl类，通过start，length，cort来获取Startups对象集合时出错！");
+			e.printStackTrace();
+		}
+
+		return stsList;
 	}
 
 	@Override
@@ -98,7 +116,7 @@ System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获�
 	
 	
 	@Override
-	public StartupsTempShow getStaratupsInId(String startupsId) {
+	public StartupsTempShow getStartupsTempShowInId(String startupsId) {
 		// TODO Auto-generated method stub
 		StartupsTempShow sts = null;
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();

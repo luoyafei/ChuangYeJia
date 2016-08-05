@@ -15,8 +15,21 @@ create table user (
     userRealPhoto varchar(255),
     userTel varchar(20) unique,
     userWeChat varchar(20) unique,
-    isVerify varchar(1) default '0'
+    isVerify varchar(1) default '0',
+    copartnerCategory varchar(10),
+    startAbility text,
+    userField varchar(10),
+    introduceVideo varchar(255)
 ) ENGINE=InnoDB default charset=utf8
+
+	private String copartnerCategory = null;//合伙人类型（资金，技术，推广，运营，其他）
+	private String startAbility = null;//创业能力
+	private String userField = null;
+	//领域 (移动互联网，电子商务，文化艺术，教育体育，汽车，旅游户外，房产，营销广告，硬件，工具软件，企业服务，搜索安全，医疗健康，媒体资讯，生活消费，其他)
+	private String userDirection = null;//方向
+	//方向 	美术设计，软件开发，工业制造，化学化工，农业牧林	财务，法律，人事，推广，其他
+	private String introduceVideo = null;//介绍视频
+
 
 
 create table Startups (

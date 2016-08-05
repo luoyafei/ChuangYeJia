@@ -6,6 +6,7 @@ import com.chuangyejia.bean.User;
 import com.chuangyejia.dao.IUserDao;
 import com.chuangyejia.factory.DaoFactory;
 import com.chuangyejia.service.IUserService;
+import com.chuangyejia.tools.UserTempShow;
 
 public class UserServiceImpl implements IUserService {
 
@@ -49,6 +50,14 @@ public class UserServiceImpl implements IUserService {
 	public User getUserInId(String userId) {
 		// TODO Auto-generated method stub
 		return ud.getUserInId(userId);
+	}
+	
+	
+
+	@Override
+	public UserTempShow getUserTempShowInId(String userId) {
+		// TODO Auto-generated method stub
+		return ud.getUserTempShowInId(userId);
 	}
 
 	@Override

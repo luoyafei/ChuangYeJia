@@ -181,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<li>服务类型:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsServiceType"/></span></li>
 									<li>运营阶段:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsOperationStage"/></span></li>
 									<li>合伙人需求:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsCopartnerRequire"/></span></li>
-									<li>公司所属地:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsAddress"/></span></li>
+									<li>所属高校:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.sts.startupsAddress"/></span></li>
 								</ul>
                             </div>
                         </div>
@@ -245,7 +245,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							<div style="width: 80%;height: 100%;float: right;">
 								<div style="width: 100px;height: 100%;">
-									<a href="">
+									<a href="getUserMark?mark=<s:property value='#request.sts.startupsLeader.userId'/>">
 										<img src='<s:property value="#request.sts.startupsLeader.userPhoto"/>' alt="logo.jpg" style="width: 80px;height: 80%;margin: 0 auto;padding-right: 10px;" />
 										<button class="btn btn-sm" style="width: 70px;overflow: hidden;">
 											<s:property value="#request.sts.startupsLeader.userNickName"/>
@@ -265,10 +265,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								
 									<s:iterator value="#request.sts.copartner" var="x">
 										<div class="col-md-2">
-											<a href="">
+											<a href="getUserMark?mark=<s:property value='#x.userId' />">
 												<img data-holder-rendered="true" src="<s:property value="#x.UserPhoto" />" alt="图片加载失败" style="width: 80px; height: 80px;" class="img-circle" />
 												<button class="btn btn-sm" style="width: 70px;overflow: hidden;">
-													<s:property value="#x.UserNickName" />
+													<s:property value="#x.userNickName" />
 												</button>
 											</a>
 									    </div>

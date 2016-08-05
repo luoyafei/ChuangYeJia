@@ -38,12 +38,13 @@ public interface IStartupsService {
 	public int getAllStartupsCount();
 	
 	/**
-	 * 获取指定开始位置，指定数量的Startups
+	 * 获取指定开始位置，指定数量的，指定排序方式的StartupsTempShow集合
 	 * @param start
 	 * @param length
+	 * @param sort
 	 * @return List<Startups>
 	 */
-	public List<Startups> getStartups(Integer start, Integer length);
+	public List<StartupsTempShow> getStartupTempShows(Integer start, Integer length, String sort);
 	
 	/**
 	 * 通过Startups对象的Id获取整个对象
@@ -56,10 +57,7 @@ public interface IStartupsService {
 	 * @param startupsId
 	 * @return
 	 */
-	public StartupsTempShow getStaratupsInId(String startupsId);
-	
-	
-	
+	public StartupsTempShow getStartupsTempShowInId(String startupsId);
 	/**
 	 * 通过公司Startups对象的leaderId来获取整个对象
 	 * @param leaderId

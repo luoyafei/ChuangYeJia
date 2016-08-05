@@ -38,8 +38,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <ul class="uk-list uk-list-line">
 									<li>用户昵称:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userNickName"/></span></li>
 									<li>用户邮箱:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userEmail"/></span></li>
-									<li>所属地址:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userAddress"/></span></li>
-									<li>用户简介:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userIntroduce"/></span></li>
+									<li>所属高校:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userAddress"/></span></li>
+									<li>能力方向:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.copartnerCategory"/></span></li>
+									<li>关注领域:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userField"/></span></li>
+									<li>用户经历:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.userIntroduce"/></span></li>
+									<li>创业能力:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#session.user.startAbility"/></span></li>
 								</ul>
                             </div>
                         </div>
@@ -51,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
             <div class="uk-width-medium-1-2 uk-container-center">
                 <div class="uk-panel uk-panel-box uk-panel-box-primary" style="text-align: center">
-					<h4>当前团队状态：</h4>
+					<h4>当前公司状态：</h4>
 				</div>
             </div>
 			<hr class="featurette-divider">
