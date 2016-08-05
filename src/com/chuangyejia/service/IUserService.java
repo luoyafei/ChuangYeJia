@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.chuangyejia.bean.User;
 import com.chuangyejia.tools.UserTempShow;
+import com.chuangyejia.tools.UserTempShowOnlyUser;
 /**
  * 定义用户服务类的接口
  * @author Diamond
@@ -40,6 +41,34 @@ public interface IUserService {
 	 * @return List<User>
 	 */
 	public List<User> getUsers(Integer start, Integer length);
+	/**
+	 * 在指定位置，获取指定数量,根据合伙人类型区分 ，根据sort排序的用户集合
+	 * @param start
+	 * @param length
+	 * @param copartnerCategory
+	 * @return List<User>
+	 */
+	public List<User> getUsers(Integer start, Integer length, String copartnerCategory, String sort);
+	
+	/**
+	 * 在指定位置，获取指定数量,根据合伙人类型区分 ，根据sort排序的用户集合
+	 * @param start
+	 * @param length
+	 * @param copartnerCategory
+	 * @return List<UserTempShow>
+	 */
+	public List<UserTempShow> getUserTempShows(Integer start, Integer length, String copartnerCategory, String sort);
+	
+	/**
+	 * 在指定位置，获取指定数量,根据合伙人类型区分 ，根据sort排序的用户集合
+	 * @param start
+	 * @param length
+	 * @param copartnerCategory
+	 * @return List<UserTempShowOnlyUser>
+	 */
+	public List<UserTempShowOnlyUser> getUserTempShowOnlyUser(Integer start, Integer length, String copartnerCategory, String sort);
+	
+	
 	/**
 	 * 通过userId 获取User对象
 	 * @param userId

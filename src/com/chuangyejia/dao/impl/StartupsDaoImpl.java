@@ -78,7 +78,7 @@ System.out.println("dao层中，在StartupsDaoImpl类，更新公司时，进行
 		List<StartupsTempShow> stsList = new ArrayList<StartupsTempShow>();
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from Startups s order by :sort desc").setString("sort", "s."+sort).setMaxResults(4).setFirstResult(length);
+			Query query = session.createQuery("from Startups s order by :sort desc").setString("sort", "s."+sort).setMaxResults(length).setFirstResult(start);
 			List<Startups> startupsList = (List<Startups>)query.list();
 			for(int i = 0; i < startupsList.size(); i++)
 				stsList.add(startupsList.get(i).toStartupsTempShow());

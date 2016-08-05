@@ -1,12 +1,15 @@
 package com.chuangyejia.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.chuangyejia.bean.User;
 import com.chuangyejia.dao.IUserDao;
 import com.chuangyejia.factory.DaoFactory;
+import com.chuangyejia.factory.HibernateSessionFactory;
 import com.chuangyejia.service.IUserService;
 import com.chuangyejia.tools.UserTempShow;
+import com.chuangyejia.tools.UserTempShowOnlyUser;
 
 public class UserServiceImpl implements IUserService {
 
@@ -45,7 +48,45 @@ public class UserServiceImpl implements IUserService {
 		// TODO Auto-generated method stub
 		return ud.getUsers(start, length);
 	}
+	
+	@Override
+	public List<User> getUsers(Integer start, Integer length, String copartnerCategory, String sort) {
+		// TODO Auto-generated method stub
+		return ud.getUsers(start, length, copartnerCategory, sort);
+	}
 
+	@Override
+	public List<UserTempShow> getUserTempShows(Integer start, Integer length, String copartnerCategory, String sort) {
+		// TODO Auto-generated method stub
+		List<User> users = getUsers(start, length, copartnerCategory, sort);
+		List<UserTempShow> uts = new ArrayList<UserTempShow>();
+		for(int i = 0; i < users.size(); i++) {
+			uts.add(users.get(i).toUserTempShow());
+		}
+		/**
+		 * 当进行转换之后，再将该session关闭
+		 */
+		HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
+		return uts;
+	}
+
+	@Override
+	public List<UserTempShowOnlyUser> getUserTempShowOnlyUser(Integer start, Integer length, String copartnerCategory, String sort) {
+		// TODO Auto-generated method stub
+		List<User> users = getUsers(start, length, copartnerCategory, sort);
+		List<UserTempShowOnlyUser> utsou = new ArrayList<UserTempShowOnlyUser>();
+		for(int i = 0; i < users.size(); i++) {
+			utsou.add(users.get(i).toUserTempShowOnlyUser());
+		}
+		/**
+		 * 当进行转换之后，再将该session关闭
+		 */
+		HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
+		return utsou;
+	}
+
+	
+	
 	@Override
 	public User getUserInId(String userId) {
 		// TODO Auto-generated method stub

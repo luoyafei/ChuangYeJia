@@ -18,6 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.chuangyejia.tools.StartupsTempShow;
 import com.chuangyejia.tools.UserTempShow;
+import com.chuangyejia.tools.UserTempShowOnlyUser;
 
 @Entity
 public class User {
@@ -368,6 +369,38 @@ public class User {
 		uts.setAllJoinStartups(allJoinStartupsTemp);
 		
 		return uts;
+		
+	}
+	
+	
+	/**
+	 * 提供了一个UserTempShowOnlyUser对象，将给被人展示的信息装入，不要将整个User对象拿出，具有安全信息！
+	 * 此处只提供User字段的！不包含Startups的内容
+	 * @return
+	 */
+	public UserTempShowOnlyUser toUserTempShowOnlyUser() {
+		
+		UserTempShowOnlyUser utsou = new UserTempShowOnlyUser();
+		
+		utsou.setUserId(userId);
+		utsou.setUserNickName(userNickName);
+		utsou.setUserEmail(userEmail);
+		utsou.setUserIntroduce(userIntroduce);
+		utsou.setUserGender(userGender);
+		utsou.setUserAddress(userAddress);
+		utsou.setUserPhoto(userPhoto);
+		utsou.setUserWeChat(userWeChat);
+		utsou.setUserTel(userTel);
+		utsou.setUserCreateDate(userCreateDate);
+		utsou.setIsVerify(isVerify);
+		
+		utsou.setCopartnerCategory(copartnerCategory);
+		utsou.setStartAbility(startAbility);
+		utsou.setUserField(userField);
+		utsou.setIntroduceVideo(introduceVideo);
+		
+		
+		return utsou;
 		
 	}
 	

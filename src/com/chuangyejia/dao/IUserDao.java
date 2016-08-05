@@ -43,6 +43,14 @@ public interface IUserDao {
 	 */
 	public List<User> getUsers(Integer start, Integer length);
 	/**
+	 * 在指定位置，获取指定数量,根据合伙人类型区分 ，根据sort排序的用户集合
+	 * @param start
+	 * @param length
+	 * @param copartnerCategory
+	 * @return List<User>
+	 */
+	public List<User> getUsers(Integer start, Integer length, String copartnerCategory, String sort);
+	/**
 	 * 通过userId 获取User对象
 	 * @param userId
 	 * @return User

@@ -33,8 +33,10 @@ public class SupportFourStartupsAction extends ActionSupport {
 
 	public void getStartups() {
 		
-		if(sort == null) 
-			sort = "startupsId";
+		/**
+		 * 暂时前台尚未提供该功能，先直接赋值，
+		 */
+		sort = "startupsCreateDate";
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");

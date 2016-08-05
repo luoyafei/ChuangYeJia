@@ -1,5 +1,6 @@
 package com.chuangyejia.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -71,6 +72,37 @@ System.out.println("Hibernate往数据库中更新User数据时出现异常！")
 	public List<User> getUsers(Integer start, Integer length) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getUsers(Integer start, Integer length, String copartnerCategory, String sort) {
+		// TODO Auto-generated method stub
+		List<User> users = new ArrayList<User>();
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+System.out.println("daoimp");
+		try {
+			session.beginTransaction();
+			if(copartnerCategory.equals("null")) {
+				String ejbql = "from User u order by :sort desc";
+				Query query = session.createQuery(ejbql).setString("sort", sort).setFirstResult(start).setMaxResults(length);
+				users = (ArrayList<User>)query.list();
+			} else {
+				String ejbql = "from User u where u.copartnerCategory = :copartnerCategory order by :sort desc";
+				Query query = session.createQuery(ejbql).setString("copartnerCategory", copartnerCategory).setString("sort", sort).setFirstResult(start).setMaxResults(length);
+				users = (ArrayList<User>)query.list();
+			}
+			
+			/**
+			 * 此处不进行关闭，交由调用它的service层关闭，这样就不会处理懒加载错误！
+			 * session.getTransaction().commit();
+			 */
+		} catch(HibernateException e) {
+System.out.println("在dao层，获取根据start, length, copartnweCategory获取用户集时出错！");
+			e.printStackTrace();
+		}
+		
+		return users;
 	}
 
 	@Override
