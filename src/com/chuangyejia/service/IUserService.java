@@ -30,10 +30,11 @@ public interface IUserService {
 	 */
 	public boolean updateUser(User user);
 	/**
-	 * 获取用户的所有数量
+	 * 获取用户的所有数量，根据合伙人需求区分
+	 * @param copartnerCategory (如果为"null"这里是字符串，则是获取所有用户的数量)
 	 * @return int
 	 */
-	public int getAllUsersCount();
+	public int getAllUsersCount(String copartnerCategory);
 	/**
 	 * 在指定位置，获取指定数量的用户
 	 * @param start

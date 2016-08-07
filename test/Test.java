@@ -261,13 +261,15 @@ System.out.println(users.size());
 	public void testSaveOneUser() {
 		
 		IUserService ius = ServiceFactory.createUserService();
-		User user = new User();
-		
-		user.setUserNickName("罗亚飞");
-		user.setUserEmail("123@qq.com");
-		user.setUserPassword("luoyafei");
-		
-		ius.saveUser(user);
+		for(int i = 700; i < 800; i++) {
+			User user = new User();
+			
+			user.setUserNickName("推广luo" + i);
+			user.setUserEmail(i + "1414124@qq.com");
+			user.setUserPassword("luoyafei" + i);
+			user.setCopartnerCategory("推广");
+			ius.saveUser(user);
+		}
 		
 	}
 	

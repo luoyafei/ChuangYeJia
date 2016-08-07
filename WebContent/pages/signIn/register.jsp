@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- Bootstrap core CSS -->
 		<link href="<%=path%>/assets/bootstrap-3.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="<%=path%>/assets/bootstrap-3.3.5/docs/assets/js/ie-emulation-modes-warning.js"></script>
-		<script charset="utf-8" src="<%=path%>/assets/ke/kindeditor.js"></script>
 		<link href="<%=path%>/assets/bootstrap-3.3.5/docs/examples/carousel/carousel.css" rel="stylesheet">
 
 		<!-- Bootstrap core JavaScript
@@ -30,6 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="<%=path%>/assets/jQuery/2.x/jquery-2.1.4.min.js"></script>
 		<script src="<%=path%>/assets/bootstrap-3.3.5/dist/js/bootstrap.min.js"></script>
 		<script src="<%=path%>/assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+		
+		<script src="<%=path%>/assets/uikit/uikit.js"></script>
+		<link href="<%=path%>/assets/uikit/uikit.css" rel="stylesheet"/>
 		
 		<script src="<%=path%>/assets/manualSource/js/register.js"></script>
 		<style>

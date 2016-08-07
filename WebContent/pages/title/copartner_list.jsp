@@ -4,6 +4,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setAttribute("flag", "partner");
 %>
 
 
@@ -36,10 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link href="<%=path%>/assets/uikit/uikit.css" rel="stylesheet"/>
 		<link href="<%=path%>/assets/uikit/tooltip.css" rel="stylesheet"/>
 		<script src="<%=path%>/assets/uikit/tooltip.js"></script>
-		<link href="<%=path%>/assets/uikit/slideshow.css" rel="stylesheet"/>
-		<script src="<%=path%>/assets/uikit/uikit.js"></script>
-		<script src="<%=path%>/assets/uikit/slideshow.js"></script>
-
+		
 		<style>
 			body {
 				font-family: "微软雅黑";
@@ -221,167 +219,270 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<div class="categoryTab">
 			    <ul id="copartnerCategory" class="nav nav-tabs" role="tablist">
-			      <li role="presentation" class="active">
+			      <li role="presentation" class="active" onclick="changeCategory(5)">
 			      		<a href="#time" role="tab" data-toggle="tab" id="time-tab" style="color: #398BE5;" aria-controls="home" aria-expanded="true">综合</a>
 			      </li>
-			      <li class="" role="presentation">
+			      <li class="" role="presentation" onclick="changeCategory(1)">
 			      		<a href="#fund" role="tab" data-toggle="tab" id="fund-tab" style="color: #398BE5;" aria-controls="fund" aria-expanded="true">资金</a>
 			      </li>
-			      <li class="" role="presentation">
+			      <li class="" role="presentation" onclick="changeCategory(2)">
 			      		<a href="#technology" role="tab" data-toggle="tab" id="technology-tab" style="color: #398BE5;" aria-controls="technology" aria-expanded="true">技术</a>
 			      </li>
-			      <li class="" role="presentation">
+			      <li class="" role="presentation" onclick="changeCategory(3)">
 			      		<a href="#popularize" role="tab" data-toggle="tab" id="popularize-tab" style="color: #398BE5;" aria-controls=popularize aria-expanded="true">推广</a>
 			      </li>
-			      <li class="" role="presentation">
+			      <li class="" role="presentation" onclick="changeCategory(4)">
 			      		<a href="#operation" role="tab" data-toggle="tab" id="operation-tab" style="color: #398BE5;" aria-controls="operation" aria-expanded="true">运营</a>
 			      </li>
-			      <li class="" role="presentation">
+			      <li class="" role="presentation" onclick="changeCategory(0)">
 			      		<a href="#other" role="tab" data-toggle="tab" id="other-tab" style="color: #398BE5;" aria-controls="other" aria-expanded="true">其他</a>
 			      </li>
-			     
 			    </ul>
+			    
 			    <div id="myTabContent" class="tab-content" style="background-color: #FFFFFF">
 			      <div role="tabpanel" class="tab-pane fade active in" id="time" aria-labelledby="time-tab">
 
-			<div class="uk-margin">
-				<div class="uk-grid">
-				
-				    <div class="uk-width-medium-1-5 flagToClone">
-						<div class="uk-thumbnail">
-	                   		<figure class="uk-overlay uk-overlay-hover">
-	                           <img src="" style="height: 194.15px;width:194.15px;" class="uk-overlay-spin userCover img-circle" alt="正在玩命加载中请稍后...">
-	                           		<figcaption class="uk-overlay-panel uk-overlay-background  uk-overlay-bottom uk-overlay-slide-bottom">
-	                             		<span class="userIntroduce"></span>
-	                             	</figcaption> 
-	                         </figure>
-	                   		<div class="uk-thumbnail-caption">
-	                   			<ul class="uk-list uk-list-line">
-									<li class="category"></li>
-									<li>
-										<span class="glyphicon glyphicon-user" aria-hidden="true">
-											<a class="nickname" href="" style="color: #1d8acb;">
-											</a>
-										</span>
-									</li>
-								</ul>
-		                   			
-	                   		</div>
-	                   	</div>
+						<div class="uk-margin">
+							<div class="uk-grid" id="gridAll">
+							    <div class="uk-width-medium-1-5 flagToCloneAll">
+									<div class="uk-thumbnail">
+				                   		<figure class="uk-overlay uk-overlay-hover">
+				                           <img src="" style="height: 194.15px;width:194.15px;" class="uk-overlay-spin userCoverAll img-circle" alt="正在玩命加载中请稍后...">
+				                           		<figcaption class="uk-overlay-panel uk-overlay-background  uk-overlay-bottom uk-overlay-slide-bottom">
+				                             		<span class="userIntroduceAll"></span>
+				                             	</figcaption> 
+				                         </figure>
+				                   		<div class="uk-thumbnail-caption">
+				                   			<ul class="uk-list uk-list-line">
+												<li class="categoryAll"></li>
+												<li>
+													<span class="glyphicon glyphicon-user" aria-hidden="true">
+														<a class="nicknameAll" href="" style="color: #1d8acb;">
+														</a>
+													</span>
+												</li>
+											</ul>
+				                   		</div>
+				                   	</div>
+								</div>
+							</div>
+						</div>  
+						<nav id="paginationAll" class="text-center">
+					      <ul class="pagination" id="pagId">
+					        <li class="pagination_All active"><span>1</span></li>
+					        <li class="pagination_All"><span>2</span></li>
+                            <li class="pagination_All"><span>3</span></li>
+                            <li class="pagination_All"><span>4</span></li>
+                            <li class="pagination_All"><span>5</span></li>
+				            <li class="pagination_All"><span>...</span></li>
+		            		<li class="pagination_All"><span>7</span></li>
+					     </ul>
+					   </nav>
 					</div>
-	
-					
-					
-					
-				</div>
-			</div>
-
-
-
-			      </div>
-			      <div role="tabpanel" class="tab-pane fade" id="fund" aria-labelledby="fund-tab">
-			        1
-			      </div>
-			      <div role="tabpanel" class="tab-pane fade" id="technology" aria-labelledby="technology-tab">
-			        2
-			      </div>
-			      <div role="tabpanel" class="tab-pane fade" id="popularize" aria-labelledby="popularize-tab">
-			        3
-			      </div>
-			      <div role="tabpanel" class="tab-pane fade" id="operation" aria-labelledby="operation-tab">
-			        4
-			      </div>
-			      <div role="tabpanel" class="tab-pane fade" id="other" aria-labelledby="other-tab">
-			        5
-			      </div>
-			     
 			    </div>
 			  </div>
-		</div>
+			</div>
 		
 		
 	<jsp:include page="../module/bottom.jsp" flush="true" />
 	</body>
 	<script>
 	$('#copartnerCotegory a').click(function(e) {
-		
 		e.preventDefault();
 		$(this).tab('show');
-		
 	});
-	/* .userIntroduce .category .nickname .userCover
-	.flagToClone
-	.uk-grid */
+	
+	var category = 5;
+	function changeCategory(type) {
+		category = type;
+		$(".pagination_All").each(function(index) {
+			if(index == 0)
+				$(".pagination_All").eq(index).attr("class", "pagination_All active");
+			else
+				$(".pagination_All").eq(index).attr("class", "pagination_All");
+		})
+		getAllItem(type + ",1", 10);
+	}
 		$(document).ready(function() {
 			$("td").attr("style", "border-top: solid #333333 1px;");
 			
-			
-			var introduce = $(".userIntroduce");
-			var category = $(".category");
-			var nickname = $(".nickname");
-			var cover = $(".userCover");
+			getAllItem("5,1", 10);
 			
 			
+			$(".pagination_All").bind("click", function(a) {
+				if($(this).text() != "...") {
+					$(".pagination_All").each(function(index) {
+						$(".pagination_All").eq(index).attr("class", "pagination_All");
+					})
+
+					getAllItem(category + "," + $(this).text(), 10);
+				}
+			});
+			 
+		});
+	
+	
+		function getAllItem(start, length) {
 			
-			$.post('provideUsers!getUsers.action', {}, function(data, textStatus) {
+			$.post('provideUsers!getUsers.action', {
+				start : start,
+				length : length
+			}, function(data, textStatus) {
 				if(textStatus == "success") {
-					//alert(JSON.stringify(data));
 					
-					var all = data.all;
+					$(".cloneItemAll").remove();
 					
+					var startArray = start.split(",");
+					var categoryType = startArray[0];
+					
+					var startCount = startArray[1];
+			
+					var all;
+					var allCount;
+					
+					if(categoryType == 5) {
+						all = data.all;
+						allCount = data.allCount;
+					} else if(categoryType == 1) {
+						all = data.fund;
+						allCount = data.fundCount;
+					} else if(categoryType == 2) {
+						all = data.technology;
+						allCount = data.technologyCount;
+					} else if(categoryType == 3) {
+						all = data.popularize;
+						allCount = data.popularizeCount;
+					} else if(categoryType == 4) {
+						all = data.operation;
+						allCount = data.operationCount;
+					} else if(categoryType == 0) {
+						all = data.other;
+						allCount = data.otherCount;
+					}
+					
+					
+					allPage = parseInt(allCount/length) + (allCount%(length*1)==0?0:1);
+
+					var pa1 = $(".pagination_All").eq(0);
+					var pa2 = $(".pagination_All").eq(1);
+					var pa3 = $(".pagination_All").eq(2);
+					var pa4 = $(".pagination_All").eq(3);
+					var pa5 = $(".pagination_All").eq(4);
+					var paSpan = $(".pagination_All").eq(5);
+					var pa999 = $(".pagination_All").eq(6);
+
+					if(allPage > 7 && startCount <= (allPage*1-5)) {
+						if(startCount==1) {
+							pa1.html("<span>" + (startCount*1) + "</span>");
+							pa2.html("<span>" + (startCount*1+1) + "</span>");
+							pa3.html("<span>" + (startCount*1+2) + "</span>");
+							pa4.html("<span>" + (startCount*1+3) + "</span>");
+							pa5.html("<span>" + (startCount*1+4) + "</span>");
+							paSpan.html("<span>...</span>");
+							pa999.html("<span>" + allPage*1 + "</span>");
+						} else if(startCount == 2) {
+							pa1.html("<span>" + (startCount*1-1) + "</span>");
+							pa2.html("<span>" + (startCount*1) + "</span>");
+							pa3.html("<span>" + (startCount*1+1) + "</span>");
+							pa4.html("<span>" + (startCount*1+2) + "</span>");
+							pa5.html("<span>" + (startCount*1+3) + "</span>");
+							paSpan.html("<span>...</span>");
+							pa999.html("<span>" + allPage*1 + "</span>");
+						} else {
+							pa1.html("<span>" + (startCount*1-2) + "</span>");
+							pa2.html("<span>" + (startCount*1-1) + "</span>");
+							pa3.html("<span>" + (startCount*1) + "</span>");
+							pa4.html("<span>" + (startCount*1+1) + "</span>");
+							pa5.html("<span>" + (startCount*1+2) + "</span>");
+							paSpan.html("<span>...</span>");
+							pa999.html("<span>" + allPage*1 + "</span>");
+						}
+						
+						
+					} else if(allPage > 7 && startCount > (allPage*1-5)) {
+						
+						pa1.html("<span>" + (allPage*1-6) + "</span>");
+						pa2.html("<span>" + (allPage*1-5) + "</span>");
+						pa3.html("<span>" + (allPage*1-4) + "</span>");
+						pa4.html("<span>" + (allPage*1-3) + "</span>");
+						pa5.html("<span>" + (allPage*1-2) + "</span>");
+						paSpan.html("<span>"+ (allPage*1-1) +"</span>");
+						pa999.html("<span>" + (allPage*1) + "</span>");
+					} else if(allPage == 7) {
+						pa1.html("<span>" + 1 + "</span>");
+						pa2.html("<span>" + 2 + "</span>");
+						pa3.html("<span>" + 3 + "</span>");
+						pa4.html("<span>" + 4 + "</span>");
+						pa5.html("<span>" + 5 + "</span>");
+						paSpan.html("<span>"+ 6 +"</span>");
+						pa999.html("<span>" + 7 + "</span>");
+					} else {
+						/**
+						需修改！
+						*/
+						if(startCount == 1) {
+							$("#pagId").empty();
+							for(var i = 1; i <= allPage; i++) {
+								var li = $('<li></li>');
+								if(i == startCount) {
+						   			var li = $('<li></li>');
+						   			var span = $('<span></span>');
+						   			li.attr("class", "pagination_All active");
+						   			span.text(i);
+						   			span.appendTo(li);
+						   			li.appendTo($("#pagId"));
+						   		} else {
+						   			var li = $('<li></li>');
+						   			var span = $('<span></span>');
+						   			li.attr("class", "pagination_All");
+						   			span.text(i);
+						   			span.appendTo(li);
+						   			li.appendTo($("#pagId"));
+						   		}
+							}
+						} 
+						
+						
+					}
+					
+					$(".pagination_All").each(function(index) {
+						if($(".pagination_All").eq(index).text() == startCount) {
+							$(this).attr("class", "pagination_All active");
+						}
+					});
+					
+				
 					
 					for(var i = 0; i < all.length-1; i++) {
-						$(".uk-grid").append($(".flagToClone").clone().attr("class", "uk-width-medium-1-5"));
-						
-						/* cover.eq(i + 1).attr("src", data.all[i + 1].userPhoto);
-						introduce.eq(i + 1).text("用户经历：" + data.all[i + 1].userIntroduce);
-						category.eq(i + 1).text(data.all[i + 1].copartnerCategory);
-						nickname.eq(i + 1).text(data.all[i + 1].userNickName);
-						nickname.eq(i + 1).attr("href", "/ChuangYeJia/getUserMark.action?mark="+data.all[i + 1].userId); */
+						$("#gridAll").append($(".flagToCloneAll").clone().attr("class", "uk-width-medium-1-5 cloneItemAll"));
 					}
-					$(".userCover").each(function(index){
-						$(this).attr("src", data.all[index].userPhoto);
+					$(".userCoverAll").each(function(index){
+						$(this).attr("src", all[index].userPhoto);
 					});
-					$(".userIntroduce").each(function(index){
+					$(".userIntroduceAll").each(function(index){
 						var introduce = "暂无";
-						if(data.all[index].userIntroduce!=undefined)
-							introduce = data.all[index].userIntroduce;
-						
+						if(all[index].userIntroduce!=undefined)
+							introduce = all[index].userIntroduce;
 						$(this).text("用户经历： " + introduce);
 					});
-					$(".nickname").each(function(index){
-						$(this).text(data.all[index].userNickName);
+					$(".nicknameAll").each(function(index){
+						$(this).text(all[index].userNickName);
 					});
-					$(".nickname").each(function(index){
-						$(this).attr("href", "/ChuangYeJia/getUserMark.action?mark="+data.all[i].userId);
+					$(".nicknameAll").each(function(index){
+						$(this).attr("href", "/ChuangYeJia/getUserMark.action?mark="+all[index].userId);
 					});
-					$(".category").each(function(index){
-						$(this).text(data.all[index].copartnerCategory);
+					$(".categoryAll").each(function(index){
+						$(this).text(all[index].copartnerCategory);
 					});
-					
-					
-					/* 
-					cover.eq(0).attr("src", data.all[0].userPhoto);
-					introduce.eq(0).text("用户经历：" + data.all[0].userIntroduce);
-					category.eq(0).text(data.all[0].copartnerCategory);
-					nickname.eq(0).text(data.all[0].userNickName);
-					nickname.eq(0).attr("href", "/ChuangYeJia/getUserMark.action?mark="+data.all[0].userId);
-					
-					cover.eq(1).attr("src", data.all[1].userPhoto);
-					introduce.eq(1).text("用户经历：" + data.all[1].userIntroduce);
-					category.eq(1).text(data.all[1].copartnerCategory);
-					nickname.eq(1).text(data.all[1].userNickName);
-					nickname.eq(1).attr("href", "/ChuangYeJia/getUserMark.action?mark="+data.all[1].userId); */
-					
-					
-					
-					
 					
 				} else {
 					alert("网络出错！请刷新重试！");
 				}
 			}, 'json');
-		});
+			
+		}
+		
 	</script>
-
+	
+		
 </html>

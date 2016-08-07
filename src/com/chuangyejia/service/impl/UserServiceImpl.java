@@ -38,9 +38,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public int getAllUsersCount() {
+	public int getAllUsersCount(String copartnerCategory) {
 		// TODO Auto-generated method stub
-		return ud.getAllUsersCount();
+		return ud.getAllUsersCount(copartnerCategory);
 	}
 
 	@Override
@@ -52,13 +52,19 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<User> getUsers(Integer start, Integer length, String copartnerCategory, String sort) {
 		// TODO Auto-generated method stub
-		return ud.getUsers(start, length, copartnerCategory, sort);
+		
+		List<User> users = ud.getUsers(start, length, copartnerCategory, sort);
+		/**
+		 * 当进行转换之后，再将该session关闭
+		 */
+		HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
+		return users;
 	}
 
 	@Override
 	public List<UserTempShow> getUserTempShows(Integer start, Integer length, String copartnerCategory, String sort) {
 		// TODO Auto-generated method stub
-		List<User> users = getUsers(start, length, copartnerCategory, sort);
+		List<User> users = ud.getUsers(start, length, copartnerCategory, sort);
 		List<UserTempShow> uts = new ArrayList<UserTempShow>();
 		for(int i = 0; i < users.size(); i++) {
 			uts.add(users.get(i).toUserTempShow());
@@ -73,7 +79,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<UserTempShowOnlyUser> getUserTempShowOnlyUser(Integer start, Integer length, String copartnerCategory, String sort) {
 		// TODO Auto-generated method stub
-		List<User> users = getUsers(start, length, copartnerCategory, sort);
+System.out.println(start);
+		List<User> users = ud.getUsers(start, length, copartnerCategory, sort);
 		List<UserTempShowOnlyUser> utsou = new ArrayList<UserTempShowOnlyUser>();
 		for(int i = 0; i < users.size(); i++) {
 			utsou.add(users.get(i).toUserTempShowOnlyUser());
@@ -90,7 +97,13 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserInId(String userId) {
 		// TODO Auto-generated method stub
-		return ud.getUserInId(userId);
+		
+		User user = ud.getUserInId(userId);
+		/**
+		 * 当进行转换之后，再将该session关闭
+		 */
+		HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
+		return user;
 	}
 	
 	
@@ -98,7 +111,13 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public UserTempShow getUserTempShowInId(String userId) {
 		// TODO Auto-generated method stub
-		return ud.getUserTempShowInId(userId);
+		User user = ud.getUserInId(userId);
+		UserTempShow uts = user.toUserTempShow();
+		/**
+		 * 当进行转换之后，再将该session关闭
+		 */
+		HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
+		return uts;
 	}
 
 	@Override

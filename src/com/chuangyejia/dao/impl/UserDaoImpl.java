@@ -10,7 +10,6 @@ import org.hibernate.Session;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.dao.IUserDao;
 import com.chuangyejia.factory.HibernateSessionFactory;
-import com.chuangyejia.tools.UserTempShow;
 
 public class UserDaoImpl implements IUserDao {
 
@@ -63,9 +62,27 @@ System.out.println("Hibernate往数据库中更新User数据时出现异常！")
 	}
 
 	@Override
-	public int getAllUsersCount() {
+	public int getAllUsersCount(String copartnerCategory) {
 		// TODO Auto-generated method stub
-		return 0;
+		Long count = new Long(0);
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			
+			if(copartnerCategory.equals("null")) {
+				String ejbql = "select count(*) from User u";
+				count = (Long)session.createQuery(ejbql).uniqueResult();
+			} else {
+				String ejbql = "select count(*) from User u where u.copartnerCategory = :copartnerCategory";
+				count = (Long)session.createQuery(ejbql).setString("copartnerCategory", copartnerCategory).uniqueResult();
+			}
+			
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+System.out.println("在dao层，UserDaoImpl中，根据copartnerCategory获取用户个数出错");
+			e.printStackTrace();
+		}
+		return count.intValue();
 	}
 
 	@Override
@@ -78,18 +95,19 @@ System.out.println("Hibernate往数据库中更新User数据时出现异常！")
 	@Override
 	public List<User> getUsers(Integer start, Integer length, String copartnerCategory, String sort) {
 		// TODO Auto-generated method stub
+
 		List<User> users = new ArrayList<User>();
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
-System.out.println("daoimp");
+
 		try {
 			session.beginTransaction();
 			if(copartnerCategory.equals("null")) {
 				String ejbql = "from User u order by :sort desc";
-				Query query = session.createQuery(ejbql).setString("sort", sort).setFirstResult(start).setMaxResults(length);
+				Query query = session.createQuery(ejbql).setString("sort", sort).setFirstResult(start*length).setMaxResults(length);
 				users = (ArrayList<User>)query.list();
 			} else {
 				String ejbql = "from User u where u.copartnerCategory = :copartnerCategory order by :sort desc";
-				Query query = session.createQuery(ejbql).setString("copartnerCategory", copartnerCategory).setString("sort", sort).setFirstResult(start).setMaxResults(length);
+				Query query = session.createQuery(ejbql).setString("copartnerCategory", copartnerCategory).setString("sort", sort).setFirstResult(start*length).setMaxResults(length);
 				users = (ArrayList<User>)query.list();
 			}
 			
@@ -115,7 +133,10 @@ System.out.println("在dao层，获取根据start, length, copartnweCategory获�
 			
 			user = (User)session.get(User.class, userId);
 			
-			session.getTransaction().commit();
+			/**
+			 * 此处不关闭！交由service层关闭！
+			 * session.getTransaction().commit();
+			 */
 			
 		} catch(HibernateException e) {
 System.out.println("根据UserId获取User对象时，出错！");
@@ -194,25 +215,5 @@ System.out.println("验证用户的邮箱和密码时出错！");
 			return null;
 	}
 
-	@Override
-	public UserTempShow getUserTempShowInId(String userId) {
-		// TODO Auto-generated method stub
-		UserTempShow uts = null;
-		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			
-			User user = (User)session.get(User.class, userId);
-			
-			uts = user.toUserTempShow();
-			
-			session.getTransaction().commit();
-			
-		} catch(HibernateException e) {
-System.out.println("根据UserId获取User对象时，出错！");
-			e.printStackTrace();
-		}
-		return uts;
-	}
-
+	
 }

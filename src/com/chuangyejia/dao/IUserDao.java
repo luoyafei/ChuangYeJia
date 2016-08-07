@@ -3,7 +3,6 @@ package com.chuangyejia.dao;
 import java.util.List;
 
 import com.chuangyejia.bean.User;
-import com.chuangyejia.tools.UserTempShow;
 
 /**
  * 定义数据访问对象dao的接口
@@ -31,10 +30,11 @@ public interface IUserDao {
 	 */
 	public boolean updateUser(User user);
 	/**
-	 * 获取用户的所有数量
+	 * 获取用户的所有数量,根据合伙人的类型
+	 * @param copartnerCategory //如果为"null"这里是字符串null，则为获取所有用户的数量
 	 * @return int
 	 */
-	public int getAllUsersCount();
+	public int getAllUsersCount(String copartnerCategory);
 	/**
 	 * 在指定位置，获取指定数量的用户
 	 * @param start
@@ -56,12 +56,7 @@ public interface IUserDao {
 	 * @return User
 	 */
 	public User getUserInId(String userId);
-	/**
-	 * 通过userId 获取UserTempShow对象
-	 * @param userId
-	 * @return User
-	 */
-	public UserTempShow getUserTempShowInId(String userId);
+	
 	/**
 	 * 通过userEmail(邮箱) 获取User对象
 	 * @param userEmail
