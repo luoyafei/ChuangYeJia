@@ -67,7 +67,20 @@ System.out.println("dao层中，在StartupsDaoImpl类，更新公司时，进行
 	@Override
 	public int getAllStartupsCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		Long count = new Long(0);
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			
+			String ejbql = "select count(*) from Startups s";
+			count = (Long)session.createQuery(ejbql).uniqueResult();
+			
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+System.out.println("在dao层，StartupsDaoImpl中，获取数据库中所有公司的数量");
+			e.printStackTrace();
+		}
+		return count.intValue();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -79,7 +79,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<UserTempShowOnlyUser> getUserTempShowOnlyUser(Integer start, Integer length, String copartnerCategory, String sort) {
 		// TODO Auto-generated method stub
-System.out.println(start);
+//System.out.println(start);
 		List<User> users = ud.getUsers(start, length, copartnerCategory, sort);
 		List<UserTempShowOnlyUser> utsou = new ArrayList<UserTempShowOnlyUser>();
 		for(int i = 0; i < users.size(); i++) {
