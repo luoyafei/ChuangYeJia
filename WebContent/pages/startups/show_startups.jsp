@@ -38,7 +38,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="<%=path%>/assets/uikit/uikit.js"></script>
 		<link href="<%=path%>/assets/uikit/uikit.css" rel="stylesheet"/>
 		<link href="<%=path%>/assets/uikit/slideshow.css" rel="stylesheet"/>
-		<script src="<%=path%>/assets/uikit/uikit.js"></script>
 		<script src="<%=path%>/assets/uikit/slideshow.js"></script>
 			
 		<style>
@@ -196,9 +195,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <h3 class="panel-title project_brief">公司简介</h3>
 					  </div>
 					  <div class="panel-body">
-					    <span>
-					    	<s:property value="#request.sts.startupsBrief"/>
-					    </span>
+					  	
+					  	<div class="uk-grid">
+						    <div class="uk-width-1-2">
+						    	<div class="uk-cover iframeDiv">
+								    <iframe src='<s:property value="#request.sts.startupsVideo"/>' style="width: 100%; height: 100%;" class="iframeSrc" frameborder=0 allowfullscreen></iframe>
+								</div>
+						    </div>
+						    <div class="uk-width-1-2">
+						    简介：
+						    	<span>
+							    	<s:property value="#request.sts.startupsBrief"/>
+							    </span>
+							</div>
+						</div>
+					  
+					    
 					  </div>
 					</div>
 				</div>
@@ -209,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a class="btn btn-default" onclick="" style="border: solid #A9A9A9 2px; border-radius: 10px;">联系ta</a>
 				</div>
 				<div class="main-right" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
-					<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;" href="../team/apply_member.jsp?teamid=groupid">申请加入</a>
+					<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;" href="<%=path %>/pages/userConsole/apply/apply_join.jsp?join=<s:property value='#request.sts.startupsId'/>">申请加入</a>
 				</div>
 			</div>
 

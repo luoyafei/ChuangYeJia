@@ -12,7 +12,14 @@ public class StartupsCreateDTO {
 	private String address;
 	private String brief;
 	private String detail;
+	private String video;
 	
+	public String getVideo() {
+		return video;
+	}
+	public void setVideo(String video) {
+		this.video = video;
+	}
 	public String getName() {
 		return name;
 	}
@@ -116,6 +123,7 @@ public class StartupsCreateDTO {
 		startups.setStartupsAddress(address.trim());
 		startups.setStartupsBrief(brief.trim());
 		startups.setStartupsDetail(detail.trim());
+		startups.setStartupsVideo(video);
 		
 		return startups;
 	}

@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="<%=path%>/assets/bootstrap-3.3.5/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 		<script src="<%=path%>/assets/uikit/uikit.js"></script>
+		<script src="<%=path%>/assets/uikit/lightbox.js"></script>
 		<link href="<%=path%>/assets/uikit/uikit.css" rel="stylesheet"/>
 
 		<style>
@@ -308,7 +309,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<div style="border-bottom: dashed #A9A9A9 1px;">
 							
-							<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;padding-top:15px;">
 									<label class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">上传公司照片</label>
 									<div class="col-sm-12">
 										<input type="file" class="upload_img" style="display: inline;" name="img" accept="image/*" />
@@ -318,6 +319,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 							
 							</div>
+							
+							
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -10px;;padding-top: 15px;">
+									<label for="video" class="col-sm-2 control-label" style="font-size: 18px;width: 100%;text-align: left;font-weight: normal;">介绍视频&nbsp;&nbsp;</label>
+									<div class="col-md-8">
+										<input type="text" id="video" name="sd.video" placeholder="请点击右侧的视频说明按钮，了解如何进行这一步的操作！" class="form-control" style="background-color: #F5F5F5;" />
+									</div>
+									<div class="col-md-2">
+									
+										<div class="uk-button-group">
+		                                    <button class="uk-button" onclick="testVideo()">点击测试</button>
+		                                    <a class="uk-button" href="<%=path %>/assets/manualSource/img/videoExplain.png" data-uk-lightbox="" title="视频说明">视频说明</a>
+		                                </div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="uk-cover iframeDiv" style="display: none;">
+							    <iframe src="" class="iframeSrc" style="width: 100%; height: 100%;" frameborder=0 allowfullscreen></iframe>
+							</div>
+							
+							<script teyp="text/javascript">
+								function testVideo() {
+									if($("#video").val().trim() !== "") {
+										$(".iframeDiv").attr("style", "display: inline;");
+										var videoTemp = $("#video").val().trim().split("src=")[1];
+										var videoUrl = videoTemp.split('"')[1];
+										$(".iframeSrc").attr("src", videoUrl);
+									} else {
+										alert("请先输入地址！");
+									}
+									
+								}
+							</script>
+							
+							
 
 							<div style="margin: 50px auto;">
 								<div class="form-group" style="margin: 0 auto; text-align: center;">
