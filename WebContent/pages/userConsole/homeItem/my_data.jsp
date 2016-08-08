@@ -52,28 +52,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             </div>
             
-            <div class="uk-width-medium-1-2 uk-container-center">
-                <div class="uk-panel uk-panel-box uk-panel-box-primary" style="text-align: center">
-					<h4>当前公司状态：</h4>
+			 <div class="uk-width-medium-1-1 uk-container-center">
+                <div class="uk-panel uk-panel-box uk-panel-box-default" style="text-align: center;">
+						<div class="uk-grid">
+						    <div class="uk-width-3-10">
+								<span class="uk-h2">认证情况</span>
+								<!-- <label style="border-radius: 10px;margin-right: 20px;float: right;font-size: 24px">认证情况：</label> -->
+							</div>
+						    <div class="uk-width-7-10">
+						    <div class="uk-grid">
+			                     <div class="uk-width-1-3"><a class="uk-button" style="border: solid #398BE5 2px; border-radius: 10px;color: #398BE5;" href="">实名认证</a></div>
+			                     <div class="uk-width-1-3"><a class="uk-button" style="border: solid #398BE5 2px; border-radius: 10px;color: #398BE5;" href="">实名认证</a></div>
+			                     <div class="uk-width-1-3"><a class="uk-button" style="border: solid #398BE5 2px; border-radius: 10px;color: #398BE5;" href="">实名认证</a></div>
+			                </div>
+						</div>
+					</div>
 				</div>
             </div>
-			<hr class="featurette-divider">
-			<div class="uk-grid">
-			    <div class="uk-width-3-10">
-					<label style="border-radius: 10px;margin-right: 20px;float: right;font-size: 24px">认证情况：</label>
-				</div>
-			    <div class="uk-width-7-10">
-			    	<div class="uk-grid uk-grid-small">
-                           <div class="uk-width-1-3">
-							<a class="btn btn-default" style="border: solid #398BE5 3px; border-radius: 10px;color: #398BE5;margin-right: 20px;">实名认证</a>
-						</div>
-						<div class="uk-width-1-3">
-							<a class="btn btn-default" style="border: solid #398BE5 3px; border-radius: 10px;color: #398BE5;margin-right: 20px;">实名认证</a>
-						</div>
-						<div class="uk-width-1-3">
-							<a class="btn btn-default" style="border: solid #398BE5 3px; border-radius: 10px;color: #398BE5;margin-right: 20px;">实名认证</a>
-						</div>
-                       </div>
-				</div>
-			</div>
+            
 		</div>

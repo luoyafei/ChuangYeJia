@@ -14,7 +14,7 @@ public class StartupsServiceImpl implements IStartupsService {
 	private IStartupsDao sd = null;
 	
 	public StartupsServiceImpl() {
-		sd = DaoFactory.createServiceDao();
+		sd = DaoFactory.createStartupsDao();
 	}
 
 	@Override

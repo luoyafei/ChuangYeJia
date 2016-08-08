@@ -141,7 +141,7 @@ System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获�
 			sts = startups.toStartupsTempShow();
 			session.getTransaction().commit();
 		} catch(HibernateException e) {
-System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获取Startups对象出错！");
+System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获取StartupsTempShow对象出错！");
 			e.printStackTrace();
 		}
 		return sts;

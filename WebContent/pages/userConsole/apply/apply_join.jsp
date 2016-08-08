@@ -133,62 +133,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="content-main" style="width: 100%;height: 100%;background-color: white;overflow: hidden;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
                 <div class="content-main-top" style="height: 100%;">
                 
-                <s:debug></s:debug>
                 
                     <div style="width: 80%;height: 100%;margin: 50px auto;">
-                                <form action="" method="post" onsubmit="return checkdata()">
 
-                                    <input type="hidden" name="user_a_id" value ='1'/>
-
-                                     <div class="form-group">
-                                        <label for="name" style="text-align: right;margin-top: 6px;" class="col-md-2 control-label">合同名</label>
-                                        <div class="col-md-10">
-                                            <input type="text" maxlength="16" class="form-control" name="contract_name" id="name" onblur="chechName()" placeholder="合同名">
-                                            <div class="alert alert-danger alert-password" role="alert" style="display: none;">
-                                                	请输入合同名称
-                                            </div>
-                                            <hr />
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="content" class="col-sm-2 control-label" style="text-align: right;margin-top: 6px;">合同内容&nbsp;&nbsp;</label>
-                                        <div class="col-sm-10">
-                                            <textarea id="content" name="contract_content" style="width:100%;height:200px;"></textarea>
-                                        </div>
-                                    </div>
+						<label id="applySendError" style="text-align: center;color: #398BE5; width: 100%;"></label>
+							
+                        <div class="form-group">
+                           <label for="name" style="text-align: right;margin-top: 6px;" class="col-md-2 control-label">合同名</label>
+                           <div class="col-md-10">
+                               <input type="text" maxlength="16" class="form-control" name="contract_name" id="name" placeholder="合同名">
+                               <div class="alert alert-danger alert-name" role="alert" style="display: none;">
+                                   	请输入合同名称
+                               </div>
+                               <hr />
+                           </div>
+                       </div>
 
 
-                                    <div style="text-align: center;">
-                                        <button type="submit" class="btn btn-default" style="color: #398BE5;margin-top: 40px;">
-                                          	  发送申请
-                                        </button>
-                                    </div>
-									<input type="hidden" name="join" value='<s:property value='#parameters.join'/>' />
-                                </form>
-                                <script>
+                        <div class="form-group">
+                            <label for="content" class="col-md-2 control-label" style="text-align: right;margin-top: 6px;">合同内容&nbsp;&nbsp;</label>
+                            <div class="col-md-10">
+                                <textarea id="content" name="contract_content" style="width:100%;height:200px;"></textarea>
+                                <div class="alert alert-danger alert-content" role="alert" style="display: none;">
+                                   	请输入合同内容
+                               </div>
+                            </div>
+                        </div>
 
-	                                function chechName() {
-	                                    var name = $("#name").val().trim();
-	                                    if (name === "") {
-	                                        $(".alert-password").attr("style", "display:inline-block;");
-	                                    } else {
-	                                        $(".alert-password").attr("style", "display:none;");
-	                                    }
-	                                }
-	
-	                                function checkdata() {
-	                                    var name = $("#name").val().trim();
-	                                    var content = $("#content").val().trim();
-	                                    if (name === "" || content === "") {
-	                                        alert("请您将信息填写完整");
-	                                        return false;
-	                                    } else {
-	                                        return true;
-	                                    }
-	                                }
-                                </script>
+
+                        <div style="text-align: center;">
+                            <button class="btn btn-default" id="sendApply" style="color: #398BE5;margin-top: 40px;">
+                                 	  发送申请
+                        	</button>
+                       	</div>
                         </div>
                     </div>
                 </div>
@@ -199,6 +176,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <script>
         $(document).ready(function() {
             $("td").attr("style", "border-top: solid #333333 1px;");
+            
+            $("#sendApply").bind('click', function() {
+            	var name = $("#name").val().trim();
+                var content = $("#content").val().trim();
+               
+                if (name === "") {
+                    $(".alert-name").attr("style", "display:inline-block;");
+                } else if(content === "") {
+                	$(".alert-content").attr("style", "display:inline-block;");
+                }
+                if(name !== "" && content !== "") {
+                	$.post('applyJoin!applyJoin.action', {
+                		name : name,
+                		content : content,
+                		startups : "<s:property value='#parameters.join'/>"
+                	}, function(data, textStatus) {
+                		if(textStatus == "success") {
+                			
+                			if(data.success) {
+                				$("#applySendError").text("恭喜！您已经成功提交申请合同到该公司负责人手中！请敬候佳音！");
+                			} else {
+                				$("#applySendError").text(data.reason);
+                			}
+                		}
+                	}, 'json');
+                }
+                
+            });
         });
     </script>
 </html>

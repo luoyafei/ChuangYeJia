@@ -48,7 +48,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 
 			#navbar ul a:hover {
-				border-bottom: solid #398BE5 3px;
 				color: #398BE5;
 				background-color: transparent;
 			}
@@ -63,17 +62,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	
-    <div class="container-fluid" style="margin-top: 20px;">
+    <div class="container-fluid" style="margin-top: 0px;">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar" style="margin-top: 20px;">
           <ul class="nav nav-sidebar nav-tabs-justified" role="tablist" id="user_con_tab">
           	<!--个人资料，我的项目，我的资金，我的技术，我的运营，我的产品，我的合同，我的团队-->
-          	<li role="presentation" class="active"><a href="#my_team" role="tab" data-toggle="tab">我的团队</a></li>
-            <li role="presentation"><a href="#my_data" role="tab" data-toggle="tab">我的资料 </a></li>
-            <li role="presentation"><a href="#my_project" role="tab" data-toggle="tab">我的项目</a></li>
-            <li role="presentation"><a href="#my_money" role="tab" data-toggle="tab">我的资金</a></li>
-            <li role="presentation"><a href="#my_technology" role="tab" data-toggle="tab">我的技术</a></li>
-            <li role="presentation"><a href="#my_business" role="tab" data-toggle="tab">我的运营</a></li>
+            <li role="presentation"  class="active"><a href="#my_data" role="tab" data-toggle="tab">我的资料 </a></li>
+            <li role="presentation"><a href="#my_startups" role="tab" data-toggle="tab">我的公司</a></li>
             <li role="presentation"><a href="#my_product" role="tab" data-toggle="tab">我的产品</a></li>
             <li role="presentation"><a href="#my_contract" role="tab" data-toggle="tab">我的合同</a></li>
             <!--<li role="presentation"><a href="#my_news" role="tab" data-toggle="tab">我的消息</a></li>-->
@@ -85,18 +80,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  $(this).tab('show')
 			})
         </script>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<s:debug></s:debug>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
         	<div class="tab-content">
-        		<div role="tabpanel" class="tab-pane active" id="my_team"></div>
-			  	<div role="tabpanel" class="tab-pane" id="my_data"></div>
-			  	<div role="tabpanel" class="tab-pane" id="my_project"></div>
-			  	<div role="tabpanel" class="tab-pane" id="my_money"></div>
-			  	<div role="tabpanel" class="tab-pane" id="my_technology"></div>
-			    <div role="tabpanel" class="tab-pane" id="my_business"></div>
+			  	<div role="tabpanel" class="tab-pane active" id="my_data"></div>
+			  	<div role="tabpanel" class="tab-pane" id="my_startups"></div>
 			  	<div role="tabpanel" class="tab-pane" id="my_product"></div>
 			  	<div role="tabpanel" class="tab-pane" id="my_contract"></div>
-			  	<div role="tabpanel" class="tab-pane" id="my_news"></div>
+			  	<!-- <div role="tabpanel" class="tab-pane" id="my_news"></div> -->
 			</div>
 
         	<script>
@@ -106,13 +96,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			$("#navbar").attr("class", "navbar navbar-fixed-top navbar-inverse");
         			
         			$("#my_data").load("homeItem/my_data.jsp");//将个人资料load进来
-        			$("#my_project").load("homeItem/my_project.jsp");//将我的项目load进来
-        			$("#my_money").load("homeItem/my_money.jsp");//将我的资金load进来
-        			$("#my_technology").load("homeItem/my_technology.jsp");//将我的技术load进来
-        			$("#my_operation").load("homeItem/my_operation.jsp");//将我的运营load进来
+        			$("#my_startups").load("homeItem/my_startups.jsp");//将我的项目load进来
         			$("#my_product").load("homeItem/my_product.jsp");//将我的产品load进来
         			$("#my_contract").load("homeItem/my_contract.jsp");//将我的合同load进来
-        			$("#my_team").load("homeItem/my_team.jsp");//将我的团队load进来团队
         			/*$("#my_news").load("user_statusinfo_item/my_news.php");//将我的消息load进来团队*/
         		});
         	</script>

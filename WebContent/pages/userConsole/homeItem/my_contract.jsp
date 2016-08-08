@@ -15,7 +15,6 @@
               <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
             我创建的合同
               </a>
-              <!--<a class="btn btn-default btn-xs" href="../project/publish_project.php" style="float: right;">创建合同</a>-->
             </h4>
           </div>
           <div id="collapseOne1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne1">
@@ -33,32 +32,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                <? for ($i=0;is_array($contract_leader)&& $i <count($contract_leader); $i++) {
-                ?>
+               
                   <tr>
-                    <td><?echo $contract_leader[$i]['contract_title']?></td>
+                    <td> </td>
                     <td>我</td>
-                    <td><?echo $contract_leader[$i]['contract_create_date'];?></td>
-                    <td><?echo $contract_valid_leader[$i];?></td>
-                    <td><?echo $contract_status_leader[$i];?></td>
-                    <td>
-                      <?if ($contract_leader[$i]['is_valid'] == 1) {
-                        ?>
-                        <a href="../contract/net_contract_show.php?projectid=<?echo $contract_leader[$i]['contract_id']?>" class="btn btn-default btn-xs">查看</a>
-                        <?
-
-                      } else {?>
-                      <a href="../contract/net_contract_show.php?projectid=<?echo $contract_leader[$i]['contract_id']?>" class="btn btn-default btn-xs">编辑</a>
-                      <button class="btn btn-danger btn-xs" onclick="delete_return_contract(<?echo $contract_leader[$i]['contract_id']?>)">删除</button>
-                      <!-- <a href="../contract/create_net_contract.php?projectid=<?//echo $project_list[$i]['project_id']?>" class="btn btn-warning btn-xs">创建合同</a> -->
-                      <?
-                     }
-                      ?>
-                   </td>
-                  </tr>
-                  <?
-                  }
-                  ?>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td><a href="" class="btn btn-default btn-xs">查看</a>
+                      <a href="" class="btn btn-default btn-xs">编辑</a>
+                      <button class="btn btn-danger btn-xs" onclick="delete_return_contract()">删除</button>
+                     </td>
                 </tbody>
               </table>
               
@@ -109,21 +93,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                <? for ($i=0;is_array($contract_member)&& $i <count($contract_member); $i++) {
-                ?>
+               
                   <tr>
-                    <td><?echo $contract_member[$i]['contract_title']?></td>
-                    <td><?echo $contract_member[$i]['contract_create_date'];?></td>
-                    <td><?echo $contract_valid_member[$i];?></td>
-                    <td><?echo $contract_status_member[$i];?></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td>
-                      <a href="../contract/confirm_contract_show.php?projectid=<?echo $contract_member[$i]['contract_id']?>" class="btn btn-default btn-xs">查看</a>
-                      <a href="../../action/contract/action_confirm_contract.php?contractid=<?echo $contract_member[$i]['contract_id']?>" class="btn btn-default btn-xs">确认</a>
+                      <a href="" class="btn btn-default btn-xs">查看</a>
+                      <a href="" class="btn btn-default btn-xs">确认</a>
                    </td>
                   </tr>
-                  <?
-                  }
-                  ?>
                 </tbody>
               </table>
             </div>
@@ -131,12 +111,6 @@
           </div>
         </div>
         
-        
-        <!--
-        	作者：635142812@qq.com
-        	时间：2016-06-15
-        	描述：创建申请，参与申请
-        -->
           <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingOne1OfInvite01">
             <h4 class="panel-title">
@@ -161,53 +135,39 @@
                   </tr>
                 </thead>
                 <tbody>
-                <? for ($i=0;is_array($contract_leader)&& $i <count($contract_leader); $i++) {
-                ?>
                   <tr>
-                    <td><?echo $contract_leader[$i]['contract_title']?></td>
+                    <td></td>
                     <td>我</td>
-                    <td><?echo $contract_leader[$i]['contract_create_date'];?></td>
-                    <td><?echo $contract_valid_leader[$i];?></td>
-                    <td><?echo $contract_status_leader[$i];?></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td>
-                      <?if ($contract_leader[$i]['is_valid'] == 1) {
-                        ?>
-                        <a href="../contract/net_contract_show.php?projectid=<?echo $contract_leader[$i]['contract_id']?>" class="btn btn-default btn-xs">查看</a>
-                        <?
-
-                      } else {?>
-                      <a href="../contract/net_contract_show.php?projectid=<?echo $contract_leader[$i]['contract_id']?>" class="btn btn-default btn-xs">编辑</a>
-                      <button class="btn btn-danger btn-xs" onclick="delete_return_contract_Invite(<?echo $contract_leader[$i]['contract_id']?>)">删除</button>
-                      <!-- <a href="../contract/create_net_contract.php?projectid=<?//echo $project_list[$i]['project_id']?>" class="btn btn-warning btn-xs">创建合同</a> -->
-                      <?
-                     }
-                      ?>
+                      <a href="" class="btn btn-default btn-xs">查看</a>
+                      <a href="" class="btn btn-default btn-xs">编辑</a>
+                      <button class="btn btn-danger btn-xs" onclick="delete_return_contract_Invite()">删除</button>
                    </td>
                   </tr>
-                  <?
-                  }
-                  ?>
                 </tbody>
               </table>
               
                <script>
-          function delete_return_contract_Invite(contractId) {
-            if(confirm("确认要删除吗？")) {
-              $.get('../../action/contract/action_delete_contract.php',{
-                projectid : contractId
-              }, function(data, textStatus){
-                // alert(data);
-                if(textStatus == "success") {
-                  if(data.success == 1) {
-                    alert("删除成功!!");
-                    window.location.reload();
-                  } else {
-                    alert(data.result);
-                  }
-                }
-              }, 'json');
-            }
-          }
+		          function delete_return_contract_Invite(contractId) {
+		            if(confirm("确认要删除吗？")) {
+		              $.get('../../action/contract/action_delete_contract.php',{
+		                projectid : contractId
+		              }, function(data, textStatus){
+		                // alert(data);
+		                if(textStatus == "success") {
+		                  if(data.success == 1) {
+		                    alert("删除成功!!");
+		                    window.location.reload();
+		                  } else {
+		                    alert(data.result);
+		                  }
+		                }
+		              }, 'json');
+		            }
+		          }
           </script>
               
             </div>
@@ -237,30 +197,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                <? for ($i=0;is_array($contract_member)&& $i <count($contract_member); $i++) {
-                ?>
                   <tr>
-                    <td><?echo $contract_member[$i]['contract_title']?></td>
-                    <td><?echo $contract_member[$i]['contract_create_date'];?></td>
-                    <td><?echo $contract_valid_member[$i];?></td>
-                    <td><?echo $contract_status_member[$i];?></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td>
-                      <a href="../contract/confirm_contract_show.php?projectid=<?echo $contract_member[$i]['contract_id']?>" class="btn btn-default btn-xs">查看</a>
-                      <a href="../../action/contract/action_confirm_contract.php?contractid=<?echo $contract_member[$i]['contract_id']?>" class="btn btn-default btn-xs">确认</a>
-                   </td>
+                      <a href="" class="btn btn-default btn-xs">查看</a>
+                      <a href="" class="btn btn-default btn-xs">确认</a>
+                   	</td>
                   </tr>
-                  <?
-                  }
-                  ?>
                 </tbody>
               </table>
             </div>
             </div>
           </div>
         </div>
-        
-        
-
       </div>
   </body>
 </html>

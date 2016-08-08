@@ -51,6 +51,8 @@
 
         <mapping class="com.chuangyejia.bean.User"/>
         <mapping class="com.chuangyejia.bean.Startups"/>
+        <mapping class="com.chuangyejia.bean.ApplyContract"/>
+        <mapping class="com.chuangyejia.bean.InviteContract"/>
     </session-factory>
 
 </hibernate-configuration>

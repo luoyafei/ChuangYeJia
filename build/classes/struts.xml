@@ -71,6 +71,8 @@
 		<!-- bar中获取用户集合数据给予显示的ajax的action -->
 		<action name="provideUsers" class="com.chuangyejia.ajax.ProvideUserListForShowAction" />
 		
+		<!-- 用户进行申请加入公司的ajax的action -->
+		<action name="applyJoin" class="com.chuangyejia.ajax.ApplyJoinStartupsAction" />
 		
 		<!-- 用来处理创建公司的action -->
 		<action name="createStartups" class="com.chuangyejia.action.CreateStartupsAction">

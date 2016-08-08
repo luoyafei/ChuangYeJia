@@ -293,7 +293,7 @@ request.setAttribute("flag", "startups");
 		   </nav>
 			
 			
-			</div>
+		</div>
 		
 		
 	<jsp:include page="../module/bottom.jsp" flush="true" />

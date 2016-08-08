@@ -398,5 +398,18 @@ System.out.println(s2.size());*/
 		System.out.println(us.next().getUserId());
 		//System.out.println(st.getCopartner().size());
 	}
-	
+
+	@org.junit.Test
+	public void testApplyContract() {
+		
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		String ejbql = "from ApplyContract ac where ac.applyStartupsId = :applyStartupsId and ac.applyStatus = :applyStatus and ac.applyOrganiserId = :applyOrganiserId";
+		
+		Query query = session.createQuery(ejbql).setString("applyStartupsId", "402881fc564a670b01564a6882a70001 ").setString("applyStatus", "正在审核").setString("applyOrganiserId", "402881fc56416d860156416e52330001 ");
+		int count = query.list().size();
+		System.out.println(count);
+		
+		session.getTransaction().commit();
+	}
 }

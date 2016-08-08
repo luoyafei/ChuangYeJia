@@ -12,8 +12,6 @@
     <div class="navbar-wrapper">
       <div class="container">
 
-
-
  		<nav class="navbar  navbar-inverse navbar-static-top">
           <div class="container">
             <div class="navbar-header">
@@ -27,8 +25,8 @@
             <div id="navbar" class="navbar-collapse collapse">
             
               <ul class="nav navbar-nav">
-              
-               <li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("index")?"active":"" %>><a class="a-item" href="/ChuangYeJia/index.jsp">首页</a></li>
+               
+                <li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("index")?"active":"" %>><a class="a-item" href="/ChuangYeJia/index.jsp">首页</a></li>
 				<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("startups")?"active":"" %>><a class="a-item" href="/ChuangYeJia/pages/title/startups_list.jsp">创业公司</a></li>
 				<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("partner")?"active":"" %>><a class="a-item" href="/ChuangYeJia/pages/title/copartner_list.jsp">合伙人</a></li>
 				<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("product")?"active":"" %>><a class="a-item" href="#">产品</a></li>
@@ -67,7 +65,7 @@
 					<div class="navbar-form pull-right">
 						<ul class="nav navbar-nav">
 							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("index")?"active":"" %>><a class="a-item" href="/ChuangYeJia/index.jsp">首页</a></li>
-							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("project")?"active":"" %>><a class="a-item" href="#">创业公司</a></li>
+							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("startups")?"active":"" %>><a class="a-item" href="/ChuangYeJia/pages/title/startups_list.jsp">创业公司</a></li>
 							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("partner")?"active":"" %>><a class="a-item" href="/ChuangYeJia/pages/title/copartner_list.jsp">合伙人</a></li>
 							<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("product")?"active":"" %>><a class="a-item" href="#">产品</a></li>
 							<div class="navbar-form navbar-left" role="search">
