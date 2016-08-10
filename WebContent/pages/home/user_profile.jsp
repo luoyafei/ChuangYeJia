@@ -181,10 +181,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
             <div class="uk-width-medium-1-1 uk-container-center">
                 <div class="uk-panel uk-panel-box uk-panel-box-default" style="text-align: center;border:none;">
-					<h4>
-						<button class="uk-button uk-button-large" type="button">联系ta</button>
-						<!-- <a class="btn btn-default" onclick="connect_our_im()" style="border: solid #A9A9A9 2px; border-radius: 10px;">联系ta</a> -->
-					</h4>
+					<div style="width: 80%;height: 80px;margin: 0 auto;">
+						<div class="main-left" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
+								<a class="btn btn-default" onclick="" style="border: solid #A9A9A9 2px; border-radius: 10px;">联系ta</a>
+						</div>
+						<div class="main-right" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
+							<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;" href="<%=path %>/pages/userConsole/invite/invite_join.jsp?join=<s:property value='#request.uts.userId'/>">邀请加入</a>
+						</div>
+					</div>
 				</div>
             </div>
             

@@ -14,7 +14,6 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.jdbc.Work;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
-import com.chuangyejia.bean.ApplyContract;
 import com.chuangyejia.bean.Startups;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.factory.HibernateSessionFactory;
@@ -31,21 +30,30 @@ public class Test {
 	public static void main(String[] args) {
 		
 		
-		List<ApplyContract> allLeaderStartupsReceivedApply = new ArrayList<ApplyContract>();
+		IStartupsService iss = ServiceFactory.createStartupsService();
+		StartupsTempShow sts = iss.getStartupsTempShowInId("402881fc564e779601564e7799260001");
+		boolean repeat = false;
+		Set<UserTempShow> uts = sts.getCopartner();
+		Iterator<UserTempShow> iterUts = uts.iterator();
+System.out.println(uts.size());
+		while(iterUts.hasNext()) {
+			if(iterUts.next().getUserId().equals("402881fc567011c701567011cb0c0003")) {
+				repeat = true;
+				break;
+			}
+		}
+		System.out.println(repeat);
+		
+	/*	List<ApplyContract> allLeaderStartupsReceivedApply = new ArrayList<ApplyContract>();
 		IUserService ius = ServiceFactory.createUserService();
 		UserTempShow uts = ius.getUserTempShowInId("402881fc56415b8001564162f8330001");
-//System.out.println(uts.getUserNickName());
 	
-		/**
-		 * 先将该用户创建的所有公司取出，再将每个公司中所有的申请取出，
-		 * 最后全部加入一个总的List中
-		 */
 		Iterator<StartupsTempShow> itSts = uts.getAllLeaderStartups().iterator();
 		while(itSts.hasNext()) {
 			allLeaderStartupsReceivedApply.addAll(ServiceFactory.createApplyContractService().getApplyContractInStartupsId(itSts.next().getStartupsId()));
 		}
 		
-System.out.println(allLeaderStartupsReceivedApply.size());
+System.out.println(allLeaderStartupsReceivedApply.size());*/
 		/*	Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			List<ApplyContract> acs = new ArrayList<ApplyContract>();
