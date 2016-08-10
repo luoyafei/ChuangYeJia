@@ -125,7 +125,6 @@ System.out.println("backUrl :" + backUrl);
 				IUserService ius = ServiceFactory.createUserService();
 				
 				User user = ius.checkEmailAndPassword(ud.toUser());//判断数据库中是否存在该email和password
-				//String userIp = ;
 				
 				if(user != null) {
 					HttpSession session = ServletActionContext.getRequest().getSession();

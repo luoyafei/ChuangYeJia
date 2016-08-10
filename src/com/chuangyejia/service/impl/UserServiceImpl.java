@@ -97,7 +97,6 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserInId(String userId) {
 		// TODO Auto-generated method stub
-		
 		User user = ud.getUserInId(userId);
 		/**
 		 * 当进行转换之后，再将该session关闭

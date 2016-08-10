@@ -27,18 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody>
-
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-									<a href="" class="btn btn-default btn-xs">查看</a>
-									<a href="" class="btn btn-default btn-xs">编辑</a>
-									<button class="btn btn-danger btn-xs" onclick="delete_return_contract()">删除</button>
-								</td>
+						<tbody id="myStartupsTbody">
+							<tr class="myStartupsTr">
+								<td class="myStartupsName"></td>
+								<td class="myCopartnerRequire"></td>
+								<td class="myStartupsPassword"></td>
+								<td class="myCreateDate"></td>
+								<td class="myOperate"></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -51,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h4 class="panel-title">
 				<a class="collapsed" data-toggle="collapse"
 					data-parent="#startups1" href="#joinStartups"
-					aria-expanded="false" aria-controls="joinStartups"> 我参与的项目 </a>
+					aria-expanded="false" aria-controls="joinStartups"> 我参与的公司 </a>
 			</h4>
 		</div>
 		<div id="joinStartups" class="panel-collapse collapse" role="tabpanel"
@@ -68,15 +64,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody>
-
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td><a href="" class="btn btn-default btn-xs">查看</a>
-								<a href="" class="btn btn-default btn-xs">确认</a></td>
+						
+						<tbody id="joinStartupsTbody">
+							<tr class="joinStartupsTr">
+								<td class="joinStartupsName"></td>
+								<td class="joinStartupsLeader"></td>
+								<td class="joinCopartnerRequire"></td>
+								<td class="joinCreateDate"></td>
+								<td class="joinOperate">
+									<!--
+										<a href="" class="btn btn-default btn-xs joinOperateDetail">查看</a>
+										<a href="" class="btn btn-default btn-xs joinOperateExit">退出</a>
+									-->
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -84,4 +84,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$.post('getStartupsConsole!getStartupsList.action', {}, function(data, textStatus) {
+				if(textStatus == "success") {
+					if(data.success) {
+						if(data.leaderS.length > 1) {
+							$("#myStartupsTrClone").empty();
+							for(var i = 0; i < data.leaderS.length; i++) {
+								$(".myStartupsTr").clone().attr("class", "myStartupsTrClone").appendTo("#myStartupsTbody");
+							}
+							
+							for(var i = 0; i < data.leaderS.length; i++) {
+								$(".myStartupsName").eq(i).text(data.leaderS[i].startupsName);
+								$(".myCopartnerRequire").eq(i).text(data.leaderS[i].startupsCopartnerRequire);
+								$(".myStartupsPassword").eq(i).text(data.leaderS[i].startupsPassword)
+								$(".myCreateDate").eq(i).text(data.leaderS[i].startupsCreateDate);
+								$(".myOperate").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[i].startupsId + "' class='btn btn-default btn-xs myOperateDetail'>查看</a>"
+									+ "<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[i].startupsId + "' class='btn btn-default btn-xs myOperateModify'>修改</a>"
+									+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick='delete_return_contract()'></button>"
+								);
+							}
+							
+						} else if(data.lenderS.length == 1){
+							$("#myStartupsTrClone").empty();
+							
+							$(".myStartupsName").eq(0).text(data.leaderS[0].startupsName);
+							$(".myCopartnerRequire").eq(0).text(data.leaderS[0].startupsCopartnerRequire);
+							$(".myStartupsPassword").eq(0).text(data.leaderS[0].startupsPassword)
+							$(".myCreateDate").eq(0).text(data.leaderS[0].startupsCreateDate);
+							$(".myOperate").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[0].startupsId + "' class='btn btn-default btn-xs myOperateDetail'>查看</a>"
+								+ "<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[0].startupsId + "' class='btn btn-default btn-xs myOperateModify'>修改</a>"
+								+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick='delete_return_contract()'></button>"
+							);
+							
+						}
+					}
+				}
+			}, 'json');
+		});
+	</script>
+	
 </div>
+
+
+

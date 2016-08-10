@@ -61,11 +61,18 @@ public interface IStartupsDao {
 	
 	
 	/**
-	 * 通过公司Startups对象的leaderId来获取整个对象
+	 * 通过用户的Id来获取其为leader的所有公司的集合
 	 * @param leaderId
-	 * @return Startups
+	 * @return  List<Startups>
 	 */
-	public Startups getStartupsInLeaderId(String leaderId);
+	public List<Startups> getStartupsInLeaderId(String leaderId);
+	
+	/**
+	 * 通过 用户的Id来获取其为成员的所有公司的集合
+	 * @param leaderId
+	 * @return  List<Startups>
+	 */
+	public List<Startups> getStartupsInCopartnerId(String copartnerId);
 	
 	/**
 	 * 查询公司名称是否重复

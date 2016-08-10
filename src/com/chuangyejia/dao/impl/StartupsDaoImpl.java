@@ -148,15 +148,41 @@ System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获�
 	}
 
 	@Override
-	public Startups getStartupsInLeaderId(String leaderId) {
+	public List<Startups> getStartupsInLeaderId(String leaderId) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		String ejbql = "from Startups s where s.startupsLeader.userId = :leaderId";
+		List<Startups> leaders = (ArrayList<Startups>)session.createQuery(ejbql).setString("leaderId", leaderId).list();
+		session.getTransaction().commit();
+		
+		for(int i = 0; i < leaders.size(); i++) {
+			leaders.get(i).setStartupsLeader(null);
+			leaders.get(i).setCopartner(null);
+		}
+		return leaders;
 	}
 
 	@Override
 	public boolean isNameRepeat(String startupsName) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Startups> getStartupsInCopartnerId(String copartnerId) {
+		// TODO Auto-generated method stub
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		String ejbql = "from Startups s where s.startupsLeader.copartner.userId = :leaderId";
+		List<Startups> joins = (ArrayList<Startups>)session.createQuery(ejbql).setString("leaderId", copartnerId).list();
+		session.getTransaction().commit();
+		
+		for(int i = 0; i < joins.size(); i++) {
+			joins.get(i).setStartupsLeader(null);
+			joins.get(i).setCopartner(null);
+		}
+		return joins;
 	}
 
 

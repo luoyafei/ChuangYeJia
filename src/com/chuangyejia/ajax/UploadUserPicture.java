@@ -63,7 +63,8 @@ public class UploadUserPicture extends ActionSupport {
 	public void uploadPicture() {
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
+		//response.setContentType("text/html;charset=utf-8");
+		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = null;
 		
 		JsonObject jo = new JsonObject();

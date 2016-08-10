@@ -110,7 +110,7 @@ request.setAttribute("flag", "partner");
 			</ol>
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
-					<img class="" src="../../assets/img/project/project_list1.png" alt="">
+					<img class="" src="<%=path %>/assets/img/project/project_list1.png" alt="">
 					<div class="container" style="padding-right: 0px;padding-left: 0px;">
 						<div class="carousel-caption">
 							<div style="width: 50%;float: right;">
@@ -131,8 +131,8 @@ request.setAttribute("flag", "partner");
 					</div>
 				</div>
 				<div class="item">
-					<img class="second-slide" src="../../assets/img/project/project_list1.png" alt="Second slide">
-					<img class="" src="../../assets/img/project/project_list1.png" alt="">
+					<img class="second-slide" src="<%=path %>/assets/img/project/project_list1.png" alt="Second slide">
+					<img class="" src="<%=path %>/assets/img/project/project_list1.png" alt="">
 					<div class="container" style="padding-right: 0px;padding-left: 0px;">
 						<div class="carousel-caption">
 							<div style="width: 50%;float: right;">
@@ -153,8 +153,8 @@ request.setAttribute("flag", "partner");
 					</div>
 				</div>
 				<div class="item">
-					<img class="third-slide" src="../../assets/img/project/project_list1.png" alt="Third slide">
-					<img class="" src="../../assets/img/project/project_list1.png" alt="">
+					<img class="third-slide" src="<%=path %>/assets/img/project/project_list1.png" alt="Third slide">
+					<img class="" src="<%=path %>/assets/img/project/project_list1.png" alt="">
 					<div class="container" style="padding-right: 0px;padding-left: 0px;">
 						<div class="carousel-caption">
 							<div style="width: 50%;float: right;">
@@ -175,8 +175,8 @@ request.setAttribute("flag", "partner");
 					</div>
 				</div>
 				<div class="item">
-					<img class="third-slide" src="../../assets/img/project/project_list1.png" alt="Third slide">
-					<img class="" src="../../assets/img/project/project_list1.png" alt="">
+					<img class="third-slide" src="<%=path %>/assets/img/project/project_list1.png" alt="Third slide">
+					<img class="" src="<%=path %>/assets/img/project/project_list1.png" alt="">
 					<div class="container" style="padding-right: 0px;padding-left: 0px;">
 						<div class="carousel-caption">
 							<div style="width: 50%;float: right;">

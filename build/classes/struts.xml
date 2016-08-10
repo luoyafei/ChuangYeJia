@@ -73,10 +73,12 @@
 		
 		<!-- 用户进行申请加入公司的ajax的action -->
 		<action name="applyJoin" class="com.chuangyejia.ajax.ApplyJoinStartupsAction" />
+		<!-- 用户在userConsole控制台中获取自己是leader的公司以及自己参加的公司的ajax的action -->
+		<action name="getStartupsConsole" class="com.chuangyejia.ajax.GetStartupsInUserConsole" />
 		
 		<!-- 用来处理创建公司的action -->
 		<action name="createStartups" class="com.chuangyejia.action.CreateStartupsAction">
-			
+		
 			<interceptor-ref name="timer" />
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="execAndWait">

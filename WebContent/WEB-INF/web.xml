@@ -5,6 +5,7 @@
   <context-param>
   	<param-name>uploadPictureUrlDisk</param-name>
   	<param-value>D:\Java_Project\ChuangYeJiaSource\PictureHead\</param-value>
+  	<!-- <param-value>/home/ChuangYeJiaSource/PictureHead/</param-value> -->
   </context-param>
   <context-param>
   	<param-name>uploadPictureUrlVir</param-name>

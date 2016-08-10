@@ -84,8 +84,9 @@ System.out.println(start);
 System.out.println("===" + category + "," + startTrue);
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
-
+		//response.setContentType("text/html;charset=utf-8");
+		
+		response.setContentType("application/json; charset=utf-8");
 		IUserService ius = ServiceFactory.createUserService();
 		
 		Gson gson = new Gson();

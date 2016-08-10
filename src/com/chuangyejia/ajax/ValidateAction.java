@@ -71,6 +71,7 @@ public class ValidateAction extends ActionSupport {
 		boolean flag = false;
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = null;
 		
 		try {

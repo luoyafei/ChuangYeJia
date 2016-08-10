@@ -66,7 +66,8 @@ public class SupportFourStartupsAction extends ActionSupport {
 		}
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
+		//response.setContentType("text/html;charset=utf-8");
+		response.setContentType("application/json; charset=utf-8");
 		
 		IStartupsService iss = ServiceFactory.createStartupsService();
 		List<StartupsTempShow> startupsTempList = iss.getStartupTempShows(startTrue, lengthTrue, sort);
@@ -76,7 +77,7 @@ public class SupportFourStartupsAction extends ActionSupport {
 		JsonObject jo = new JsonObject();
 		jo.add("stl", gson.toJsonTree(startupsTempList));
 		jo.addProperty("count", count);
-System.out.println(jo.toString());
+//System.out.println(jo.toString());
 		try {
 			response.getWriter().print(jo.toString());
 		} catch (IOException e) {

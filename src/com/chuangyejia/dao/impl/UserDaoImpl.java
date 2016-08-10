@@ -132,12 +132,8 @@ System.out.println("在dao层，获取根据start, length, copartnweCategory获�
 			session.beginTransaction();
 			
 			user = (User)session.get(User.class, userId);
-			
-			/**
-			 * 此处不关闭！交由service层关闭！
-			 * session.getTransaction().commit();
-			 */
-			
+
+			//HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
 		} catch(HibernateException e) {
 System.out.println("根据UserId获取User对象时，出错！");
 			e.printStackTrace();

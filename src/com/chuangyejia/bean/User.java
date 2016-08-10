@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -21,6 +22,7 @@ import com.chuangyejia.tools.UserTempShow;
 import com.chuangyejia.tools.UserTempShowOnlyUser;
 
 @Entity
+@Table(name="user")
 public class User {
 	
 	private final static String PHOTO_DEFAULT = "/ChuangYeJia/assets/img/defaultImg/head.png";

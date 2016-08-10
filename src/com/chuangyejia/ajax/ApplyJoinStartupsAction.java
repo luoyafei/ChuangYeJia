@@ -52,8 +52,9 @@ public class ApplyJoinStartupsAction extends ActionSupport {
 	public void applyJoin() {
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");
+		//response.setContentType("text/html;charset=utf-8");
 		
+		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();

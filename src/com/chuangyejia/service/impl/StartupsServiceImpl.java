@@ -11,10 +11,17 @@ import com.chuangyejia.tools.StartupsTempShow;
 public class StartupsServiceImpl implements IStartupsService {
 
 	
+	
 	private IStartupsDao sd = null;
 	
 	public StartupsServiceImpl() {
 		sd = DaoFactory.createStartupsDao();
+	}
+
+	@Override
+	public List<Startups> getStartupsInCopartnerId(String copartnerId) {
+		// TODO Auto-generated method stub
+		return sd.getStartupsInCopartnerId(copartnerId);
 	}
 
 	@Override
@@ -54,11 +61,13 @@ public class StartupsServiceImpl implements IStartupsService {
 	}
 
 	@Override
-	public Startups getStartupsInLeaderId(String leaderId) {
+	public List<Startups> getStartupsInLeaderId(String leaderId) {
 		// TODO Auto-generated method stub
 		return sd.getStartupsInLeaderId(leaderId);
 	}
 
+	
+	
 	@Override
 	public boolean isNameRepeat(String startupsName) {
 		// TODO Auto-generated method stub

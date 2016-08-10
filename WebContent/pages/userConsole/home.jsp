@@ -81,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})
         </script>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+        
         	<div class="tab-content">
 			  	<div role="tabpanel" class="tab-pane active" id="my_data"></div>
 			  	<div role="tabpanel" class="tab-pane" id="my_startups"></div>

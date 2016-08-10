@@ -41,7 +41,8 @@ public class UserInfoModifyAction extends ActionSupport {
 	public void modifyPassword() {
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setContentType("text/html;charset=utf-8");  
+		//response.setContentType("text/html;charset=utf-8");
+		response.setContentType("application/json; charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		PrintWriter out = null;
 		try {

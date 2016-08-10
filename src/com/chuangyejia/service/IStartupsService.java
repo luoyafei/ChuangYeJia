@@ -45,7 +45,6 @@ public interface IStartupsService {
 	 * @return List<Startups>
 	 */
 	public List<StartupsTempShow> getStartupTempShows(Integer start, Integer length, String sort);
-	
 	/**
 	 * 通过Startups对象的Id获取整个对象
 	 * @param startupsId
@@ -59,11 +58,19 @@ public interface IStartupsService {
 	 */
 	public StartupsTempShow getStartupsTempShowInId(String startupsId);
 	/**
-	 * 通过公司Startups对象的leaderId来获取整个对象
+	 * 通过 用户的Id来获取其为leader的所有公司的集合
 	 * @param leaderId
-	 * @return Startups
+	 * @return  List<Startups>
 	 */
-	public Startups getStartupsInLeaderId(String leaderId);
+	public List<Startups> getStartupsInLeaderId(String leaderId);
+	
+	/**
+	 * 通过 用户的Id来获取其为成员的所有公司的集合
+	 * @param leaderId
+	 * @return  List<Startups>
+	 */
+	public List<Startups> getStartupsInCopartnerId(String copartnerId);
+	
 	
 	/**
 	 * 查询公司名称是否重复

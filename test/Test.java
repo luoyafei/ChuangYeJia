@@ -20,6 +20,7 @@ import com.chuangyejia.factory.HibernateSessionFactory;
 import com.chuangyejia.factory.ServiceFactory;
 import com.chuangyejia.service.IStartupsService;
 import com.chuangyejia.service.IUserService;
+import com.chuangyejia.tools.StartupsTempShow;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -27,16 +28,54 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		//new SchemaExport(new AnnotationConfiguration().configure()).create(true, true);
-	
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
 		session.beginTransaction();
+		String ejbql = "from Startups s where s.startupsId in (select ss.copartner from Startups ss where ss.copartner.userId:=joinId)";
+		List<Startups> joins = (ArrayList<Startups>)session.createQuery(ejbql).setString("joinId", "402881fc567011c701567011caae0001").list();
+		session.getTransaction().commit();
+		
+		for(int i = 0; i < joins.size(); i++) {
+			joins.get(i).setStartupsLeader(null);
+			joins.get(i).setCopartner(null);
+		}
+		
+		Gson gson = new Gson();
+		JsonObject jo = new JsonObject();
+		
+		jo.add("leaderS", gson.toJsonTree(joins));
+		
+		System.out.println(jo);
+		
+	/*	
+		IUserService ius = ServiceFactory.createUserService();
+		User newUser = ius.getUserInId("402881fc56415b8001564162f8330001");
+		
+		
+		
+		Set<Startups> leaderS = newUser.getAllLeaderStartups();
+		Iterator<Startups> leaderSArray = leaderS.iterator();
+		List<Startups> s = new ArrayList<Startups>();
+		
+		while(leaderSArray.hasNext()) {
+			//System.out.println(leaderSArray.next().toString());
+			s.add(leaderSArray.next());
+		}
+		Gson gson = new Gson();
+		JsonObject jo = new JsonObject();
+		
+		jo.add("leaderS", gson.toJsonTree(s));
+		
+		System.out.println(jo);*/
+		//new SchemaExport(new AnnotationConfiguration().configure()).create(true, true);
+	
+		/*Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();*/
 		
 		//Startups s = (Startups)session.get(Startups.class, "402881fc564a670b01564a6882a70001");
 //System.out.println(s.getStartupsName());
 
-		IStartupsService iss = ServiceFactory.createStartupsService();
-		Startups s = iss.getStartupsInId("402881fc564e779601564e7799260001");
+		/*IStartupsService iss = ServiceFactory.createStartupsService();
+		Startups s = iss.getStartupsInId("402881fc564e779601564e7799260001");*/
 /*		
 		User user = new User();
 		user.setUserNickName("成员");
@@ -260,6 +299,7 @@ System.out.println(users.size());
 	@org.junit.Test
 	public void testSaveOneUser() {
 		
+		
 		IUserService ius = ServiceFactory.createUserService();
 		for(int i = 700; i < 800; i++) {
 			User user = new User();
@@ -310,11 +350,12 @@ System.out.println(s2.size());*/
 
 		Startups s = (Startups)session.load(Startups.class, "402881fc564e779601564e7799260001");
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 440; i < 450; i++) {
 			User user = new User();
-			user.setUserNickName("罗亚飞" + i);
-			user.setUserEmail("123" + i + "@qq.com");
+			user.setUserNickName("罗亚飞007" + i);
+			user.setUserEmail("2022" + i + "@qq.com");
 			user.setUserPassword("luoyafei" + i);
+			user.setCopartnerCategory("技术");
 			session.save(user);
 			s.getCopartner().add(user);
 		}
@@ -412,4 +453,19 @@ System.out.println(s2.size());*/
 		
 		session.getTransaction().commit();
 	}
+	
+	@org.junit.Test
+	public void testGsonToJson() {
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		String ejbql = "from Startups s where s.startupsLeader.userId = :leaderId";
+		List<Startups> leaders = (ArrayList<Startups>)session.createQuery(ejbql).setString("leaderId", "402881fc56415b8001564162f8330001").list();
+		Gson gson = new Gson();
+		JsonObject jo = new JsonObject();
+		
+		jo.addProperty("leaderS", gson.toJson(leaders));
+		session.getTransaction().commit();
+		System.out.println(jo);
+	}
+	
 }

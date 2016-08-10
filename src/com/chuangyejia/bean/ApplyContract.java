@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -14,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author Diamond
  */
 @Entity
+@Table(name="applyContract")
 public class ApplyContract {
 
 	private String applyId;

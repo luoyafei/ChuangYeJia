@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -26,6 +27,7 @@ import com.chuangyejia.tools.UserTempShow;
  * @author Diamond
  */
 @Entity
+@Table(name="startups")
 public class Startups {
 
 	private final static String STARTUPS_DEFAULT_PICTURE = "/ChuangYeJia/assets/img/defaultImg/startupsCover.png";
