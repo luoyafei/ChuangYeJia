@@ -76,6 +76,8 @@
 		<!-- 用户在userConsole控制台中获取自己是leader的公司以及自己参加的公司的ajax的action -->
 		<action name="getStartupsConsole" class="com.chuangyejia.ajax.GetStartupsInUserConsole" />
 		
+		<!-- 用户在userConsole控制台中获取合同集合的ajax的action -->
+		<action name="getContractConsole" class="com.chuangyejia.ajax.GetContractInUserConsole" />
 		<!-- 用来处理创建公司的action -->
 		<action name="createStartups" class="com.chuangyejia.action.CreateStartupsAction">
 		

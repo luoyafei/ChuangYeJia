@@ -1,10 +1,12 @@
 package com.chuangyejia.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.chuangyejia.bean.Startups;
 import com.chuangyejia.dao.IStartupsDao;
 import com.chuangyejia.factory.DaoFactory;
+import com.chuangyejia.factory.HibernateSessionFactory;
 import com.chuangyejia.service.IStartupsService;
 import com.chuangyejia.tools.StartupsTempShow;
 
@@ -19,9 +21,17 @@ public class StartupsServiceImpl implements IStartupsService {
 	}
 
 	@Override
-	public List<Startups> getStartupsInCopartnerId(String copartnerId) {
+	public List<StartupsTempShow> getStartupsInCopartnerId(String copartnerId) {
 		// TODO Auto-generated method stub
-		return sd.getStartupsInCopartnerId(copartnerId);
+		List<Startups> joins = sd.getStartupsInCopartnerId(copartnerId);
+		List<StartupsTempShow> sts = new ArrayList<StartupsTempShow>();
+
+		for(int i = 0; i < joins.size(); i++) {
+			sts.add(joins.get(i).toStartupsTempShow());
+		}
+		
+		HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
+		return sts;
 	}
 
 	@Override

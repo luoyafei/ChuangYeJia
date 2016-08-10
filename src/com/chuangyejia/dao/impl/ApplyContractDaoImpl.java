@@ -37,10 +37,30 @@ System.out.println("dao层中，ApplyContractDaoImpl中，将申请合同插入�
 		return flag;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ApplyContract> getApplyContractInStartupsId(String startupsId) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List<ApplyContract> acs = new ArrayList<ApplyContract>();
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		
+		try {
+			session.beginTransaction();
+			
+			String ejbql = "from ApplyContract ac where ac.applyStartupsId = :applyStartupsId";
+			
+			Query query = session.createQuery(ejbql).setString("applyStartupsId", startupsId);
+			acs = (ArrayList<ApplyContract>)query.list();
+			
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+System.out.println("在ApplyContractDaoImpl.java中，获取某公司下的所有申请出错！");
+			e.printStackTrace();
+		}
+		
+		
+		return acs;
 	}
 
 	@Override
@@ -61,10 +81,30 @@ System.out.println("dao层中，ApplyContractDaoImpl中，将申请合同插入�
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ApplyContract> getApplyContractInUserId(String userId) {
 		// TODO Auto-generated method stub
-		return null;
+
+		List<ApplyContract> acs = new ArrayList<ApplyContract>();
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			
+			String ejbql = "from ApplyContract ac where ac.applyOrganiserId = :applyOrganiserId";
+			
+			Query query = session.createQuery(ejbql).setString("applyOrganiserId", userId);
+			acs = (ArrayList<ApplyContract>)query.list();
+			
+
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+			acs = null;
+System.out.println("通过用户Id，获取申请集合时出错！");
+			e.printStackTrace();
+		}
+		
+		return acs;
 	}
 	
 	
@@ -94,6 +134,7 @@ System.out.println("通过用户Id，根据状态获取申请集合时出错！"
 		return acs;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ApplyContract> getApplyContractInStartupsId(String startupsId, String status) {
 		// TODO Auto-generated method stub

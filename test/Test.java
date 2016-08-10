@@ -14,6 +14,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.jdbc.Work;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
+import com.chuangyejia.bean.ApplyContract;
 import com.chuangyejia.bean.Startups;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.factory.HibernateSessionFactory;
@@ -21,6 +22,7 @@ import com.chuangyejia.factory.ServiceFactory;
 import com.chuangyejia.service.IStartupsService;
 import com.chuangyejia.service.IUserService;
 import com.chuangyejia.tools.StartupsTempShow;
+import com.chuangyejia.tools.UserTempShow;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -28,24 +30,54 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		String ejbql = "from Startups s where s.startupsId in (select ss.copartner from Startups ss where ss.copartner.userId:=joinId)";
-		List<Startups> joins = (ArrayList<Startups>)session.createQuery(ejbql).setString("joinId", "402881fc567011c701567011caae0001").list();
-		session.getTransaction().commit();
 		
+		List<ApplyContract> allLeaderStartupsReceivedApply = new ArrayList<ApplyContract>();
+		IUserService ius = ServiceFactory.createUserService();
+		UserTempShow uts = ius.getUserTempShowInId("402881fc56415b8001564162f8330001");
+//System.out.println(uts.getUserNickName());
+	
+		/**
+		 * 先将该用户创建的所有公司取出，再将每个公司中所有的申请取出，
+		 * 最后全部加入一个总的List中
+		 */
+		Iterator<StartupsTempShow> itSts = uts.getAllLeaderStartups().iterator();
+		while(itSts.hasNext()) {
+			allLeaderStartupsReceivedApply.addAll(ServiceFactory.createApplyContractService().getApplyContractInStartupsId(itSts.next().getStartupsId()));
+		}
+		
+System.out.println(allLeaderStartupsReceivedApply.size());
+		/*	Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+			session.beginTransaction();
+			List<ApplyContract> acs = new ArrayList<ApplyContract>();
+			String ejbql = "from ApplyContract ac where ac.applyOrganiserId = :applyOrganiserId";
+			
+			Query query = session.createQuery(ejbql).setString("applyOrganiserId", "402881fc56416d860156416e52330001 ");
+			acs = (ArrayList<ApplyContract>)query.list();
+			
+			System.out.println("daoimp : " + acs.size());
+			session.getTransaction().commit();*/
+		
+		/*Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		String ejbql = "select s from Startups s left join s.copartner u where u.userId = :joinId";
+		
+		List<Startups> joins = (ArrayList<Startups>)session.createQuery(ejbql).setString("joinId", "402881fc567011c701567011caae0001").list();
+		
+		session.getTransaction().commit();
 		for(int i = 0; i < joins.size(); i++) {
-			joins.get(i).setStartupsLeader(null);
+			joins.get(i).getStartupsLeader().setAllJoinStartups(null);
+			joins.get(i).getStartupsLeader().setAllLeaderStartups(null);
 			joins.get(i).setCopartner(null);
 		}
 		
+		System.out.println(joins.get(0).getStartupsLeader().toString());
 		Gson gson = new Gson();
 		JsonObject jo = new JsonObject();
 		
 		jo.add("leaderS", gson.toJsonTree(joins));
 		
 		System.out.println(jo);
-		
+		*/
 	/*	
 		IUserService ius = ServiceFactory.createUserService();
 		User newUser = ius.getUserInId("402881fc56415b8001564162f8330001");

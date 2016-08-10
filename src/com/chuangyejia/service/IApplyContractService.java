@@ -77,5 +77,11 @@ public interface IApplyContractService {
 	 * @return
 	 */
 	public boolean canApplyContract(String userId, String startupsId, String status);
+	/**
+	 * 根据用户的id，来获取他是leader的公司所收到的申请合同
+	 * @param userId
+	 * @return
+	 */
+	public List<ApplyContract> getApplyContractInLeaderId(String leaderId);
 	
 }

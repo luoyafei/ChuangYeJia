@@ -339,7 +339,7 @@ public class User {
 		
 		Iterator<Startups> iteratorAllLeader = allLeaderStartups.iterator();
 		Iterator<Startups> iteratorJoin = allJoinStartups.iterator();
-		
+//System.out.println("User ++++++++++++++++++++++++++++++ " + allLeaderStartups.size());
 		/**
 		 * 由于继续选择toStartupsTempShow()转换，将会造成死循环，现在选用以下方法
 		 * 从User角度获取到的StartupsTempShow对象，仅有id，name，brief 具有值
@@ -355,6 +355,7 @@ public class User {
 			
 			allLeaderStartupsTemp.add(sts);
 		}
+		uts.setAllLeaderStartups(allLeaderStartupsTemp);
 		
 		while(iteratorJoin.hasNext()) {
 			
@@ -366,10 +367,9 @@ public class User {
 			sts.setStartupsBrief(s.getStartupsBrief());
 			
 			allJoinStartupsTemp.add(sts);
-			
 		}
 		uts.setAllJoinStartups(allJoinStartupsTemp);
-		
+//System.out.println("user ++++++++++++++" + uts.getAllLeaderStartups().size());
 		return uts;
 		
 	}

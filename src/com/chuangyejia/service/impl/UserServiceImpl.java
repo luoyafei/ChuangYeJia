@@ -115,7 +115,9 @@ public class UserServiceImpl implements IUserService {
 		/**
 		 * 当进行转换之后，再将该session关闭
 		 */
+	
 		HibernateSessionFactory.createSessionFactory().getCurrentSession().getTransaction().commit();
+//System.out.println(uts.getAllLeaderStartups().size());
 		return uts;
 	}
 

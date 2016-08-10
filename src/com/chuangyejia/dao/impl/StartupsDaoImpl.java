@@ -174,16 +174,15 @@ System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获�
 		// TODO Auto-generated method stub
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		String ejbql = "from Startups s where s.startupsLeader.copartner.userId = :leaderId";
-		List<Startups> joins = (ArrayList<Startups>)session.createQuery(ejbql).setString("leaderId", copartnerId).list();
-		session.getTransaction().commit();
+		String ejbql = "select s from Startups s left join s.copartner u where u.userId = :copartnerId";
+		List<Startups> joins = (ArrayList<Startups>)session.createQuery(ejbql).setString("copartnerId", copartnerId).list();
 		
-		for(int i = 0; i < joins.size(); i++) {
-			joins.get(i).setStartupsLeader(null);
+		/*for(int i = 0; i < joins.size(); i++) {
+			joins.get(i).getStartupsLeader().setAllJoinStartups(null);
+			joins.get(i).getStartupsLeader().setAllLeaderStartups(null);
 			joins.get(i).setCopartner(null);
-		}
+		}*/
 		return joins;
 	}
-
 
 }

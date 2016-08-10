@@ -2,7 +2,6 @@ package com.chuangyejia.ajax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +13,7 @@ import com.chuangyejia.bean.Startups;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.factory.ServiceFactory;
 import com.chuangyejia.service.IStartupsService;
+import com.chuangyejia.tools.StartupsTempShow;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,17 +46,21 @@ System.out.println("GetStartupsInUserConsole.java 中获取输出管道出错");
 			
 			IStartupsService iss = ServiceFactory.createStartupsService();
 			List<Startups> leaderS = iss.getStartupsInLeaderId(user.getUserId());
-			List<Startups> joinS = iss.getStartupsInJoinId();
+			List<StartupsTempShow> joinS = iss.getStartupsInCopartnerId(user.getUserId());
+			for(int i = 0; i < joinS.size(); i++) {
+				joinS.get(i).getStartupsLeader().setAllJoinStartups(null);
+				joinS.get(i).getStartupsLeader().setAllLeaderStartups(null);
+				joinS.get(i).setCopartner(null);
+			}
 			success = true;
 			
 			jo.add("leaderS", gson.toJsonTree(leaderS));
-			//jo.addProperty("leaderS", gson.toJson(leaderSArray));
+			jo.add("joinS", gson.toJsonTree(joinS));
 		}
 		jo.addProperty("success", success);
 		
-System.out.println(jo.toString());
+//System.out.println(jo.toString());
 		out.print(jo);
-System.out.println("end");
 		out.flush();
 		out.close();
 	}

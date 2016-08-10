@@ -67,9 +67,9 @@ public interface IStartupsService {
 	/**
 	 * 通过 用户的Id来获取其为成员的所有公司的集合
 	 * @param leaderId
-	 * @return  List<Startups>
+	 * @return  List<StartupsTempShow>
 	 */
-	public List<Startups> getStartupsInCopartnerId(String copartnerId);
+	public List<StartupsTempShow> getStartupsInCopartnerId(String copartnerId);
 	
 	
 	/**

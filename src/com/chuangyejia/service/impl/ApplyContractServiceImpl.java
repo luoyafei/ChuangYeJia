@@ -1,12 +1,18 @@
 package com.chuangyejia.service.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.chuangyejia.bean.ApplyContract;
 import com.chuangyejia.dao.IApplyContractDao;
 import com.chuangyejia.factory.DaoFactory;
+import com.chuangyejia.factory.ServiceFactory;
 import com.chuangyejia.service.IApplyContractService;
+import com.chuangyejia.service.IUserService;
+import com.chuangyejia.tools.StartupsTempShow;
+import com.chuangyejia.tools.UserTempShow;
 
 public class ApplyContractServiceImpl implements IApplyContractService {
 
@@ -88,4 +94,21 @@ public class ApplyContractServiceImpl implements IApplyContractService {
 		return iacd.canApplyContract(userId, startupsId, stataus);
 	}
 
+
+	@Override
+	public List<ApplyContract> getApplyContractInLeaderId(String leaderId) {
+		// TODO Auto-generated method stub
+		List<ApplyContract> allLeaderStartupsReceivedApply = new ArrayList<ApplyContract>();
+		IUserService ius = ServiceFactory.createUserService();
+		UserTempShow uts = ius.getUserTempShowInId(leaderId);
+		/**
+		 * 先将该用户创建的所有公司取出，再将每个公司中所有的申请取出，
+		 * 最后全部加入一个总的List中
+		 */
+		Iterator<StartupsTempShow> itSts = uts.getAllLeaderStartups().iterator();
+		while(itSts.hasNext()) {
+			allLeaderStartupsReceivedApply.addAll(iacd.getApplyContractInStartupsId(itSts.next().getStartupsId()));
+		}
+		return allLeaderStartupsReceivedApply;
+	}
 }

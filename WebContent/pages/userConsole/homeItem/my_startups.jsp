@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="panel-heading" role="tab" id="headindStartups">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="#startups1" href="#createStartups" aria-expanded="true" aria-controls="createStartups"> 我创建的公司 </a>
+				<span class="label label-info myStartupsLabel"></span>
 			</h4>
 		</div>
 		<div id="createStartups" class="panel-collapse collapse" role="tabpanel"
@@ -48,6 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a class="collapsed" data-toggle="collapse"
 					data-parent="#startups1" href="#joinStartups"
 					aria-expanded="false" aria-controls="joinStartups"> 我参与的公司 </a>
+					<span class="label label-info joinStartupsLabel"></span>
 			</h4>
 		</div>
 		<div id="joinStartups" class="panel-collapse collapse" role="tabpanel"
@@ -71,12 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td class="joinStartupsLeader"></td>
 								<td class="joinCopartnerRequire"></td>
 								<td class="joinCreateDate"></td>
-								<td class="joinOperate">
-									<!--
-										<a href="" class="btn btn-default btn-xs joinOperateDetail">查看</a>
-										<a href="" class="btn btn-default btn-xs joinOperateExit">退出</a>
-									-->
-								</td>
+								<td class="joinOperate"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -91,8 +88,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.post('getStartupsConsole!getStartupsList.action', {}, function(data, textStatus) {
 				if(textStatus == "success") {
 					if(data.success) {
-						if(data.leaderS.length > 1) {
-							$("#myStartupsTrClone").empty();
+						
+						$(".myStartupsLabel").text(data.leaderS.length + "个");
+						$(".joinStartupsLabel").text(data.joinS.length + "个");
+						
+						if(data.leaderS != null && data.leaderS.length > 1) {
+							$(".myStartupsTrClone").remove();
 							for(var i = 0; i < data.leaderS.length; i++) {
 								$(".myStartupsTr").clone().attr("class", "myStartupsTrClone").appendTo("#myStartupsTbody");
 							}
@@ -108,8 +109,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								);
 							}
 							
-						} else if(data.lenderS.length == 1){
-							$("#myStartupsTrClone").empty();
+						} else if(data.leaderS.length == 1){
+							$(".myStartupsTrClone").remove();
 							
 							$(".myStartupsName").eq(0).text(data.leaderS[0].startupsName);
 							$(".myCopartnerRequire").eq(0).text(data.leaderS[0].startupsCopartnerRequire);
@@ -120,6 +121,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick='delete_return_contract()'></button>"
 							);
 							
+						}
+						
+						if(data.joinS != null && data.joinS.length > 1) {
+							$(".joinStartupsTrClone").remove();
+							for(var i = 0; i < data.joinS.length; i++) {
+								$(".joinStartupsTr").clone().attr("class", "joinStartupsTrClone").appendTo("#joinStartupsTbody");
+							}
+							
+							for(var i = 0; i < data.joinS.length; i++) {
+								$(".joinStartupsName").eq(i).text(data.joinS[i].startupsName);
+								$(".joinStartupsLeader").eq(0).html("<a href='/ChuangYeJia/getUserMark.action?mark='" + data.joinS[i].startupsLeader.userId + "'>data.joinS[0].startupsLeader.userNickName</a>")
+								$(".joinCopartnerRequire").eq(i).text(data.joinS[i].startupsCopartnerRequire);
+								$(".joinCreateDate").eq(i).text(data.joinS[i].startupsCreateDate);
+								$(".joinOperate").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.joinS[i].startupsId + "' class='btn btn-default btn-xs joinOperateDetail'>查看</a>"
+										+ "<a href='' class='btn btn-default btn-xs joinOperateExit'>退出公司</a>"
+								);
+							}
+							
+						} else if(data.joinS.length == 1){
+							$(".joinStartupsTrClone").remove();
+							
+							$(".joinStartupsName").eq(0).text(data.joinS[0].startupsName);
+							$(".joinStartupsLeader").eq(0).html("<a href='/ChuangYeJia/getUserMark.action?mark=" + data.joinS[0].startupsLeader.userId + "'>" + data.joinS[0].startupsLeader.userNickName + "</a>")
+							$(".joinCopartnerRequire").eq(0).text(data.joinS[0].startupsCopartnerRequire);
+							$(".joinCreateDate").eq(0).text(data.joinS[0].startupsCreateDate);
+							$(".joinOperate").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.joinS[0].startupsId + "' class='btn btn-default btn-xs joinOperateDetail'>查看</a>"
+								+ "<a href='' class='btn btn-default btn-xs joinOperateExit'>退出公司</a>"
+							);
 						}
 					}
 				}
