@@ -43,6 +43,7 @@ public class CreateStartupsAction extends ActionSupport {
 	/**
 	 * Logo图片的默认地址
 	 */
+	@SuppressWarnings("unused")
 	private static final String DEFAULT = ServletActionContext.getServletContext().getInitParameter("defaultLogo");
 	
 	private String startupsId;

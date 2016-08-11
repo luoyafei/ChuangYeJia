@@ -15,6 +15,7 @@
               <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
             我创建的邀请合同
               </a>
+               <span class="label label-info myCreateInviteLabel"></span>
             </h4>
           </div>
           <div id="collapseOne1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne1">
@@ -32,40 +33,17 @@
                   </tr>
                 </thead>
                 <tbody>
-               
-                  <tr>
-                    <td> </td>
-                    <td>我</td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td><a href="" class="btn btn-default btn-xs">查看</a>
-                      <a href="" class="btn btn-default btn-xs">编辑</a>
-                      <button class="btn btn-danger btn-xs" onclick="delete_return_contract()">删除</button>
-                     </td>
-                </tbody>
+               <tbody id="myCreateInvite">
+						<tr class="myCreateInviteTr">
+							<td class="myCreateInviteName"></td>
+							<td class="myCreateInviteUser"></td>
+							<td class="myCreateInviteStartups"></td>
+							<td class="myCreateInviteCreateDate"></td>
+							<td class="myCreateInviteStatus"></td>
+							<td class="myCreateInviteOperate"></td>
+						</tr>
+					</tbody>
               </table>
-              
-               <script>
-          function delete_return_contract(contractId) {
-            if(confirm("确认要删除吗？")) {
-              $.get('../../action/contract/action_delete_contract.php',{
-                projectid : contractId
-              }, function(data, textStatus){
-                // alert(data);
-                if(textStatus == "success") {
-                  if(data.success == 1) {
-                    alert("删除成功!!");
-                    window.location.reload();
-                  } else {
-                    alert(data.result);
-                  }
-                }
-              }, 'json');
-            }
-          }
-          </script>
-              
             </div>
             </div>
           </div>
@@ -77,6 +55,7 @@
               <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
                   我接收的邀请合同
               </a>
+              <span class="label label-info myReceiveInviteLabel"></span>
             </h4>
           </div>
           <div id="collapseTwo1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo1">
@@ -87,24 +66,24 @@
                   <tr>
                     <th>合同名称</th>
                     <th>邀请公司</th>
+                    <th>邀请人</th>
                     <th>创建时间</th>
                     <th>合同状态</th>
                     <th>操作</th>
                   </tr>
                 </thead>
-                <tbody>
-               
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <a href="" class="btn btn-default btn-xs">查看</a>
-                      <a href="" class="btn btn-default btn-xs">确认</a>
-                   </td>
-                  </tr>
-                </tbody>
+                
+                 <tbody id="myReceiveInvite">
+					<tr class="myReceiveInviteTr">
+						<td class="myReceiveInviteName"></td>
+						<td class="myReceiveInviteStartups"></td>
+						<td>我</td>
+						<td class="myReceiveInviteCreateDate"></td>
+						<td class="myReceiveInviteStatus"></td>
+						<td class="myReceiveInviteOperate"></td>
+					</tr>
+				</tbody>
+                
               </table>
             </div>
             </div>
@@ -127,6 +106,7 @@
                 <thead>
                   <tr>
                     <th>合同名称</th>
+                    <th>创建人</th>
 					<th>申请公司</th>
                     <th>创建时间</th>
                     <th>合同状态</th>
@@ -138,6 +118,7 @@
                 <tbody id="myCreateApply">
 					<tr class="myCreateApplyTr">
 						<td class="myCreateApplyName"></td>
+						<td>我</td>
 						<td class="myCreateApplyStartups"></td>
 						<td class="myCreateApplyCreateDate"></td>
 						<td class="myCreateApplyStatus"></td>
@@ -202,14 +183,15 @@
             			   //alert(JSON.stringify(data.myLeaderReceive));
             			   $(".myCreateApplyLabel").text(data.myCreateApply.length + "个");
             			   $(".myLeaderReceiveLabel").text(data.myLeaderReceive.length + "个");
-            			   
+            			   $(".myCreateInviteLabel").text(data.myCreateInvite.length + "个");
+            			   $(".myReceiveInviteLabel").text(data.myReceiveInvite.length + "个");
             			   /*
 							这是我创建的申请的合同的块
             			   */
             			   if(data.myCreateApply != null && data.myCreateApply.length > 1) {
 
             				   	$(".myCreateApplyTrClone").remove();
-	   							for(var i = 0; i < data.myCreateApply.length; i++) {
+	   							for(var i = 0; i < data.myCreateApply.length-1; i++) {
 	   								$(".myCreateApplyTr").clone().attr("class", "myCreateApplyTrClone").appendTo("#myCreateApply");
 	   							}
 	   							
@@ -219,9 +201,8 @@
 	   								$(".myCreateApplyStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myCreateApplyStartups[i].startupsId + "'>"+data.myCreateApplyStartups[i].startupsName+"</a>");
 		   							$(".myCreateApplyCreateDate").eq(i).text(data.myCreateApply[i].createDate);
 		   							$(".myCreateApplyStatus").eq(i).text(data.myCreateApply[i].applyStatus);
-		   							$(".myCreateApplyOperate").eq(i).html("<a href='' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>"
-		   								+ "<a href='' class='btn btn-default btn-xs myCreateApplyOperateModify'>编辑</a>"
-		   								+ "<button class='btn btn-danger btn-xs myCreateApplyOperateDelete' onclick='delete_return_contract_Invite()'>删除</button>"
+		   							$(".myCreateApplyOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myCreateApply[i].applyId+"' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>"
+		   									+ "<a class='btn btn-default btn-xs myCreateApplyOperateQuit' onclick='myLeaderReceiveOperate(2, \""+ data.myCreateApply[i].applyId + "\")'>取消申请</a>"
 		   							);
 	   								
 	   							}
@@ -233,9 +214,8 @@
 	   							$(".myCreateApplyStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myCreateApplyStartups[0].startupsId + "'>"+data.myCreateApplyStartups[0].startupsName+"</a>");
 	   							$(".myCreateApplyCreateDate").eq(0).text(data.myCreateApply[0].createDate);
 	   							$(".myCreateApplyStatus").eq(0).text(data.myCreateApply[0].applyStatus);
-	   							$(".myCreateApplyOperate").eq(0).html("<a href='' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>"
-	   								+ "<a href='' class='btn btn-default btn-xs myCreateApplyOperateModify'>编辑</a>"
-	   								+ "<button class='btn btn-danger btn-xs myCreateApplyOperateDelete' onclick='delete_return_contract_Invite()'>删除</button>"
+	   							$(".myCreateApplyOperate").eq(0).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myCreateApply[0].applyId+"' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>"
+	   								+ "<a class='btn btn-default btn-xs myCreateApplyOperateQuit' onclick='myLeaderReceiveOperate(2, \""+ data.myCreateApply[0].applyId + "\")'>取消申请</a>"
 	   							);
 	   						}
             			   
@@ -246,7 +226,7 @@
             			   if(data.myLeaderReceive != null && data.myLeaderReceive.length > 1) {
 
            				   		$(".myLeaderReceiveTrClone").remove();
-	   							for(var i = 0; i < data.myLeaderReceive.length; i++) {
+	   							for(var i = 0; i < data.myLeaderReceive.length-1; i++) {
 	   								$(".myLeaderReceiveTr").clone().attr("class", "myLeaderReceiveTrClone").appendTo("#myLeaderReceive");
 	   							}
 	   							
@@ -257,11 +237,10 @@
 		   							$(".myLeaderReceiveStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myLeaderReceive[i].applyStartupsId + "'>" + data.myLeaderReceiveStartups[i].startupsName + "</a>");
 		   							$(".myLeaderReceiveCreateDate").eq(i).text(data.myLeaderReceive[i].createDate);
 		   							$(".myLeaderReceiveStatus").eq(i).text(data.myLeaderReceive[i].applyStatus);
-		   							$(".myLeaderReceiveOperate").eq(i).html("<a href='' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>"
-		   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveOk' onclick='delete_return_contract_Invite()'>确认</button>"
-		   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveRefuse' onclick='delete_return_contract_Invite()'>拒绝</button>"
+		   							$(".myLeaderReceiveOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myLeaderReceive[i].applyId+"' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>"
+		   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveOk' onclick='myLeaderReceiveOperate(1, \""+ data.myLeaderReceive[i].applyId + "\")'>接收</button>"
+		   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveRefuse' onclick='myLeaderReceiveOperate(0, \""+ data.myLeaderReceive[i].applyId + "\")'>拒绝</button>"
 		   							);
-	   								
 	   							}
   							
 	   						} else if(data.myLeaderReceive.length == 1){
@@ -272,45 +251,147 @@
 	   							$(".myLeaderReceiveStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myLeaderReceive[0].applyStartupsId + "'>" + data.myLeaderReceiveStartups[0].startupsName + "</a>");
 	   							$(".myLeaderReceiveCreateDate").eq(0).text(data.myLeaderReceive[0].createDate);
 	   							$(".myLeaderReceiveStatus").eq(0).text(data.myLeaderReceive[0].applyStatus);
-	   							$(".myLeaderReceiveOperate").eq(0).html("<a href='' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>"
-	   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveOk' onclick='delete_return_contract_Invite()'>确认</button>"
-	   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveRefuse' onclick='delete_return_contract_Invite()'>拒绝</button>"
+	   							$(".myLeaderReceiveOperate").eq(0).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myLeaderReceive[0].applyId+"' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>"
+	   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveOk' onclick='myLeaderReceiveOperate(1, \""+ data.myLeaderReceive[0].applyId + "\")'>接收</button>"
+	   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveRefuse' onclick='myLeaderReceiveOperate(0, \""+ data.myLeaderReceive[0].applyId + "\")'>拒绝</button>"
+	   							);
+	   						}
+            			   
+            			   /**
+            			   * 这里是我创建的邀请
+            			   */
+            			   if(data.myCreateInvite != null && data.myCreateInvite.length > 1) {
+
+          				   		$(".myCreateInviteTrClone").remove();
+	   							for(var i = 0; i < data.myCreateInvite.length-1; i++) {
+	   								$(".myCreateInviteTr").clone().attr("class", "myCreateInviteTrClone").appendTo("#myCreateInvite");
+	   							}
+	   							
+	   							for(var i = 0; i < data.myCreateInvite.length; i++) {
+	   								
+	   								$(".myCreateInviteName").eq(i).text(data.myCreateInvite[i].inviteTitle);
+		   							$(".myCreateInviteUser").eq(i).html("<a href='/ChuangYeJia/getUserMark.action?mark="+ data.myCreateInvite[i].inviteUserId + "'>" + data.myCreateInviteUser[i].userNickName + "</>");
+		   							$(".myCreateInviteStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myCreateInvite[i].inviteOrganiserStartupsId + "'>" + data.myCreateInviteStartups[i].startupsName + "</a>");
+		   							$(".myCreateInviteCreateDate").eq(i).text(data.myCreateInvite[i].createDate);
+		   							$(".myCreateInviteStatus").eq(i).text(data.myCreateInvite[i].inviteStatus);
+		   							$(".myCreateInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myCreateInvite[i].inviteId + "' class='btn btn-default btn-xs myCreateInviteOperateDetail'>查看</a>"
+		   								+ "<button class='btn btn-danger btn-xs myCreateInviteQuit' onclick='delete_return_contract_Invite()'>取消邀请</button>"
+		   							);
+	   								
+	   							}
+ 							
+	   						} else if(data.myCreateInvite.length == 1){
+	   							$(".myCreateInviteTrClone").remove();
+	   							
+	   							$(".myCreateInviteName").eq(0).text(data.myCreateInvite[0].inviteTitle);
+	   							$(".myCreateInviteUser").eq(0).html("<a href='/ChuangYeJia/getUserMark.action?mark="+ data.myCreateInvite[0].inviteUserId + "'>" + data.myCreateInviteUser[0].userNickName + "</>");
+	   							$(".myCreateInviteStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myCreateInvite[0].inviteOrganiserStartupsId + "'>" + data.myCreateInviteStartups[0].startupsName + "</a>");
+	   							$(".myCreateInviteCreateDate").eq(0).text(data.myCreateInvite[0].createDate);
+	   							$(".myCreateInviteStatus").eq(0).text(data.myCreateInvite[0].inviteStatus);
+	   							$(".myCreateInviteOperate").eq(0).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myCreateInvite[0].inviteId + "' class='btn btn-default btn-xs myCreateInviteOperateDetail'>查看</a>"
+	   									+ "<button class='btn btn-danger btn-xs myCreateInviteQuit' onclick='delete_return_contract_Invite()'>取消邀请</button>"
 	   							);
 	   						}
             			   
             			   
-            			   /*
-            			   <!-- applyId
-							applyOrganiserId
-							applyTitle
-							applyContent
-							applyStartupsId
-							createDate
-							applyStatus
-								-->
+            			   /* 
+            			   	这里是我被邀请的所有邀请合同
+            			   	我接收的邀请合同
+            			   	myReceiveInvite
             			   */
+            			   
+            			   if(data.myReceiveInvite != null && data.myReceiveInvite.length > 1) {
+
+           				   	$(".myReceiveInviteTrClone").remove();
+	   							for(var i = 0; i < data.myReceiveInvite.length-1; i++) {
+	   								$(".myReceiveInviteTr").clone().attr("class", "myReceiveInviteTrClone").appendTo("#myReceiveInvite");
+	   							}
+	   							
+	   							for(var i = 0; i < data.myReceiveInvite.length; i++) {
+	   								
+	   								$(".myReceiveInviteName").eq(i).text(data.myReceiveInvite[i].inviteTitle);
+	   								$(".myReceiveInviteStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myReceiveInviteStartups[i].startupsId + "'>"+data.myReceiveInviteStartups[i].startupsName+"</a>");
+		   							$(".myReceiveInviteCreateDate").eq(i).text(data.myReceiveInvite[i].createDate);
+		   							$(".myReceiveInviteStatus").eq(i).text(data.myReceiveInvite[i].inviteStatus);
+		   							$(".myReceiveInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myReceiveInvite[i].inviteId + "' class='btn btn-default btn-xs myReceiveInviteOperateDetail'>查看</a>"
+		   									+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateOk'>接收</a>"
+			   								+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateRefuse'>拒绝</a>"
+		   							);
+	   								
+	   							}
+  							
+	   						} else if(data.myReceiveInvite.length == 1){
+	   							$(".myReceiveInviteTrClone").remove();
+	   							
+	   							$(".myReceiveInviteName").eq(0).text(data.myReceiveInvite[0].inviteTitle);
+	   							$(".myReceiveInviteStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myReceiveInviteStartups[0].startupsId + "'>"+data.myReceiveInviteStartups[0].startupsName+"</a>");
+	   							$(".myReceiveInviteCreateDate").eq(0).text(data.myReceiveInvite[0].createDate);
+	   							$(".myReceiveInviteStatus").eq(0).text(data.myReceiveInvite[0].inviteStatus);
+	   							$(".myReceiveInviteOperate").eq(0).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myReceiveInvite[0].inviteId + "' class='btn btn-default btn-xs myReceiveInviteOperateDetail'>查看</a>"
+	   								+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateOk'>接收</a>"
+	   								+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateRefuse'>拒绝</a>"
+	   							);
+	   						}
+            			   
             		   }
             		   
             	   }, 'json');
                });
                
                
-		          function delete_return_contract_Invite(contractId) {
-		            if(confirm("确认要删除吗？")) {
-		              $.get('../../action/contract/action_delete_contract.php',{
-		                projectid : contractId
-		              }, function(data, textStatus){
-		                // alert(data);
-		                if(textStatus == "success") {
-		                  if(data.success == 1) {
-		                    alert("删除成功!!");
-		                    window.location.reload();
-		                  } else {
-		                    alert(data.result);
-		                  }
-		                }
-		              }, 'json');
-		            }
+		          function myLeaderReceiveOperate(type, applyId) {
+		        	  if(type == 1) {
+		        		  if(confirm("您确定要接受该合伙人加入您的公司吗？")) {
+		        			  $.post('operateApply!receiveUser.action', {
+		        				  applyId : applyId
+		        			  }, function(data, textStatus){
+		        				  if(textStatus == "success") {
+		        					  if(data.operateSuccess) {
+		        						  alert("操作成功！！");
+						                    window.location.reload();
+		        					  } else {
+		        						  alert("操作失败！！");
+		        					  }
+		        				  }
+		        			  } , 'json');
+				          }
+		        	  } else if(type == 0) {
+		        		  
+		        		  if(confirm("您确定要拒绝该合伙人加入您的公司吗？")) {
+				              $.post('operateApply!refuseUser.action',{
+				                applyId : applyId
+				              }, function(data, textStatus){
+				                if(textStatus == "success") {
+		        					  
+		        					  if(data.operateSuccess) {
+		        						  alert("操作成功！！");
+						                    window.location.reload();
+		        					  } else {
+		        						  alert("操作失败！！");
+		        					  }
+				                }
+				              }, 'json');
+				            }
+		        	  } else if(type == 2) {
+		        		  
+		        		  if(confirm("您确定要取消该申请合同吗？")) {
+				              $.post('operateApply!quitApply.action',{
+				                applyId : applyId
+				              }, function(data, textStatus){
+				                if(textStatus == "success") {
+				                	  alert(typeof data.operateSuccess);
+		        					  alert(JSON.stringify(data));
+		        					  if(data.operateSuccess) {
+		        						  alert("操作成功！！");
+						                    window.location.reload();
+		        					  } else {
+		        						  alert("操作失败！！");
+		        					  }
+				                }
+				              }, 'json');
+				            }
+		        	  }
+		            
 		          }
           </script>
               

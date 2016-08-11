@@ -123,7 +123,17 @@ public class StartupsCreateDTO {
 		startups.setStartupsAddress(address.trim());
 		startups.setStartupsBrief(brief.trim());
 		startups.setStartupsDetail(detail.trim());
-		startups.setStartupsVideo(video);
+		
+		/**
+		 * 将video的src过滤chul
+		 */
+		if(video != null && video.trim() != "") {
+			String videoTemp = video.trim().split("src=")[1];
+			String videoUrl = videoTemp.split("\"")[1];
+			startups.setStartupsVideo(videoUrl);
+		} else {
+			startups.setStartupsVideo(null);
+		}
 		
 		return startups;
 	}

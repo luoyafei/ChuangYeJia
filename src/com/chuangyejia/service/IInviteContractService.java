@@ -52,5 +52,12 @@ public boolean saveInviteContract(InviteContract ic);
 	 * @return
 	 */
 	public boolean canInviteContract(String startupsId, String inviteUserId, String inviteStatus);
+
+	/**
+	 * 根据leaderId,来获取他所有公司所发出的所有邀请
+	 * @param leaderId
+	 * @return
+	 */
+	public List<InviteContract> getInviteContractInLeaderId(String leaderId);
 	
 }

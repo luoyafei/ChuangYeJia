@@ -102,7 +102,6 @@ System.out.println("InviteJoinStartupsAction.java处理用户申请的ajaxAction
 				break;
 			}
 		}
-System.out.println("Action:" + startups + ", userId:" + userId);
 		
 		if(repeat) {
 			success = false;

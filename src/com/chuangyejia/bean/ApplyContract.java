@@ -25,7 +25,7 @@ public class ApplyContract {
 	private String applyStartupsId;//申请的公司Id
 	private Timestamp createDate;//创建日期
 	private Timestamp lastModifyDate;//最后一次的修改日期
-	private String applyStatus = "正在审核";//申请状态
+	private String applyStatus = "正在审核";//申请状态(正在审核，已接受，已拒绝)
 	
 	@Id
 	@GenericGenerator(name="uuid", strategy="uuid")

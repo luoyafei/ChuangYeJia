@@ -83,5 +83,4 @@ public interface IApplyContractService {
 	 * @return
 	 */
 	public List<ApplyContract> getApplyContractInLeaderId(String leaderId);
-	
 }

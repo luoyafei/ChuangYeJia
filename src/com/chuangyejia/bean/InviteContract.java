@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,7 +25,7 @@ public class InviteContract {
 	private String inviteUserId;//邀请的用户Id
 	private Timestamp createDate;//创建时间
 	private Timestamp lastModifyDate;//最好修改时间
-	private String inviteStatus;//邀请状态
+	private String inviteStatus;//邀请状态(正在审核，已接受，已拒绝)
 	
 	@Id
 	@GenericGenerator(name="uuid", strategy="uuid")
@@ -59,7 +60,19 @@ public class InviteContract {
 	public void setInviteUserId(String inviteUserId) {
 		this.inviteUserId = inviteUserId;
 	}
+	
+	/**
+	 * 构建一个可以直接获取String类型的日期
+	 * @return String
+	 */
+	@Transient
+	public String getCreateDateStringTime() {
+		if(createDate == null)
+			createDate = new Timestamp(System.currentTimeMillis());
+		return createDate.toString();
+	}
 	public Timestamp getCreateDate() {
+		getCreateDateStringTime();
 		return createDate;
 	}
 	public void setCreateDate(Timestamp createDate) {

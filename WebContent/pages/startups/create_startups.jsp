@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div role="tabpanel" class="tab-pane active" id="home">
 				
 					<div class="tab-content-1" style="width: 80%;height: 100%;margin: 0 auto; background-color: white;">
-						<form class="form-horizontal" role="form" style="margin-left: 0px;" action="createStartups" method="post" enctype="multipart/form-data" onsubmit="return checkCreateStartups()">
+						<form class="form-horizontal" action="createStartups" role="form" id="submitForm" style="margin-left: 0px;" method="post" enctype="multipart/form-data">
 							
 							<div class="form-group" style="margin-right: 0px;margin-left: -10px;">
 							
@@ -328,11 +328,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<input type="text" id="video" name="sd.video" placeholder="请点击右侧的视频说明按钮，了解如何进行这一步的操作！" class="form-control" style="background-color: #F5F5F5;" />
 									</div>
 									<div class="col-md-2">
-									
-										<div class="uk-button-group">
-		                                    <button class="uk-button" onclick="testVideo()">点击测试</button>
-		                                    <a class="uk-button" href="<%=path %>/assets/manualSource/img/videoExplain.png" data-uk-lightbox="" title="视频说明">视频说明</a>
-		                                </div>
+		                            	<a class="uk-button" href="<%=path %>/assets/manualSource/img/videoExplain.png" data-uk-lightbox="" title="视频说明">视频说明</a>
 									</div>
 								</div>
 							</div>
@@ -340,68 +336,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="uk-cover iframeDiv" style="display: none;">
 							    <iframe src="" class="iframeSrc" style="width: 100%; height: 100%;" frameborder=0 allowfullscreen></iframe>
 							</div>
-							
-							<script teyp="text/javascript">
-								function testVideo() {
-									if($("#video").val().trim() !== "") {
-										$(".iframeDiv").attr("style", "display: inline;");
-										var videoTemp = $("#video").val().trim().split("src=")[1];
-										var videoUrl = videoTemp.split('"')[1];
-										$(".iframeSrc").attr("src", videoUrl);
-									} else {
-										alert("请先输入地址！");
-									}
-									
-								}
-							</script>
-							
-							
+						</form>
 
 							<div style="margin: 50px auto;">
 								<div class="form-group" style="margin: 0 auto; text-align: center;">
 									<p style="color:red;text-align: center;"><span id="errorSpan"></span></p>
-									<button type="submit" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">发送</button>
-									
+									<button  id="testClick" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">点击测试视频</button>
+									<button id="sendStartups" class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">发送</button>
 								</div>
 							</div>
-						</form>
-						<script type="text/javascript">
-							function checkCreateStartups() {
-								var name = $("#name").val().trim();
-								var type = $(".type").val().trim();
-								var require = $(".require").val().trim();
-								var stage = $(".stage").val().trim();
-								var address = $("#address").val().trim();
-								var brief = $("#brief").val().trim();
-								var detail = $("#detail").val().trim();
-								var img = $(".upload_img");
-								
-								if(name === "") {
-									$("#errorSpan").text("请填写公司名称！");
-									return false;
-								}
-								if(address === "") {
-									$("#errorSpan").text("请填写公司归属地！");
-									return false;
-								}
-								if(brief === "") {
-									$("#errorSpan").text("请填写公司简介！");
-									return false;
-								}
-								if(detail === "") {
-									$("#errorSpan").text("请填写公司详细内容！");
-									return false;
-								}
-								
-								for(var i = 0; i < 4; i++) {
-									if(img.eq(i).val().trim() === "") {
-										$("#errorSpan").text("请选择图片！");
-										return false;
-									}
-								}
-								return true;
-							}
-						</script>
 					</div>
 				</div>
 
@@ -413,8 +356,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</body>
 	<script>
 		$(document).ready(function() {
-			
 			$("td").attr("style", "border-top: solid #333333 1px;");
+			$("#testClick").bind('click',function() {
+				if($("#video").val().trim() !== "") {
+					$(".iframeDiv").attr("style", "display: inline;");
+					var videoTemp = $("#video").val().trim().split("src=")[1];
+					var videoUrl = videoTemp.split('"')[1];
+					$(".iframeSrc").attr("src", videoUrl);
+				} else {
+					alert("请先输入地址！");
+				}
+			});
+			$("#sendStartups").bind('click', function() {
+				var name = $("#name").val().trim();
+				var type = $(".type").val().trim();
+				var require = $(".require").val().trim();
+				var stage = $(".stage").val().trim();
+				var address = $("#address").val().trim();
+				var brief = $("#brief").val().trim();
+				var detail = $("#detail").val().trim();
+				var img = $(".upload_img");
+				var isOk = true;
+				
+				if(name === "") {
+					$("#errorSpan").text("请填写公司名称！");
+					isOk = false;
+				}
+				if(address === "") {
+					$("#errorSpan").text("请填写公司归属地！");
+					isOk = false;
+				}
+				if(brief === "") {
+					$("#errorSpan").text("请填写公司简介！");
+					isOk = false;
+				}
+				if(detail === "") {
+					$("#errorSpan").text("请填写公司详细内容！");
+					isOk = false;
+				}
+				
+				for(var i = 0; i < 4; i++) {
+					if(img.eq(i).val().trim() === "") {
+						$("#errorSpan").text("请选择图片！");
+						isOk = false;
+					}
+				}
+				if(isOk) {
+					$("#submitForm").submit();
+				}
+			});
 		});
 	</script>
 

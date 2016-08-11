@@ -86,6 +86,9 @@
 		<!-- 用户在邀请成员加入时，获取自己创建的所有公司的ajax的action -->
 		<action name="getMyLeaderForInvite" class="com.chuangyejia.ajax.GetMyLeaderStartupsForInvite" />
 		
+		<!-- 用户在操作接收到的合同的ajax的action -->
+		<action name="operateApply" class="com.chuangyejia.ajax.OperateApplyContractAction" />
+		
 		
 		<!-- 用来处理创建公司的action -->
 		<action name="createStartups" class="com.chuangyejia.action.CreateStartupsAction">
@@ -115,18 +118,24 @@
 			<result name="none" type="redirect">/index.jsp</result>
 		</action>
 		
+		
+		<!-- 处理点击申请合同想要访问该合同信息的页面时，根据申请的id，将合同的信息获取 -->
+		<action name="getApplyContract" class="com.chuangyejia.action.GetApplyContractInIdAction">
+			<result name="success">/pages/userConsole/apply/apply_show.jsp</result>
+			<result name="none" type="redirect">/index.jsp</result>
+		</action>
+		
+		<!-- 处理点击邀请合同想要访问该合同信息的页面时，根据邀请的id，将合同的信息获取 -->
+		<action name="getInviteContract" class="com.chuangyejia.action.GetInviteContractInIdAction">
+			<result name="success">/pages/userConsole/invite/invite_show.jsp</result>
+			<result name="none" type="redirect">/index.jsp</result>
+		</action>
+		
+		
+		
     <!-- 	<global-results>
     		<result name="exception">/exception.jsp</result>
     	</global-results> -->
-    	
-    	<!-- 这是用来测试重复提交token的Action
-    	<action name="tokenAction" class="com.struts.action.TokenAction">
-    		<result>/index.jsp</result>
-    		<interceptor-ref name="defaultStack"></interceptor-ref>
-    		<interceptor-ref name="token"></interceptor-ref>
-    		<result name="invalid.token" type="redirect">/testToken.jsp</result>
-    	</action>
-    	 -->
     	
     	
     </package>

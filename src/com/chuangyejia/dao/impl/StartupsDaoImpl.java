@@ -39,7 +39,7 @@ System.out.println("dao层中，在StartupsDaoImpl类，创建公司时，进行
 	@Override
 	public boolean updateStartups(Startups startups) {
 		// TODO Auto-generated method stub
-		boolean flag = false;
+		boolean flag = true;
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
 		
 		try {
@@ -48,13 +48,12 @@ System.out.println("dao层中，在StartupsDaoImpl类，创建公司时，进行
 			session.update(startups);
 			
 			session.getTransaction().commit();
-			flag = true;
 		} catch(HibernateException e) {
 			flag = false;
 System.out.println("dao层中，在StartupsDaoImpl类，更新公司时，进行数据库更新Startups对象时，出现异常！");
 			e.printStackTrace();
 		}
-		
+System.out.println("daoimpl:" + flag);
 		return flag;
 	}
 
@@ -147,6 +146,7 @@ System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获�
 		return sts;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Startups> getStartupsInLeaderId(String leaderId) {
 		// TODO Auto-generated method stub
@@ -169,6 +169,7 @@ System.out.println("dao层中，在StartupsDdaoImpl类，通过startupsId来获�
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Startups> getStartupsInCopartnerId(String copartnerId) {
 		// TODO Auto-generated method stub

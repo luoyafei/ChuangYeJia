@@ -66,19 +66,70 @@ System.out.println("在ApplyContractDaoImpl.java中，获取某公司下的所�
 	@Override
 	public boolean updateApplyContract(ApplyContract ac) {
 		// TODO Auto-generated method stub
-		return false;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		boolean flag = false;
+		
+		try {
+
+			session.beginTransaction();
+			
+			session.update(ac);
+			
+			session.getTransaction().commit();
+			flag = true;
+		} catch(HibernateException e) {
+			flag = false;
+System.out.println("更新申请合同时，出现错误！");
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 
 	@Override
 	public boolean deleteApplyContract(ApplyContract ac) {
 		// TODO Auto-generated method stub
-		return false;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		boolean flag = true;
+		try {
+			session.beginTransaction();
+			
+			ApplyContract accplyC = (ApplyContract)session.load(ApplyContract.class, ac.getApplyId());
+			session.delete(accplyC);
+
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+			flag = false;
+System.out.println("删除申请时出错！");
+			e.printStackTrace();
+		}
+		
+System.out.println(flag);
+		
+		return flag;
 	}
 
 	@Override
 	public ApplyContract getApplyContractInApplyId(String applyId) {
 		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		ApplyContract ac = null;
+		try {
+			session.beginTransaction();
+			
+			String ejbql = "from ApplyContract ac where ac.applyId = :applyId";
+			
+			Query query = session.createQuery(ejbql).setString("applyId", applyId);
+			ac = (ApplyContract)query.uniqueResult();
+
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+			ac = null;
+System.out.println("通过applyId，获取申请时出错！");
+			e.printStackTrace();
+		}
+		
+		return ac;
 	}
 
 	@SuppressWarnings("unchecked")

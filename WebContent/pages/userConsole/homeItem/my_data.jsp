@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			
-			<div class="uk-block uk-block-muted" style="width:100%;height: 400px;">
+			<div class="uk-block uk-block-muted" style="width:100%;">
 
                 <div class="uk-container">
 

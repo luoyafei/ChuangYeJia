@@ -98,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								$(".myStartupsTr").clone().attr("class", "myStartupsTrClone").appendTo("#myStartupsTbody");
 							}
 							
-							for(var i = 0; i < data.leaderS.length; i++) {
+							for(var i = 0; i < data.leaderS.length-1; i++) {
 								$(".myStartupsName").eq(i).text(data.leaderS[i].startupsName);
 								$(".myCopartnerRequire").eq(i).text(data.leaderS[i].startupsCopartnerRequire);
 								$(".myStartupsPassword").eq(i).text(data.leaderS[i].startupsPassword)
@@ -118,20 +118,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$(".myCreateDate").eq(0).text(data.leaderS[0].startupsCreateDate);
 							$(".myOperate").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[0].startupsId + "' class='btn btn-default btn-xs myOperateDetail'>查看</a>"
 								+ "<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[0].startupsId + "' class='btn btn-default btn-xs myOperateModify'>修改</a>"
-								+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick='delete_return_contract()'></button>"
+								+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick='delete_return_contract()'>删除</button>"
 							);
 							
 						}
 						
 						if(data.joinS != null && data.joinS.length > 1) {
 							$(".joinStartupsTrClone").remove();
-							for(var i = 0; i < data.joinS.length; i++) {
+							for(var i = 0; i < data.joinS.length-1; i++) {
 								$(".joinStartupsTr").clone().attr("class", "joinStartupsTrClone").appendTo("#joinStartupsTbody");
 							}
 							
 							for(var i = 0; i < data.joinS.length; i++) {
 								$(".joinStartupsName").eq(i).text(data.joinS[i].startupsName);
-								$(".joinStartupsLeader").eq(0).html("<a href='/ChuangYeJia/getUserMark.action?mark='" + data.joinS[i].startupsLeader.userId + "'>data.joinS[0].startupsLeader.userNickName</a>")
+								$(".joinStartupsLeader").eq(i).html("<a href='/ChuangYeJia/getUserMark.action?mark='" + data.joinS[i].startupsLeader.userId + "'>" + data.joinS[i].startupsLeader.userNickName+"</a>")
 								$(".joinCopartnerRequire").eq(i).text(data.joinS[i].startupsCopartnerRequire);
 								$(".joinCreateDate").eq(i).text(data.joinS[i].startupsCreateDate);
 								$(".joinOperate").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.joinS[i].startupsId + "' class='btn btn-default btn-xs joinOperateDetail'>查看</a>"

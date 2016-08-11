@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;UTF-8" %>
 		<!-- FOOTER -->
-		<div class="container bs-docs-footer  uk-block-secondary" style="width: 100%;height: 100px;text-align: center;background-color:; overflow: hidden;">
+		<div class="container bs-docs-footer  uk-block-secondary" style="width: 100%;height: 100px;text-align: center;background-color:#222222; overflow: hidden;">
 			
 			<div class="main-footer" style="margin: 10px auto;height: 100%;width: 80%;overflow: hidden;">
 				

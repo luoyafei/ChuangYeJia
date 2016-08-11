@@ -20,8 +20,6 @@ import com.chuangyejia.factory.HibernateSessionFactory;
 import com.chuangyejia.factory.ServiceFactory;
 import com.chuangyejia.service.IStartupsService;
 import com.chuangyejia.service.IUserService;
-import com.chuangyejia.tools.StartupsTempShow;
-import com.chuangyejia.tools.UserTempShow;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -29,8 +27,17 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		
 		IStartupsService iss = ServiceFactory.createStartupsService();
+		Startups s = iss.getStartupsInId("402881fc564aaf2801564b0f469c0001");
+		
+		User user = ServiceFactory.createUserService().getUserInId("402881fc567011c701567011cb0e0008");
+		s.getCopartner().add(user);
+		
+		boolean flag = iss.updateStartups(s);
+		
+		System.out.println(flag + ":::::::::::::::::::::::::::::::::::::::" + s.getCopartner().size());
+		
+		/*IStartupsService iss = ServiceFactory.createStartupsService();
 		StartupsTempShow sts = iss.getStartupsTempShowInId("402881fc564e779601564e7799260001");
 		boolean repeat = false;
 		Set<UserTempShow> uts = sts.getCopartner();
@@ -42,7 +49,7 @@ System.out.println(uts.size());
 				break;
 			}
 		}
-		System.out.println(repeat);
+		System.out.println(repeat);*/
 		
 	/*	List<ApplyContract> allLeaderStartupsReceivedApply = new ArrayList<ApplyContract>();
 		IUserService ius = ServiceFactory.createUserService();
