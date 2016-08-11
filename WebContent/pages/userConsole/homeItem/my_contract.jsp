@@ -379,8 +379,6 @@
 				                applyId : applyId
 				              }, function(data, textStatus){
 				                if(textStatus == "success") {
-				                	  alert(typeof data.operateSuccess);
-		        					  alert(JSON.stringify(data));
 		        					  if(data.operateSuccess) {
 		        						  alert("操作成功！！");
 						                    window.location.reload();

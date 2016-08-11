@@ -135,9 +135,11 @@ System.out.println("OperateApplyContractAction.java处理用户拒绝，拒绝�
 	 * 我创建的申请合同，取消合同的操作
 	 */
 	public void quitApply() {
-		
+		ac = ServiceFactory.createApplyContractService().getApplyContractInApplyId(applyId);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/json; charset=utf-8");
+		User user = (User)ServletActionContext.getRequest().getSession().getAttribute("user");
+		
 		PrintWriter out = null;
 		try {
 			out = response.getWriter();
@@ -149,16 +151,13 @@ System.out.println("OperateApplyContractAction.java处理用户拒绝，拒绝�
 		JsonObject jo = new JsonObject();
 		boolean operateSuccess = false;
 		
-		
-		if(checkApplyIdCanOperate()) {
-System.out.println("0");
+		if(ac.getApplyOrganiserId().equals(user.getUserId())) {
 			IApplyContractService iacs = ServiceFactory.createApplyContractService();
 			if(iacs.deleteApplyContract(ac)) {
 				operateSuccess = true;
 			}
+		}		
 			
-		}
-System.out.println(1 + "::" + operateSuccess);
 		jo.addProperty("operateSuccess", operateSuccess);
 		
 		out.print(jo.toString());
