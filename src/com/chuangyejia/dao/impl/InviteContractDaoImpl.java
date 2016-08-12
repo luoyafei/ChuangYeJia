@@ -17,14 +17,13 @@ public class InviteContractDaoImpl implements IInviteContractDao {
 	public boolean saveInviteContract(InviteContract ic) {
 		// TODO Auto-generated method stub
 		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
-		boolean flag = false;
+		boolean flag = true;
 		try {
 			session.beginTransaction();
 			
 			session.save(ic);
 			
 			session.getTransaction().commit();
-			flag = true;
 		} catch(HibernateException e) {
 			flag = false;
 			System.out.println("存储邀请合同出错！");
@@ -36,13 +35,39 @@ public class InviteContractDaoImpl implements IInviteContractDao {
 	@Override
 	public boolean deleteInviteContract(InviteContract ic) {
 		// TODO Auto-generated method stub
-		return false;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		boolean flag = true;
+		try {
+			session.beginTransaction();
+			
+			session.delete(ic);
+			
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+			flag = false;
+			System.out.println("删除邀请合同出错！");
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 	@Override
 	public boolean updateInviteContract(InviteContract ic) {
 		// TODO Auto-generated method stub
-		return false;
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		boolean flag = true;
+		try {
+			session.beginTransaction();
+			
+			session.update(ic);
+			
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+			flag = false;
+			System.out.println("更新邀请合同出错！");
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 	@Override

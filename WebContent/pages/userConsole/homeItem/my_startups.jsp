@@ -92,38 +92,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$(".myStartupsLabel").text(data.leaderS.length + "个");
 						$(".joinStartupsLabel").text(data.joinS.length + "个");
 						
-						if(data.leaderS != null && data.leaderS.length > 1) {
+						if(data.leaderS != null && data.leaderS.length > 0) {
 							$(".myStartupsTrClone").remove();
-							for(var i = 0; i < data.leaderS.length; i++) {
+							for(var i = 0; i < data.leaderS.length-1; i++) {
 								$(".myStartupsTr").clone().attr("class", "myStartupsTrClone").appendTo("#myStartupsTbody");
 							}
 							
-							for(var i = 0; i < data.leaderS.length-1; i++) {
+							for(var i = 0; i < data.leaderS.length; i++) {
 								$(".myStartupsName").eq(i).text(data.leaderS[i].startupsName);
 								$(".myCopartnerRequire").eq(i).text(data.leaderS[i].startupsCopartnerRequire);
 								$(".myStartupsPassword").eq(i).text(data.leaderS[i].startupsPassword)
 								$(".myCreateDate").eq(i).text(data.leaderS[i].startupsCreateDate);
 								$(".myOperate").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[i].startupsId + "' class='btn btn-default btn-xs myOperateDetail'>查看</a>"
 									+ "<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[i].startupsId + "' class='btn btn-default btn-xs myOperateModify'>修改</a>"
-									+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick='delete_return_contract()'></button>"
+									+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick=''>删除</button>"
 								);
 							}
 							
-						} else if(data.leaderS.length == 1){
-							$(".myStartupsTrClone").remove();
-							
-							$(".myStartupsName").eq(0).text(data.leaderS[0].startupsName);
-							$(".myCopartnerRequire").eq(0).text(data.leaderS[0].startupsCopartnerRequire);
-							$(".myStartupsPassword").eq(0).text(data.leaderS[0].startupsPassword)
-							$(".myCreateDate").eq(0).text(data.leaderS[0].startupsCreateDate);
-							$(".myOperate").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[0].startupsId + "' class='btn btn-default btn-xs myOperateDetail'>查看</a>"
-								+ "<a href='/ChuangYeJia/getStartupsItem?item=" + data.leaderS[0].startupsId + "' class='btn btn-default btn-xs myOperateModify'>修改</a>"
-								+ "<button class='btn btn-danger btn-xs myOperateDelete' onclick='delete_return_contract()'>删除</button>"
-							);
-							
 						}
 						
-						if(data.joinS != null && data.joinS.length > 1) {
+						if(data.joinS != null && data.joinS.length > 0) {
 							$(".joinStartupsTrClone").remove();
 							for(var i = 0; i < data.joinS.length-1; i++) {
 								$(".joinStartupsTr").clone().attr("class", "joinStartupsTrClone").appendTo("#joinStartupsTbody");
@@ -135,20 +123,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								$(".joinCopartnerRequire").eq(i).text(data.joinS[i].startupsCopartnerRequire);
 								$(".joinCreateDate").eq(i).text(data.joinS[i].startupsCreateDate);
 								$(".joinOperate").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.joinS[i].startupsId + "' class='btn btn-default btn-xs joinOperateDetail'>查看</a>"
-										+ "<a href='' class='btn btn-default btn-xs joinOperateExit'>退出公司</a>"
+										+ "<a href='' class='btn btn-danger btn-xs joinOperateExit'>退出公司</a>"
 								);
 							}
-							
-						} else if(data.joinS.length == 1){
-							$(".joinStartupsTrClone").remove();
-							
-							$(".joinStartupsName").eq(0).text(data.joinS[0].startupsName);
-							$(".joinStartupsLeader").eq(0).html("<a href='/ChuangYeJia/getUserMark.action?mark=" + data.joinS[0].startupsLeader.userId + "'>" + data.joinS[0].startupsLeader.userNickName + "</a>")
-							$(".joinCopartnerRequire").eq(0).text(data.joinS[0].startupsCopartnerRequire);
-							$(".joinCreateDate").eq(0).text(data.joinS[0].startupsCreateDate);
-							$(".joinOperate").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.joinS[0].startupsId + "' class='btn btn-default btn-xs joinOperateDetail'>查看</a>"
-								+ "<a href='' class='btn btn-default btn-xs joinOperateExit'>退出公司</a>"
-							);
 						}
 					}
 				}

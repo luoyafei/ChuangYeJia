@@ -90,7 +90,7 @@ System.out.println("在dao层，StartupsDaoImpl中，获取数据库中所有公
 		List<StartupsTempShow> stsList = new ArrayList<StartupsTempShow>();
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from Startups s order by :sort desc").setString("sort", "s."+sort).setMaxResults(length).setFirstResult(start);
+			Query query = session.createQuery("from Startups s order by :sort desc").setString("sort", "s."+sort).setMaxResults(length).setFirstResult(start*length);
 			List<Startups> startupsList = (List<Startups>)query.list();
 			for(int i = 0; i < startupsList.size(); i++)
 				stsList.add(startupsList.get(i).toStartupsTempShow());

@@ -188,7 +188,7 @@
             			   /*
 							这是我创建的申请的合同的块
             			   */
-            			   if(data.myCreateApply != null && data.myCreateApply.length > 1) {
+            			   if(data.myCreateApply != null && data.myCreateApply.length > 0) {
 
             				   	$(".myCreateApplyTrClone").remove();
 	   							for(var i = 0; i < data.myCreateApply.length-1; i++) {
@@ -201,29 +201,22 @@
 	   								$(".myCreateApplyStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myCreateApplyStartups[i].startupsId + "'>"+data.myCreateApplyStartups[i].startupsName+"</a>");
 		   							$(".myCreateApplyCreateDate").eq(i).text(data.myCreateApply[i].createDate);
 		   							$(".myCreateApplyStatus").eq(i).text(data.myCreateApply[i].applyStatus);
-		   							$(".myCreateApplyOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myCreateApply[i].applyId+"' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>"
-		   									+ "<a class='btn btn-default btn-xs myCreateApplyOperateQuit' onclick='myLeaderReceiveOperate(2, \""+ data.myCreateApply[i].applyId + "\")'>取消申请</a>"
-		   							);
+		   							if(data.myCreateApply[i].applyStatus == "正在审核") {
+		   								$(".myCreateApplyOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myCreateApply[i].applyId+"' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>"
+			   									+ "<a class='btn btn-danger btn-xs myCreateApplyOperateQuit' onclick='myLeaderReceiveOperate(2, \""+ data.myCreateApply[i].applyId + "\")'>取消申请</a>"
+			   							);
+		   							} else {
+		   								$(".myCreateApplyOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myCreateApply[i].applyId+"' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>");
+		   							}
+		   							
 	   								
 	   							}
    							
-	   						} else if(data.myCreateApply.length == 1){
-	   							$(".myCreateApplyTrClone").remove();
-	   							
-	   							$(".myCreateApplyName").eq(0).text(data.myCreateApply[0].applyTitle);
-	   							$(".myCreateApplyStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myCreateApplyStartups[0].startupsId + "'>"+data.myCreateApplyStartups[0].startupsName+"</a>");
-	   							$(".myCreateApplyCreateDate").eq(0).text(data.myCreateApply[0].createDate);
-	   							$(".myCreateApplyStatus").eq(0).text(data.myCreateApply[0].applyStatus);
-	   							$(".myCreateApplyOperate").eq(0).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myCreateApply[0].applyId+"' class='btn btn-default btn-xs myCreateApplyOperateDetail'>查看</a>"
-	   								+ "<a class='btn btn-default btn-xs myCreateApplyOperateQuit' onclick='myLeaderReceiveOperate(2, \""+ data.myCreateApply[0].applyId + "\")'>取消申请</a>"
-	   							);
 	   						}
-            			   
-            			   
             			   /*
-            			   这里是我接收到的申请的块
-            			   */
-            			   if(data.myLeaderReceive != null && data.myLeaderReceive.length > 1) {
+            				*   这里是我接收到的申请的块
+            			    */
+            			   if(data.myLeaderReceive != null && data.myLeaderReceive.length > 0) {
 
            				   		$(".myLeaderReceiveTrClone").remove();
 	   							for(var i = 0; i < data.myLeaderReceive.length-1; i++) {
@@ -237,30 +230,23 @@
 		   							$(".myLeaderReceiveStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myLeaderReceive[i].applyStartupsId + "'>" + data.myLeaderReceiveStartups[i].startupsName + "</a>");
 		   							$(".myLeaderReceiveCreateDate").eq(i).text(data.myLeaderReceive[i].createDate);
 		   							$(".myLeaderReceiveStatus").eq(i).text(data.myLeaderReceive[i].applyStatus);
-		   							$(".myLeaderReceiveOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myLeaderReceive[i].applyId+"' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>"
-		   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveOk' onclick='myLeaderReceiveOperate(1, \""+ data.myLeaderReceive[i].applyId + "\")'>接收</button>"
-		   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveRefuse' onclick='myLeaderReceiveOperate(0, \""+ data.myLeaderReceive[i].applyId + "\")'>拒绝</button>"
-		   							);
+		   							if(data.myLeaderReceive[i].applyStatus == "正在审核") {
+		   								$(".myLeaderReceiveOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myLeaderReceive[i].applyId+"' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>"
+			   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveOk' onclick='myLeaderReceiveOperate(1, \""+ data.myLeaderReceive[i].applyId + "\")'>接收</button>"
+			   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveRefuse' onclick='myLeaderReceiveOperate(0, \""+ data.myLeaderReceive[i].applyId + "\")'>拒绝</button>"
+			   							);
+		   							} else {
+		   								$(".myLeaderReceiveOperate").eq(i).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myLeaderReceive[i].applyId+"' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>");
+		   							}
+		   							
 	   							}
   							
-	   						} else if(data.myLeaderReceive.length == 1){
-	   							$(".myLeaderReceiveTrClone").remove();
-	   							
-	   							$(".myLeaderReceiveName").eq(0).text(data.myLeaderReceive[0].applyTitle);
-	   							$(".myLeaderReceiveApplicant").eq(0).html("<a href='/ChuangYeJia/getUserMark.action?mark="+ data.myLeaderReceive[0].applyOrganiserId + "'>" + data.myLeaderReceiveUser[0].userNickName + "</>");
-	   							$(".myLeaderReceiveStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myLeaderReceive[0].applyStartupsId + "'>" + data.myLeaderReceiveStartups[0].startupsName + "</a>");
-	   							$(".myLeaderReceiveCreateDate").eq(0).text(data.myLeaderReceive[0].createDate);
-	   							$(".myLeaderReceiveStatus").eq(0).text(data.myLeaderReceive[0].applyStatus);
-	   							$(".myLeaderReceiveOperate").eq(0).html("<a href='/ChuangYeJia/getApplyContract!JustDoIt.action?applyId="+data.myLeaderReceive[0].applyId+"' class='btn btn-default btn-xs myLeaderReceiveOperateDetail'>查看</a>"
-	   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveOk' onclick='myLeaderReceiveOperate(1, \""+ data.myLeaderReceive[0].applyId + "\")'>接收</button>"
-	   								+ "<button class='btn btn-danger btn-xs myLeaderReceiveRefuse' onclick='myLeaderReceiveOperate(0, \""+ data.myLeaderReceive[0].applyId + "\")'>拒绝</button>"
-	   							);
 	   						}
             			   
-            			   /**
+            			 /**
             			   * 这里是我创建的邀请
             			   */
-            			   if(data.myCreateInvite != null && data.myCreateInvite.length > 1) {
+            			   if(data.myCreateInvite != null && data.myCreateInvite.length > 0) {
 
           				   		$(".myCreateInviteTrClone").remove();
 	   							for(var i = 0; i < data.myCreateInvite.length-1; i++) {
@@ -274,33 +260,22 @@
 		   							$(".myCreateInviteStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myCreateInvite[i].inviteOrganiserStartupsId + "'>" + data.myCreateInviteStartups[i].startupsName + "</a>");
 		   							$(".myCreateInviteCreateDate").eq(i).text(data.myCreateInvite[i].createDate);
 		   							$(".myCreateInviteStatus").eq(i).text(data.myCreateInvite[i].inviteStatus);
-		   							$(".myCreateInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myCreateInvite[i].inviteId + "' class='btn btn-default btn-xs myCreateInviteOperateDetail'>查看</a>"
-		   								+ "<button class='btn btn-danger btn-xs myCreateInviteQuit' onclick='delete_return_contract_Invite()'>取消邀请</button>"
-		   							);
-	   								
+		   							if(data.myCreateInvite[i].inviteStatus == "正在审核") {
+		   								$(".myCreateInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myCreateInvite[i].inviteId + "' class='btn btn-default btn-xs myCreateInviteOperateDetail'>查看</a>"
+			   								+ "<button class='btn btn-danger btn-xs myCreateInviteQuit' onclick='operateInvite(2, \""+ data.myCreateInvite[i].inviteId + "\")'>取消邀请</button>"
+			   							);
+		   							} else {
+		   								$(".myCreateInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myCreateInvite[i].inviteId + "' class='btn btn-default btn-xs myCreateInviteOperateDetail'>查看</a>");
+		   							}
 	   							}
- 							
-	   						} else if(data.myCreateInvite.length == 1){
-	   							$(".myCreateInviteTrClone").remove();
-	   							
-	   							$(".myCreateInviteName").eq(0).text(data.myCreateInvite[0].inviteTitle);
-	   							$(".myCreateInviteUser").eq(0).html("<a href='/ChuangYeJia/getUserMark.action?mark="+ data.myCreateInvite[0].inviteUserId + "'>" + data.myCreateInviteUser[0].userNickName + "</>");
-	   							$(".myCreateInviteStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item=" + data.myCreateInvite[0].inviteOrganiserStartupsId + "'>" + data.myCreateInviteStartups[0].startupsName + "</a>");
-	   							$(".myCreateInviteCreateDate").eq(0).text(data.myCreateInvite[0].createDate);
-	   							$(".myCreateInviteStatus").eq(0).text(data.myCreateInvite[0].inviteStatus);
-	   							$(".myCreateInviteOperate").eq(0).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myCreateInvite[0].inviteId + "' class='btn btn-default btn-xs myCreateInviteOperateDetail'>查看</a>"
-	   									+ "<button class='btn btn-danger btn-xs myCreateInviteQuit' onclick='delete_return_contract_Invite()'>取消邀请</button>"
-	   							);
-	   						}
-            			   
-            			   
+	   						} 
             			   /* 
             			   	这里是我被邀请的所有邀请合同
             			   	我接收的邀请合同
             			   	myReceiveInvite
             			   */
             			   
-            			   if(data.myReceiveInvite != null && data.myReceiveInvite.length > 1) {
+            			   if(data.myReceiveInvite != null && data.myReceiveInvite.length > 0) {
 
            				   	$(".myReceiveInviteTrClone").remove();
 	   							for(var i = 0; i < data.myReceiveInvite.length-1; i++) {
@@ -313,24 +288,18 @@
 	   								$(".myReceiveInviteStartups").eq(i).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myReceiveInviteStartups[i].startupsId + "'>"+data.myReceiveInviteStartups[i].startupsName+"</a>");
 		   							$(".myReceiveInviteCreateDate").eq(i).text(data.myReceiveInvite[i].createDate);
 		   							$(".myReceiveInviteStatus").eq(i).text(data.myReceiveInvite[i].inviteStatus);
-		   							$(".myReceiveInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myReceiveInvite[i].inviteId + "' class='btn btn-default btn-xs myReceiveInviteOperateDetail'>查看</a>"
-		   									+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateOk'>接收</a>"
-			   								+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateRefuse'>拒绝</a>"
-		   							);
+		   							if(data.myReceiveInvite[i].inviteStatus == "正在审核") {
+		   								$(".myReceiveInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myReceiveInvite[i].inviteId + "' class='btn btn-default btn-xs myReceiveInviteOperateDetail'>查看</a>"
+		   									+ "<a onclick='operateInvite(1, \""+ data.myReceiveInvite[i].inviteId + "\")' class='btn btn-default btn-xs myReceiveInviteOperateOk'>接收</a>"
+			   								+ "<a onclick='operateInvite(0, \""+ data.myReceiveInvite[i].inviteId + "\")' class='btn btn-default btn-xs myReceiveInviteOperateRefuse'>拒绝</a>"
+			   							);
+		   							} else {
+		   								$(".myReceiveInviteOperate").eq(i).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myReceiveInvite[i].inviteId + "' class='btn btn-default btn-xs myReceiveInviteOperateDetail'>查看</a>");
+		   							}
+		   							
 	   								
 	   							}
   							
-	   						} else if(data.myReceiveInvite.length == 1){
-	   							$(".myReceiveInviteTrClone").remove();
-	   							
-	   							$(".myReceiveInviteName").eq(0).text(data.myReceiveInvite[0].inviteTitle);
-	   							$(".myReceiveInviteStartups").eq(0).html("<a href='/ChuangYeJia/getStartupsItem?item="+ data.myReceiveInviteStartups[0].startupsId + "'>"+data.myReceiveInviteStartups[0].startupsName+"</a>");
-	   							$(".myReceiveInviteCreateDate").eq(0).text(data.myReceiveInvite[0].createDate);
-	   							$(".myReceiveInviteStatus").eq(0).text(data.myReceiveInvite[0].inviteStatus);
-	   							$(".myReceiveInviteOperate").eq(0).html("<a href='/ChuangYeJia/getInviteContract!JustDoIt.action?inviteId="+ data.myReceiveInvite[0].inviteId + "' class='btn btn-default btn-xs myReceiveInviteOperateDetail'>查看</a>"
-	   								+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateOk'>接收</a>"
-	   								+ "<a href='' class='btn btn-default btn-xs myReceiveInviteOperateRefuse'>拒绝</a>"
-	   							);
 	   						}
             			   
             		   }
@@ -338,7 +307,10 @@
             	   }, 'json');
                });
                
-               
+               /* 
+               	操作申请合同，接收到的以及自己创建的
+               	@parameter type:0,1,2 拒绝，接收，取消
+               */
 		          function myLeaderReceiveOperate(type, applyId) {
 		        	  if(type == 1) {
 		        		  if(confirm("您确定要接受该合伙人加入您的公司吗？")) {
@@ -391,6 +363,66 @@
 		        	  }
 		            
 		          }
+		          
+		          /* 
+	               	操作邀请合同，接收到的以及自己创建的
+	               	@parameter type:0,1,2 拒绝，接收，取消
+	               */
+		          
+		          function operateInvite(type, inviteId) {
+	               		
+		        	  if(type == 1) {
+		        		  if(confirm("您确定要接受该公司的邀请合同吗？")) {
+		        			  $.post('operateInvite!receiveStartups.action', {
+		        				  inviteId : inviteId
+		        			  }, function(data, textStatus){
+		        				  if(textStatus == "success") {
+		        					  if(data.operateInviteSuccess) {
+		        						  alert("操作成功！！");
+						                    window.location.reload();
+		        					  } else {
+		        						  alert("操作失败！！");
+		        					  }
+		        				  }
+		        			  } , 'json');
+				          }
+		        	  } else if(type == 0) {
+		        		  
+		        		  if(confirm("您确定要拒绝该公司的邀请合同吗？")) {
+				              $.post('operateInvite!refuseStartups.action',{
+				            	  inviteId : inviteId
+				              }, function(data, textStatus){
+				                if(textStatus == "success") {
+		        					  
+		        					  if(data.operateInviteSuccess) {
+		        						  alert("操作成功！！");
+						                    window.location.reload();
+		        					  } else {
+		        						  alert("操作失败！！");
+		        					  }
+				                }
+				              }, 'json');
+				            }
+		        	  } else if(type == 2) {
+		        		  
+		        		  if(confirm("您确定要取消该邀请合同吗？")) {
+				              $.post('operateInvite!quitInvite.action',{
+				            	  inviteId : inviteId
+				              }, function(data, textStatus){
+				                if(textStatus == "success") {
+		        					  if(data.operateInviteSuccess) {
+		        						  alert("操作成功！！");
+						                    window.location.reload();
+		        					  } else {
+		        						  alert("操作失败！！");
+		        					  }
+				                }
+				              }, 'json');
+				            }
+		        	  }
+		            
+		          }
+		          
           </script>
               
         

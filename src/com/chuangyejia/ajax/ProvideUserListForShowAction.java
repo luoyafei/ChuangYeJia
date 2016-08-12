@@ -71,7 +71,7 @@ public class ProvideUserListForShowAction extends ActionSupport {
 		int category;
 		int startTrue;
 		int lengthTrue;
-System.out.println(start);
+
 		try {
 			category = Integer.parseInt(start.split(",")[0]);
 			startTrue = Integer.parseInt(start.split(",")[1]);
@@ -81,10 +81,9 @@ System.out.println(start);
 			startTrue = 0;
 			lengthTrue = 5;
 		}
-System.out.println("===" + category + "," + startTrue);
+
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
-		//response.setContentType("text/html;charset=utf-8");
 		
 		response.setContentType("application/json; charset=utf-8");
 		IUserService ius = ServiceFactory.createUserService();

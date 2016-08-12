@@ -212,10 +212,13 @@ request.setAttribute("flag", "startups");
 			<div class="thumbtitle">
 				<div class="contenttitle" style="margin-bottom: 10px;">
 					<p style="margin-bottom: 4px;">WHAT&nbsp;&nbsp;&nbsp;&nbsp;WE&nbsp;&nbsp;&nbsp;&nbsp;DO</p>
-					<p style="float: right;">随经济全球化以及生产专业化现象的普遍，社会分工和协同合作已经成为了一种创业趋势。</p>
+					<p style="float: right;">随经济全球化以及生产专业化现象的普遍，社会分工和协同合作已经成为了一种创业趋势。<a role="button" href="/ChuangYeJia/pages/startups/create_startups.jsp" class="btn btn-lg" style="padding: 4px 12px;border-radius: 30px;border: solid 2px;">创建我的公司</a></p>
 					<h2 style="margin-top: 0;color: black;">公司分类</h2>
 				</div>
 			</div>
+			
+			
+			
 			<div class="marketing-nav">
 				<ul class="nav nav-tabs marketing-nav-content" role="tablist">
 					<li role="presentation" class="active">
@@ -321,15 +324,15 @@ request.setAttribute("flag", "startups");
 		function getAllStartups(start, length) {
 			
 			$.post('supportStartups!getStartups.action', {
-				start : start,
+				start : start-1,
 				length : length
 			}, function(data, textStatus) {
 				if(textStatus == 'success') {
 					$(".cloneItemAll").remove();
 					
 					var count = data.count;
-					var allPage = count/15 + count%length==0?0:1;
-					
+					var allPage = parseInt(count/length) + (count%length==0?0:1);
+
 					var pa1 = $(".pagination_All").eq(0);
 					var pa2 = $(".pagination_All").eq(1);
 					var pa3 = $(".pagination_All").eq(2);

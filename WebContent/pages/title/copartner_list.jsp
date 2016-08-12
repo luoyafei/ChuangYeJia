@@ -212,7 +212,7 @@ request.setAttribute("flag", "partner");
 			<div class="thumbtitle">
 				<div class="contenttitle" style="margin-bottom: 10px;">
 					<p style="margin-bottom: 4px;">WHAT&nbsp;&nbsp;&nbsp;&nbsp;WE&nbsp;&nbsp;&nbsp;&nbsp;DO</p>
-					<p style="float: right;"><a role="button" href=<s:if test="#session.user == null">"/ChuangYeJia/pages/signIn/register.jsp"</s:if><s:else>"/ChuangYeJia/pages/userConsole/complete_data.jsp"</s:else> class="btn btn-lg" style="padding: 4px 12px;border-radius: 30px;border: solid 2px;">加入合伙人</a></p>
+					<p style="float: right;">随经济全球化以及生产专业化现象的普遍，社会分工和协同合作已经成为了一种创业趋势。<a role="button" href=<s:if test="#session.user == null">"/ChuangYeJia/pages/signIn/register.jsp"</s:if><s:else>"/ChuangYeJia/pages/userConsole/complete_data.jsp"</s:else> class="btn btn-lg" style="padding: 4px 12px;border-radius: 30px;border: solid 2px;">成为合伙人</a></p>
 					<h2 style="margin-top: 0;" style="color: black;">合伙人分类</h2>
 				</div>
 			</div>

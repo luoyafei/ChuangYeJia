@@ -151,6 +151,9 @@ System.out.println("OperateApplyContractAction.java处理用户拒绝，拒绝�
 		JsonObject jo = new JsonObject();
 		boolean operateSuccess = false;
 		
+		/**
+		 * 必须得确保准备删除的申请合同，是自己所创建的！
+		 */
 		if(ac.getApplyOrganiserId().equals(user.getUserId())) {
 			IApplyContractService iacs = ServiceFactory.createApplyContractService();
 			if(iacs.deleteApplyContract(ac)) {

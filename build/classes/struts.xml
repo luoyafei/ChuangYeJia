@@ -86,8 +86,11 @@
 		<!-- 用户在邀请成员加入时，获取自己创建的所有公司的ajax的action -->
 		<action name="getMyLeaderForInvite" class="com.chuangyejia.ajax.GetMyLeaderStartupsForInvite" />
 		
-		<!-- 用户在操作接收到的合同的ajax的action -->
+		<!-- 用户在操作接收到的申请合同以及自己创建的申请合同的ajax的action -->
 		<action name="operateApply" class="com.chuangyejia.ajax.OperateApplyContractAction" />
+		
+		<!-- 用户在操作接收到的邀请合同以及自己创建的邀请合同的ajax的action -->
+		<action name="operateInvite" class="com.chuangyejia.ajax.OperateInviteContractAction" />
 		
 		
 		<!-- 用来处理创建公司的action -->

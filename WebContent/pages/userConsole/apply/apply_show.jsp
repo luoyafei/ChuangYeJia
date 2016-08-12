@@ -183,41 +183,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					</div>
 				</div>
-
-			</div>
-			
-			<div>
-				<!-- <div class="main-left" style="width: 100%;text-align: center;float: left;padding-top: 20px;">
-					<a class="btn btn-default btn-lg btn-block" style="border: solid #A9A9A9 2px; border-radius: 10px;" href="">编辑</a>
-				</div> -->
-
-
-				<!-- 点击删除出现的删除框 -->
-				<div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">
-									<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-								</button>
-								<h4 class="modal-title" id="my_delete_modal">
-										删除提醒
-								</h4>
-							</div>
-							<div class="modal-body">
-								<h3>您确认要删除该合同吗？</h3>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">
-									关闭
-								</button>
-								<a href="../../action/contract/action_delete_contract.php?projectid=<?echo $project->project_id;?>" class="btn btn-danger">
-									删除
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	<jsp:include page="../../module/bottom.jsp" flush="true" />
