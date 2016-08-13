@@ -38,5 +38,12 @@ public class ProductDTO {
 		this.startups = startups;
 	}
 	
+	private boolean notNull(String data) {
+		return data != null && data.trim().hashCode() !=0 ;
+	}
+	public boolean dataValidate() {
+		
+		return notNull(name) && notNull(address) && notNull(brief) && notNull(detail) && notNull(startups); 
+	}
 	
 }

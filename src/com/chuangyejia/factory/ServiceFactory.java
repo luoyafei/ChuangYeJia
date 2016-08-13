@@ -2,10 +2,12 @@ package com.chuangyejia.factory;
 
 import com.chuangyejia.service.IApplyContractService;
 import com.chuangyejia.service.IInviteContractService;
+import com.chuangyejia.service.IProductService;
 import com.chuangyejia.service.IStartupsService;
 import com.chuangyejia.service.IUserService;
 import com.chuangyejia.service.impl.ApplyContractServiceImpl;
 import com.chuangyejia.service.impl.InviteContractServiceImpl;
+import com.chuangyejia.service.impl.ProductServiceImpl;
 import com.chuangyejia.service.impl.StartupsServiceImpl;
 import com.chuangyejia.service.impl.UserServiceImpl;
 
@@ -27,4 +29,7 @@ public class ServiceFactory {
 		return new InviteContractServiceImpl();
 	}
 	
+	public static IProductService createProductService() {
+		return new ProductServiceImpl();
+	}
 }

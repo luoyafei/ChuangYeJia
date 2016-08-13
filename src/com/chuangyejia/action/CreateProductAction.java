@@ -2,21 +2,17 @@ package com.chuangyejia.action;
 
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.chuangyejia.bean.Product;
+import com.chuangyejia.bean.Startups;
 import com.chuangyejia.bean.User;
 import com.chuangyejia.dto.ProductDTO;
 import com.chuangyejia.factory.ServiceFactory;
-import com.chuangyejia.service.IUserService;
 import com.chuangyejia.tools.UploadFileUtil;
-import com.google.gson.JsonObject;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CreateProductAction extends ActionSupport {
@@ -38,7 +34,16 @@ public class CreateProductAction extends ActionSupport {
 	/**
 	 * 图片的默认地址
 	 */
+	@SuppressWarnings("unused")
 	private static final String DEFAULT = ServletActionContext.getServletContext().getInitParameter("uploadPictureUrlDef");
+	private String productId;
+	public String getProductId() {
+		return productId;
+	}
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
 	
 	private ProductDTO pd;
 	
@@ -74,23 +79,7 @@ public class CreateProductAction extends ActionSupport {
 	
 	
 	
-	public void uploadPicture() {
-		
-		HttpServletResponse response = ServletActionContext.getResponse();
-		
-		response.setContentType("application/json; charset=utf-8");
-		PrintWriter out = null;
-		
-		JsonObject jo = new JsonObject();
-		
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-System.out.println("用户上传头像时，获取输出的管道出错");
-			e.printStackTrace();
-		}
-		
+	private String uploadPicture() {
 		
 		/**
 		 * 保证传输过来的是图片
@@ -113,69 +102,48 @@ System.out.println("用户上传头像时，获取输出的管道出错");
 			/**
 			 * 标识，创建文件是否成功
 			 * 使用上传文件工具类
-			 */
-			boolean create = UploadFileUtil.justDoIt(picture, file);
-			
-			/**
 			 * 如果创建成功，则进行往数据库用户表中更新
 			 */
-			if(create) {
-				HttpSession session = ServletActionContext.getRequest().getSession();
-				User user = (User)session.getAttribute("user");
-				
-				/**
-				 * 先将之前的头像保存出来
-				 */
-				String oldPictureUrl = user.getUserPhoto();
-				
-				user.setUserPhoto(DB + pictureFileName);
-				IUserService ius = ServiceFactory.createUserService();
-				boolean result = ius.updateUser(user);
-
-				if(result) {
-					session.setAttribute("user", user);
-					jo.addProperty("status", true);
-					jo.addProperty("pictureUrl", DB + pictureFileName);
-					/**
-					 * 插入成功后，将原图像删除
-					 */
-					if(!oldPictureUrl.equals(DEFAULT)) {
-						String oldPictureName = oldPictureUrl.split("/")[3];
-						String oldPictureDisk = DISK + oldPictureName;
-						File oldFile = new File(oldPictureDisk);
-						if(oldFile.exists())
-							oldFile.delete();
-					}
+			if(UploadFileUtil.justDoIt(picture, file)) {
+				return pictureFileName;
+			} else {
+				if(file.exists())
+					file.delete();
+				return "false";
+			}
+		}
+		return "false";
 					
-				} else {
-					user.setUserPhoto(oldPictureUrl);
-					jo.addProperty("status", false);
-					if(file.exists())
-						file.delete();
-				}
-					
-			} else
-				jo.addProperty("status", false);
-			
-		} else
-			jo.addProperty("status", false);
-		
-		out.println(jo.toString());
-		out.flush();
-		out.close();
-		
 	}
+	
 	
 	
 	
 	public String createProduct() {
-		System.out.println(pd.getAddress());
-		System.out.println(pd.getBrief());
-		System.out.println(pd.getDetail());
-		System.out.println(pd.getName());
-		System.out.println(pd.getStartups());
-		System.out.println(pictureFileName);
+		User user = (User)ServletActionContext.getRequest().getSession().getAttribute("user");
+		Startups startups = ServiceFactory.createStartupsService().getStartupsInId(pd.getStartups());
+		if(user != null && pd.dataValidate() && startups != null && startups.getStartupsLeader().getUserId().equals(user.getUserId())) {
+			String result = uploadPicture();
+			if(!result.equals("false")) {
+				Product product = new Product();
+				product.setProductName(pd.getName());
+				product.setProductAddress(pd.getAddress());
+				product.setProductBrief(pd.getBrief());
+				product.setProductCover(DB + result);
+				product.setProductCreateDate(new Timestamp(System.currentTimeMillis()));
+				product.setProductDetail(pd.getDetail());
+				product.setProductStartups(startups);
+				
+				if(ServiceFactory.createProductService().saveProduct(product)) {
+					this.productId = product.getProductId();
+					return SUCCESS;
+				} else
+					this.addFieldError("error", "保存出错！请刷新重试！");
+			} else
+				this.addFieldError("error", "图片保存上传错误！请刷新重试！");
+		} else 
+			this.addFieldError("error", "数据填写出错！请刷新重试！");
 		return INPUT;
 	}
-
+	
 }
