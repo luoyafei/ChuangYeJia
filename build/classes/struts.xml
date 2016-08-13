@@ -139,6 +139,12 @@
 			<result name="none" type="redirect">/index.jsp</result>
 		</action>
 		
+		<!-- 处理点击产品想要访问该产品信息的页面时，根据产品的id，将产品的信息获取 -->
+		<action name="getProductItem" class="com.chuangyejia.action.GetProductInIdAction">
+			<result name="success">/pages/userConsole/product/show_product.jsp</result>
+			<result name="none" type="redirect">/index.jsp</result>
+		</action>
+		
 		
 		
     <!-- 	<global-results>

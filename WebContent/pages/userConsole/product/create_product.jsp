@@ -138,8 +138,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<div class="tab-content" style="background-color: white;padding-top: 40px;border-bottom: solid #A9A9A9 2px;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
 		
-		<s:debug></s:debug>
-				
 				<div role="tabpanel" class="tab-pane active" id="home">
 					<div class="tab-content-1" style="width: 80%;height: 100%;margin: 0 auto; background-color: white;">
 						<form id="productForm" action="createProduct!createProduct.action" class="form-horizontal" role="form" style="margin-left: 0px;" method="post" enctype="multipart/form-data">

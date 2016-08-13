@@ -95,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<jsp:include page="/pages/module/index_bar.jsp" flush="true" />
 
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 0px;">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 0px;height: 100%;">
 			
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
@@ -107,11 +107,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 
 							<h1 style="margin-top: 0px; margin-bottom: 0px;">创建成功！</h1>
+							
 							<p style="margin-bottom: 0px;">
 								<br> 通过创建创业公司，发布资金，技术，运营和产品，您可以参与多项创业活动，期待您在创业加中寻找到满意的工作！
 							</p>
 							<p style="padding-top: 10px;margin-bottom: 0px;">
-								<a class="btn btn-primary" href="getStartupsItem?item=<s:property value='startupsId' />" role="button" style="border-radius: 20px;">查看已发布公司信息信息</a>
+								<a class="btn btn-primary" href="getProductItem?item=<s:property value='productId' />" role="button" style="border-radius: 20px;">查看已发布产品信息</a>
 							</p>
 						</div>
 					</div>
