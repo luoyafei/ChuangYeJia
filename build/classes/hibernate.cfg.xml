@@ -10,7 +10,7 @@
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <!-- <property name="connection.url">jdbc:mysql://114.215.109.41:3306/chuangyejia</property> -->
-        <property name="connection.url">jdbc:mysql://localhost:3306/ChuangYeJia</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/chuangyejia</property>
         <!-- //114.215.109.41:3306/chatnorefresh?user=root&password=lyfzs -->
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
@@ -56,6 +56,7 @@
         <mapping class="com.chuangyejia.bean.Startups"/>
         <mapping class="com.chuangyejia.bean.ApplyContract"/>
         <mapping class="com.chuangyejia.bean.InviteContract"/>
+        <mapping class="com.chuangyejia.bean.Product"/>
     </session-factory>
 
 </hibernate-configuration>

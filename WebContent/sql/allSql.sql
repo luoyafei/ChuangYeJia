@@ -81,3 +81,17 @@ create table inviteContract (
 	constraint foreign key (inviteOrganiserStartupsId) references Startups (StartupsId),
 	constraint foreign key (inviteUserId) references User (userId)
 )ENGINE=InnoDB default charset=utf8
+
+--产品
+create table product (
+	productId varchar(32) primary key,
+	productName varchar(18),
+	productStartupsId varchar(32),
+	productCreateDate datetime default now(),
+	productPrice varchar(12),
+	productBrief varchar(255),
+	productDetail text,
+    productAddress varchar(50),
+    productCover varchar(255),
+	constraint foreign key (productStartupsId) references Startups (StartupsId)
+)ENGINE=InnoDB default charset=utf8

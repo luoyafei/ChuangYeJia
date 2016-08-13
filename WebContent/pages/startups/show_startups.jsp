@@ -109,13 +109,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<span>
 									<img data-holder-rendered="true" src="<s:property value='#request.sts.startupsCover'/>" style="width: 100px; height: 100px;" class="img-circle" />
 								</span>
-								
-								<%-- <span>
-									<a style="font-size: 14px;text-decoration: none;">
-										<span style="display: block;">公司：</span>
-									</a>
-								</span> --%>
-								
 							</div>
 							<p style="margin-bottom: 0px;font-size: 32px;">
 								<br> <s:property value='#request.sts.startupsName'/>

@@ -76,7 +76,6 @@
 		<!-- 用户进行邀请合伙人加入公司的ajax的action -->
 		<action name="inviteJoin" class="com.chuangyejia.ajax.InviteJoinStartupsAction" />
 		
-		
 		<!-- 用户在userConsole控制台中获取自己是leader的公司以及自己参加的公司的ajax的action -->
 		<action name="getStartupsConsole" class="com.chuangyejia.ajax.GetStartupsInUserConsole" />
 		
@@ -91,6 +90,12 @@
 		
 		<!-- 用户在操作接收到的邀请合同以及自己创建的邀请合同的ajax的action -->
 		<action name="operateInvite" class="com.chuangyejia.ajax.OperateInviteContractAction" />
+		
+		<!-- 用户创建自己公司的产品的action -->
+		<action name="createProduct" class="com.chuangyejia.action.CreateProductAction">
+			<result name="input">/pages/userConsole/product/create_product.jsp</result>
+			<result name="success">/pages/userConsole/product/end_product.jsp</result>
+		</action>
 		
 		
 		<!-- 用来处理创建公司的action -->
