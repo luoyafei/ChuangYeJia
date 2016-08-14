@@ -12,4 +12,5 @@ public interface IProductDao {
 	public Product getProductInId(String productId);
 	public List<Product> getProductsInStartupsId(String startupsId);
 	public List<Product> getProductsListToShow(Integer start, Integer length, String sort);
+	public int getAllProductsCount();
 }

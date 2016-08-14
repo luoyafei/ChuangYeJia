@@ -220,6 +220,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</div>
 								</div>
 							</div>
+							<div style="border-bottom: dashed #A9A9A9 1px;">
+								<div class="form-group" style="margin-right: 0px;margin-left: -28px;;padding-top: 15px;">
+									<label for="price" class="col-sm-2 control-label" style="font-size: 18px;font-weight: normal;">售价(元)&nbsp;&nbsp;</label>
+									<div class="col-sm-10">
+										<input type="number" maxlength="12" class="form-control" name="pd.price" placeholder="如若暂不售卖，请不要填写" style="background-color: #F5F5F5;" id="price" />
+									</div>
+								</div>
+							</div>
+							
 						</form>
 							<div style="margin: 50px auto;">
 								<div class="form-group" style="margin: 0 auto; text-align: center;">
@@ -271,7 +280,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var brief = $("#brief").val().trim();
 				var startups = $("#selectFlag").val().trim();
 				var detail = $("#detail").val().trim();
-
+				var price = $("#price").val().trim();
+				
 				if(startups == 0) {
                 	$("#productSendError").text("您还没有选择您自己的公司！如果没有，请先创建属于自己的公司后，再进行发布产品吧！");
                 	isOk = false;

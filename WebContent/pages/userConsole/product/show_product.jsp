@@ -103,20 +103,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="container" style="padding-right: 0px;padding-left: 0px;">
 						<div class="carousel-caption">
 							<div class="logo-img" style="width: 100%;">
+									
 								<span>
-									<img src='<s:property value='#request.product.productCover'/>' style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;">
-								</span>
-								<span>
-									<a href="getStartupsItem?item=<s:property value='#request.product.productStartups.startupsId' />" style="font-size: 14px;text-decoration: none;">
-										<span style="display: block;">公司：<s:property value="#request.product.productStartups.startupsName"/></span>
-									</a>
-								</span>
-								<span>
-									<img src="<%=path %>/assets/img/project/等级条.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;">
+									<img data-holder-rendered="true" src="<s:property value='#request.product.productCover'/>" style="width: 100px; height: 100px;" class="img-circle" />
 								</span>
 							</div>
 							<p style="margin-bottom: 0px;font-size: 32px;">
-								<br> 产品名：<s:property value="#request.product.productName"/>
+								<br> 产品名称：<s:property value="#request.product.productName"/>
 							</p>
 							<br />
 							<br />
@@ -159,6 +152,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="uk-panel">
                                 <ul class="uk-list uk-list-line">
 									<li>产品名称:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.product.productName"/></span></li>
+									<li>所属公司:&nbsp;&nbsp;&nbsp;&nbsp;
+									<span>
+									<a href="getStartupsItem?item=<s:property value='#request.product.productStartups.startupsId' />" style="color: #000000;text-decoration: none;">
+										<s:property value="#request.product.productStartups.startupsName"/>
+									</a>
+									</span>
+									</li>
+									<li>产品售价:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:if test="#request.product.productPrice == null">暂不售卖</s:if><s:else><s:property value="#request.product.productPrice"/>元</s:else></span></li>
 									<li>产品归属地:&nbsp;&nbsp;&nbsp;&nbsp;<span><s:property value="#request.product.productAddress"/></span></li>
 								</ul>
                             </div>
@@ -175,40 +176,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <h3 class="panel-title product_brief">产品简介</h3>
 					  </div>
 					  <div class="panel-body">
-					  	
 						    简介：
-						    	<span>
-							    	<s:property value="#request.product.productBrief"/>
-							    </span>
-					  
-					    
+					    	<span>
+						    	<s:property value="#request.product.productBrief"/>
+						    </span>
 					  </div>
 					</div>
 				</div>
 			</div>
-			
 
-		
-
-
-
-				<div class="content-main-mid" style="height: 100%;margin-top: 30px;border-bottom: solid #DCDCDC 1px;">
-					<div style="width: 80%;height: 100%;margin: 0 auto;">
-						<div class="main-left" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
-								<a class="btn btn-default" onclick="" style="border: solid #A9A9A9 2px; border-radius: 10px;">联系ta</a>
-						</div>
-						<div class="main-right" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
-							<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;" href="">立即体验</a>
-						</div>
-					</div>
+			<div style="width: 80%;height: 80px;margin: 0 auto;">
+				<div class="main-left" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
+					<a class="btn btn-default" onclick="" style="border: solid #A9A9A9 2px; border-radius: 10px;">联系ta</a>
 				</div>
+				<div class="main-right" style="width: 50%;text-align: center;height: 100%;float: left;padding-top: 20px;">
+					<a class="btn btn-default" style="border: solid #A9A9A9 2px; border-radius: 10px;">点击购买</a>
+				</div>
+			</div>
+
 
 				<div class="content-main-bottoom" style="width: 100%;height: 100%;overflow: auto;">
 					
 					<ul class="nav nav-tabs" role="tablist" id="myTab">
-						<li role="presentation" class="active" style="width: 33%;text-align: center;"><a href="#home" role="tab" data-toggle="tab" style="color: black;">产品详情</a></li>
-						<li role="presentation" style="width: 33%;text-align: center;"><a href="#profile" role="tab" data-toggle="tab" style="color: black;">交易保障</a></li>
-					  	<li role="presentation" style="width: 34%;text-align: center;"><a href="#messages" role="tab" data-toggle="tab" style="color: black;">评价</a></li>
+						<li role="presentation" class="active" style="width: 33.333333%;text-align: center;"><a href="#home" role="tab" data-toggle="tab" style="color: black;">产品详情</a></li>
+						<li role="presentation" style="width: 33.333333%;text-align: center;"><a href="#profile" role="tab" data-toggle="tab" style="color: black;">交易保障</a></li>
+					  	<li role="presentation" style="width: 33.333333%;text-align: center;"><a href="#messages" role="tab" data-toggle="tab" style="color: black;">评价</a></li>
 					</ul>
 				</div>
 				
@@ -216,13 +208,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				<div class="tab-content" style="background-color: #FFFFFF">
 						<div role="tabpanel" class="tab-pane active" id="home">
-							<div style="margin: 0px auto;padding-top:20px">
-								context
+							<div style="margin: 0px auto;padding-top:20px;padding-bottom: 20px">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span><s:property value="#request.product.productDetail"/></span>
 							</div>
 						</div>
 
 
-						<!--#####################################此处为交易保障-->
+						<!--此处为交易保障-->
 					  <div role="tabpanel" class="tab-pane" id="profile" style="background-color: #FFFFFF">
 					  	<div style="width: 80%;height: 100%;margin: 30px auto;">
 					  		<div class="left-top" style="width: 50%;height: 50%;float: left;">
@@ -281,55 +274,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  	</div>
 					  </div>
 
-					  <!--#####################################此处为评价-->
+					  <!--此处为评价-->
 					  <div role="tabpanel" class="tab-pane" id="messages">
-					  	<div style="width: 100%;height: 20%;border-bottom: solid #DCDCDC 1px;overflow: hidden;">
-					  		<div style="width: 30%;height: 100%;float: left;text-align: center;">
-					  			<h1 style="color: #398BE5;font-weight: bold;">80%</h1>
-					  			<h4>好评度</h4>
+					  
+						  <div class="uk-grid">
+						    <div class="uk-width-1-2"  style="margin-top:20px;">
+						    	<ul class="uk-list" style="text-align: center;">
+								    <li><h1 style="color: #398BE5;font-weight: bold;">80%</h1></li>
+								    <li><h4>好评度</h4></li>
+								</ul>
+							</div>
+						    <div class="uk-width-1-2"  style="margin-top:20px;">
+								
+								<div class="uk-grid">
+									 <div class="uk-width-2-5"><h3 style="font-family: '微软雅黑';font-weight: 700;">投资人印象</h3></div>
+									 <div class="uk-width-2-5">
+									 <ul class="uk-list">
+		                                <li>
+		                                <span>准确性：
+		                                	<div class="progress">
+			                                	<div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
+											    	<span class="sr-only"></span><span>90%</span>
+											  	</div>
+											</div>
+										</span>
+										</li>
+		                                <li>
+		                                <span>可行性：
+		                                	<div class="progress">
+			                              	  	<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+											    	<span class="sr-only"></span><span>60%</span>
+											  	</div>
+											 </div>
+		                                </span>
+		                                </li>
+		                                <li>
+		                                <span>经济性：
+			                                <div class="progress">
+											  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
+											    <span class="sr-only"></span><span>75%</span>
+											  </div>
+											</div>
+		                                </span></li>
+                           			 </ul>
+								</div>
 					  		</div>
-					  		<div style="width: 70%;height: 100%;float: right;">
-					  			<div style="width: 50%;float: left;">
-					  				<h3 style="float: right; margin-right: 20px;font-family: '微软雅黑';font-weight: 700;">投资人印象</h3>
-					  			</div>
-					  			<div style="width: 50%;float: right; margin-top: 20px;">
-					  				<div>
-					  					<div style="width: 20%;float: left;"><span>准确性：</span></div>
-						  				<div class="progress" style="width: 70%;float: left;">
-										  <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-										    <span class="sr-only"></span>
-										  </div>
-										</div>
-										<div style="width: 10%;float: right;">
-											<span>90%</span>
-										</div>
-					  				</div>
-					  				<div>
-					  					<div style="width: 20%;float: left;"><span>可行性：</span></div>
-						  				<div class="progress" style="width: 70%;float: left;">
-										  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-										    <span class="sr-only"></span>
-										  </div>
-										</div>
-										<div style="width: 10%;float: right;">
-											<span>60%</span>
-										</div>
-					  				</div>
-					  				<div>
-					  					<div style="width: 20%;float: left;"><span>经济性：</span></div>
-						  				<div class="progress" style="width: 70%;float: left;">
-										  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-										    <span class="sr-only"></span>
-										  </div>
-										</div>
-										<div style="width: 10%;float: right;">
-											<span>75%</span>
-										</div>
-					  				</div>
-					  			</div>
-
-					  		</div>
-					  	</div>
+							
+							</div>
+						</div>
+					  
+					  	
 					  	<div style="width: 100%;height: 80%;">
 
 					  		<div style="width: 100%;height: 30%;margin-top: 20px;">
@@ -348,37 +342,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  			</div>
 					  		</div>
 
-					  		<div style="width: 100%;height: 30%;margin-top: 20px;">
-					  			<div style="width: 100%;height: 100%;">
-					  				<div style="width: 80%;height: 80%;margin:0 auto;">
-						  				<span>商品评价是指生产厂家、商家或者消费者根据具体商品的性能、规格、材质、使用寿命、外观等商品的内在价值设定一个可量化或定性的评价体系，由消费者对商品使用价值进行评价的过程。
-								  		商品评价是指生产厂家、商家或者消费者根据具体商品的性能、规格、材质、使用寿命、外观等商品的内在价值设定一个可量化或定性的评价体系，由消费者对商品使用价值进行评价的过程。
-								  		</span>
-						  			</div>
-						  			<br /><br />
-						  			<div style="width: 80%;height: 20%;margin:0 auto;text-align: right;border-bottom: dashed #A9A9A9 1px;">
-						  				<span>XXX项目投资人</span>
-						  				<br />
-						  				<span>来自电脑客户端</span>
-						  			</div>
-					  			</div>
-					  		</div>
-
-					  		<div style="width: 100%;height: 30%;margin-top: 20px;">
-					  			<div style="width: 100%;height: 100%;">
-					  				<div style="width: 80%;height: 80%;margin:0 auto;">
-						  				<span>商品评价是指生产厂家、商家或者消费者根据具体商品的性能、规格、材质、使用寿命、外观等商品的内在价值设定一个可量化或定性的评价体系，由消费者对商品使用价值进行评价的过程。
-								  		商品评价是指生产厂家、商家或者消费者根据具体商品的性能、规格、材质、使用寿命、外观等商品的内在价值设定一个可量化或定性的评价体系，由消费者对商品使用价值进行评价的过程。
-								  		</span>
-						  			</div>
-						  			<br /><br />
-						  			<div style="width: 80%;height: 20%;margin:0 auto;text-align: right;">
-						  				<span>XXX项目投资人</span>
-						  				<br />
-						  				<span>来自电脑客户端</span>
-						  			</div>
-					  			</div>
-					  		</div>
+					
 					  	</div>
 					  </div>
 

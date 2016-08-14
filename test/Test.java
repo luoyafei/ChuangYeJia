@@ -515,4 +515,12 @@ System.out.println(s2.size());*/
 		System.out.println(jo);
 	}
 	
+	@org.junit.Test
+	public void TestNumberFormat() {
+//		/*System.out.println("123123434sdf".matches("\\d*"));*/
+		
+		int i = Integer.valueOf("04");
+		System.out.println(i);
+	}
+	
 }

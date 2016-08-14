@@ -68,6 +68,12 @@
 		<!-- 首页中获取公司数据给予显示的ajax的action -->
 		<action name="supportStartups" class="com.chuangyejia.ajax.SupportFourStartupsAction" />
 		
+		<!-- 首页中获取产品数据给予显示的ajax的action -->
+		<action name="supportProducts" class="com.chuangyejia.ajax.SupportProductsAction" />
+		
+		<!-- 具体公司内容展示时，显示的该公司的所有产品的ajax的action -->
+		<action name="getProductsInStartups" class="com.chuangyejia.ajax.GetProductsInStartupsIdAction" />
+		
 		<!-- bar中获取用户集合数据给予显示的ajax的action -->
 		<action name="provideUsers" class="com.chuangyejia.ajax.ProvideUserListForShowAction" />
 		

@@ -57,4 +57,10 @@ public class ProductServiceImpl implements IProductService {
 		return pd.getProductsListToShow(start, length, sort);
 	}
 
+	
+	@Override
+	public int getAllProductsCount() {
+		// TODO Auto-generated method stub
+		return pd.getAllProductsCount();
+	}
 }

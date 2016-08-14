@@ -29,7 +29,7 @@
                 <li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("index")?"active":"" %>><a class="a-item" href="/ChuangYeJia/index.jsp">首页</a></li>
 				<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("startups")?"active":"" %>><a class="a-item" href="/ChuangYeJia/pages/title/startups_list.jsp">创业公司</a></li>
 				<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("partner")?"active":"" %>><a class="a-item" href="/ChuangYeJia/pages/title/copartner_list.jsp">合伙人</a></li>
-				<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("product")?"active":"" %>><a class="a-item" href="#">产品</a></li>
+				<li class=<%=(String)request.getAttribute("flag")!=null && ((String)request.getAttribute("flag")).equals("product")?"active":"" %>><a class="a-item" href="/ChuangYeJia/pages/title/product_list.jsp">产品</a></li>
               </ul>
               
               <ul class="nav navbar-nav navbar-right">

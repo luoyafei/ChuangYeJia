@@ -19,5 +19,6 @@ public interface IProductService {
 	 */
 	public List<Product> getProductsInUserId(String userId);
 	public List<Product> getProductsListToShow(Integer start, Integer length, String sort);
+	public int getAllProductsCount();
 	
 }

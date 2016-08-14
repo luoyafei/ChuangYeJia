@@ -132,4 +132,25 @@ System.out.println("dao层中，在ProductDaoImpl类，通过start，length，co
 		return ps;
 	}
 
+	@Override
+	public int getAllProductsCount() {
+		// TODO Auto-generated method stub
+		Long count = new Long(0);
+		Session session = HibernateSessionFactory.createSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			
+			String ejbql = "select count(*) from Product s";
+			count = (Long)session.createQuery(ejbql).uniqueResult();
+			
+			session.getTransaction().commit();
+		} catch(HibernateException e) {
+System.out.println("在dao层，ProductDaoImpl中，获取数据库中所有产品的数量");
+			e.printStackTrace();
+		}
+		return count.intValue();
+	}
+	
+	
+
 }

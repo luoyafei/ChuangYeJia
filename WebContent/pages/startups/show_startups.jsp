@@ -295,15 +295,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div style="width: 20%;height: 100%;float: left;">
 								<h4>创业产品</h4>
 							</div>
-							<div style="width: 80%;float: right;overflow-y: auto;">
-						
-								<a class="uk-thumbnail" href="">
-                                    <img src="" alt="" style="width: 200px;height: 100px;">
-                                    <div class="uk-thumbnail-caption" style="width: 200px;white-space: nowrap;overflow: hidden;">
-                                    	product_name
+							<div style="width: 80%;float: right;overflow-y: auto;" id="productField">
+					
+								<a class="uk-thumbnail productHref">
+                                    <img src="" alt="" class="productConver" style="width: 200px;height: 100px;">
+                                    <div class="uk-thumbnail-caption productName" style="width: 200px;white-space: nowrap;overflow: hidden;">
+                                    尚未创建产品
                                     </div>
                                 </a>
-
 
 							</div>
 						</div>
@@ -357,6 +356,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 		$(document).ready(function() {
 			$("td").attr("style", "border-top: solid #333333 1px;");
+			
+			
+			$.post('getProductsInStartups!getProductsInStartups.action', {
+				startupsId : '<s:property value="#request.sts.startupsId" />'
+			}, function(data, textStatus) {
+				if(textStatus == 'success') {
+					
+					if(data.success) {
+						for(var i = 0; i < data.ps.length-1; i++) {
+							$("#productField").append($(".productHref").clone().attr("class", "uk-thumbnail productFieldClone"));
+						}
+						for(var i = 0;i < data.ps.length; i++) {
+							
+							if(i === 0) {
+								$(".productHref").eq(i).attr("href", "getProductItem?item="+data.ps[i].productId);
+								$(".productName").eq(i).text(data.ps[i].productName);
+								$(".productConver").eq(i).attr("src", data.ps[i].productCover);
+							} else {
+								$(".productFieldClone").eq(i-1).attr("href", "getProductItem?item="+data.ps[i].productId);
+								$(".productName").eq(i).text(data.ps[i].productName);
+								$(".productConver").eq(i).attr("src", data.ps[i].productCover);
+							}
+							
+						}
+					} else {
+						alert("获取产品出错，请刷新重试");
+					}
+				} else {
+					alert("网络出错！请刷新重试！");
+				}
+			}, 'json');
 		});
 		$('#myTab a').click(function(e) {
 			e.preventDefault()

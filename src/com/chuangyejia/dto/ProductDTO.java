@@ -7,6 +7,14 @@ public class ProductDTO {
 	private String brief;
 	private String detail;
 	private String startups;
+	private String price;
+	
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 	public String getName() {
 		return name;
 	}
@@ -41,9 +49,13 @@ public class ProductDTO {
 	private boolean notNull(String data) {
 		return data != null && data.trim().hashCode() !=0 ;
 	}
+	
+	private boolean rightPriceFormat() {
+		return price != null && price.length() < 13 && price.matches("\\d*");
+	}
 	public boolean dataValidate() {
 		
-		return notNull(name) && notNull(address) && notNull(brief) && notNull(detail) && notNull(startups); 
+		return notNull(name) && notNull(address) && notNull(brief) && notNull(detail) && notNull(startups) && notNull(price) && rightPriceFormat(); 
 	}
 	
 }

@@ -133,6 +133,7 @@ public class CreateProductAction extends ActionSupport {
 				product.setProductCreateDate(new Timestamp(System.currentTimeMillis()));
 				product.setProductDetail(pd.getDetail());
 				product.setProductStartups(startups);
+				product.setProductPrice(pd.getPrice());
 				
 				if(ServiceFactory.createProductService().saveProduct(product)) {
 					this.productId = product.getProductId();
