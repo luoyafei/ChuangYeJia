@@ -87,7 +87,7 @@ request.setAttribute("flag", "index");
 
 	</head>
 
-	<body onscroll="barHide()">
+	<body>
 	
 		<jsp:include page="/pages/module/index_bar.jsp" flush="true" />
 			

@@ -95,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </style>
 	</head>
-	<body onscroll="barHide()" style="background-color: #F5F5F5;">
+	<body style="background-color: #F5F5F5;">
 	
 	<jsp:include page="/pages/module/index_bar.jsp" flush="true" />
 	
