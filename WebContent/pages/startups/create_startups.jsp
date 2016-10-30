@@ -102,20 +102,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="container" style="padding-right: 0px;padding-left: 0px;">
 						<div class="carousel-caption">
 							<div class="logo-img" style="width: 100%;">
-								<span><img src="<%=path %>/assets/img/project/head.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;"></span>
-								<span>
-									<a style="font-size: 14px;text-decoration: none;">
-											<span style="display: block;">
-												昵称：<%-- <s:property value="#session.user.userNickName"/> --%>
-											</span>
-								</a>
+								<s:if test="#session.user != null">
+									<span><img  class="img-circle" src='<s:property value="#session.user.userPhoto"/>' style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;"></span>
+									<span>
+										<a style="font-size: 14px;text-decoration: none;">
+												<span style="display: block;">
+													昵称：<s:property value="#session.user.userNickName"/>
+												</span>
+										</a>
+									</span>
+								</s:if>
+								<s:else>
+									<span><img src="<%=path %>/assets/img/project/head.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;"></span>
+									<span>
+										<a style="font-size: 14px;text-decoration: none;">
+												<span style="display: block;">
+													请先进行登陆再进行创建公司！
+												</span>
+										</a>
+									</span>
+								</s:else>
 								
-								<%-- <a style="font-size: 14px;text-decoration: none;">
-									<span style="display: block;">信用等级:4</span>
-								</a> --%>
-								
-								</span>
-								<%-- <span><img src="<%=path %>/assets/img/project/level.png" style="width: 12%;height: 5%; margin-bottom: 0px;padding-bottom: 0px;"></span> --%>
 							</div>
 
 							<p style="margin-bottom: 0px;font-size: 32px;">

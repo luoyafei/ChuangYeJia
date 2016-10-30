@@ -13,6 +13,11 @@
 	
 	<package name="main" extends="struts-default" namespace="/">
 	
+		<default-action-ref name="index" />
+    	<action name="index">
+    		<result>/index.jsp</result>
+    	</action>
+	
 		<!-- 默认action，在url中随意敲击，可以跳转到指定地方。 -->
     	<!-- <default-action-ref name="myIndex" />
     	<action name="myIndex">
